@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@theme {
+  --font-poppins: 'Poppins', sans-serif;
+  --color-olive-50: #F9F9F4;
+  --color-olive-100: #F2F4E6;
+  --color-olive-200: #E4E8C8;
+  --color-olive-300: #CFD79F;
+  --color-olive-400: #B5C370;
+  --color-olive-500: #99AB49;
+  --color-olive-600: #7E8B28;
+  --color-olive-700: #687320;
+  --color-olive-800: #545C1E;
+  --color-olive-900: #464C1E;
+}
+
+:root {
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #FAF9F5;
+  color: #1A1C16;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes scanLine {
+  0% {
+    top: 6%;
+    opacity: 0.7;
+  }
+
+  @keyframes gift-bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  @keyframes modal-appear {
+    from {
+      opacity: 0;
+      transform: translateY(8px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-\[gift-bounce_1\.8s_ease-in-out_infinite\],
+    .animate-\[gift-bounce_1\.2s_ease-in-out_infinite\] {
+      animation: none;
+    }
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    top: 88%;
+    opacity: 0.7;
+  }
+}
