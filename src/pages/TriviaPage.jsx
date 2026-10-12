@@ -1,30 +1,43 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useTrivia } from '../hooks/useTrivia';
+import { useUserProfile } from '../hooks/useUserProfile';
 import { TriviaCard } from '../components/trivia/TriviaCard';
 import { TriviaCompletedCard } from '../components/trivia/TriviaCompletedCard';
 import { BottomNavbar } from '../components/common/BottomNavbar';
 
 export function TriviaPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { isJunior } = useUserProfile();
+
+  const stationStep = location.state?.stationStep || 1;
+
   const {
     currentQuestion,
+    currentIndex,
     totalQuestions,
     timerPercentage,
     timeLeft,
     isTimeUp,
     selectedOption,
     isAnswered,
+    isCorrect,
     score,
     isFinished,
+    unlockedTotal,
     handleSelectOption,
+    handleNextQuestion,
     handleRestart,
-  } = useTrivia();
+  } = useTrivia({ isJunior, stationStep });
 
   return (
     <div className="w-full flex-1 relative flex flex-col justify-between items-center select-none bg-[#FAF9F5]">
-      
-      {/* 1. BOTÓN DE CERRAR "✕" EN LA ESQUINA SUPERIOR DERECHA */}
-      <div className="w-full flex justify-end px-6 pt-2 z-20">
+      {/* 1. BARRA SUPERIOR CON INDICADOR DE POSTA Y BOTÓN CERRAR "✕" */}
+      <div className="w-full flex items-center justify-between px-6 pt-2 z-20">
+        <span className="text-xs font-semibold text-[#687320] bg-[#F2F4E6] border border-[#CFD79F] px-3 py-1 rounded-full">
+          🌿 Desafío Posta {stationStep}
+        </span>
+
         <button
           type="button"
           onClick={() => navigate('/home')}
@@ -47,22 +60,29 @@ export function TriviaPage() {
         </button>
       </div>
 
-      {/* 2. CONTENIDO PRINCIPAL: TARJETA DE TRIVIA CON TEMPORIZADOR O TARJETA DE FINALIZACIÓN */}
-      <main className="w-full px-4 flex justify-center items-center my-auto pb-6">
+      {/* 2. CONTENIDO PRINCIPAL: TARJETA DE TRIVIA O FINALIZACIÓN */}
+      <main className="w-full px-4 flex justify-center items-center my-auto pb-24 pt-1">
         {!isFinished ? (
           <TriviaCard
             question={currentQuestion}
+            currentIndex={currentIndex}
+            totalQuestions={totalQuestions}
             timerPercentage={timerPercentage}
             timeLeft={timeLeft}
             isTimeUp={isTimeUp}
             selectedOption={selectedOption}
             isAnswered={isAnswered}
+            isCorrect={isCorrect}
+            isJunior={isJunior}
             onSelectOption={handleSelectOption}
+            onNextQuestion={handleNextQuestion}
           />
         ) : (
           <TriviaCompletedCard
             score={score}
             totalQuestions={totalQuestions}
+            unlockedTotal={unlockedTotal}
+            isJunior={isJunior}
             onGoHome={() => navigate('/home')}
             onRestart={handleRestart}
           />

@@ -1,8 +1,11 @@
 import { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import { TRIVIA_DATA } from '../data/triviaData';
-import { unlockFirstCharacter } from '../data/rewardProgress';
+import {
+  unlockCharacterByStation,
+  getUnlockedCharacters,
+} from '../data/rewardProgress';
 
-export function useTrivia() {
+export function useTrivia({ isJunior = false, stationStep = 1 } = {}) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);
@@ -10,11 +13,14 @@ export function useTrivia() {
   const [isTimeUp, setIsTimeUp] = useState(false);
   const [score, setScore] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
+  const [unlockedTotal, setUnlockedTotal] = useState(getUnlockedCharacters);
 
-  const totalTime = TRIVIA_DATA.timePerQuestion || 15;
+  const totalTime = isJunior
+    ? TRIVIA_DATA.juniorTimePerQuestion || 22
+    : TRIVIA_DATA.timePerQuestion || 15;
+
   const [timeLeft, setTimeLeft] = useState(totalTime);
   const timerRef = useRef(null);
-  const advanceTimerRef = useRef(null);
 
   const questions = TRIVIA_DATA.questions;
   const currentQuestion = questions[currentIndex];
@@ -30,7 +36,7 @@ export function useTrivia() {
     return Math.round((timeLeft / totalTime) * 100);
   }, [timeLeft, totalTime]);
 
-  // Función para avanzar a la siguiente pregunta o finalizar
+  // Función para avanzar a la siguiente pregunta o finalizar cuando el usuario presiona "Siguiente"
   const advanceQuestion = useCallback(() => {
     if (currentIndex + 1 < totalQuestions) {
       setCurrentIndex((prev) => prev + 1);
@@ -40,22 +46,22 @@ export function useTrivia() {
       setIsTimeUp(false);
       setTimeLeft(totalTime);
     } else {
+      if (score >= TRIVIA_DATA.minimumCorrectAnswers) {
+        const updatedCount = unlockCharacterByStation(stationStep);
+        setUnlockedTotal(updatedCount);
+      }
       setIsFinished(true);
     }
-  }, [currentIndex, totalQuestions, totalTime]);
+  }, [currentIndex, totalQuestions, totalTime, score, stationStep]);
 
   // Manejador cuando el tiempo se agota (0 segundos)
   const handleTimeout = useCallback(() => {
     setIsAnswered(true);
     setIsTimeUp(true);
     setIsCorrect(false);
+  }, []);
 
-    advanceTimerRef.current = setTimeout(() => {
-      advanceQuestion();
-    }, 1500);
-  }, [advanceQuestion]);
-
-  // Efecto del reloj de cuenta regresiva (15 segundos por pregunta)
+  // Efecto del reloj de cuenta regresiva
   useEffect(() => {
     if (isAnswered || isFinished) {
       if (timerRef.current) clearInterval(timerRef.current);
@@ -78,22 +84,16 @@ export function useTrivia() {
     };
   }, [currentIndex, isAnswered, isFinished, handleTimeout]);
 
-  useEffect(() => () => {
-    if (timerRef.current) clearInterval(timerRef.current);
-    if (advanceTimerRef.current) clearTimeout(advanceTimerRef.current);
-  }, []);
-
   useEffect(() => {
-    if (isFinished && score >= TRIVIA_DATA.minimumCorrectAnswers) {
-      unlockFirstCharacter();
-    }
-  }, [isFinished, score]);
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, []);
 
   // Manejador de selección de respuesta por parte del usuario
   const handleSelectOption = (index) => {
     if (isAnswered) return;
 
-    // Detener reloj inmediatamente
     if (timerRef.current) clearInterval(timerRef.current);
 
     setSelectedOption(index);
@@ -105,16 +105,10 @@ export function useTrivia() {
     if (correct) {
       setScore((prev) => prev + 1);
     }
-
-    // Avanza tras feedback visual de 1.2s
-    advanceTimerRef.current = setTimeout(() => {
-      advanceQuestion();
-    }, 1200);
   };
 
   const handleRestart = () => {
     if (timerRef.current) clearInterval(timerRef.current);
-    if (advanceTimerRef.current) clearTimeout(advanceTimerRef.current);
     setCurrentIndex(0);
     setSelectedOption(null);
     setIsAnswered(false);
@@ -139,7 +133,9 @@ export function useTrivia() {
     isCorrect,
     score,
     isFinished,
+    unlockedTotal,
     handleSelectOption,
+    handleNextQuestion: advanceQuestion,
     handleRestart,
   };
 }
