@@ -1,17 +1,25 @@
 import { OwlMascot } from './OwlMascot';
 
-export function DidYouKnowCard({ title, icon, description }) {
+export function DidYouKnowCard({ title, icon, description, isJunior = false }) {
   return (
     <div className="bg-white rounded-2xl p-5 sm:p-6 pb-7 shadow-[0_6px_20px_rgba(0,0,0,0.12)] border border-[#D1D5DB] relative overflow-visible transition-all">
       {/* Título con ícono vegetal */}
-      <h2 className="text-[16px] sm:text-[17px] font-bold text-[#1A1C16] mb-3 flex items-center gap-1.5">
+      <h2
+        className={`${
+          isJunior ? 'text-[18px]' : 'text-[16px] sm:text-[17px]'
+        } font-bold text-[#1A1C16] mb-2.5 flex items-center gap-1.5`}
+      >
         <span>{title}</span>
         <span className="text-base select-none">{icon}</span>
       </h2>
 
       {/* Contenido descriptivo con espacio reservado a la derecha para el búho */}
       <div className="pr-20 sm:pr-24">
-        <p className="text-[13px] sm:text-[13.5px] leading-relaxed text-[#2B2F25] font-normal">
+        <p
+          className={`${
+            isJunior ? 'text-[14.5px] font-medium' : 'text-[13px] sm:text-[13.5px] font-normal'
+          } leading-relaxed text-[#2B2F25]`}
+        >
           {description}
         </p>
       </div>
