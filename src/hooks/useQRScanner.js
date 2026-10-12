@@ -1,9 +1,21 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { SCAN_DATA } from '../data/scanData';
+import { getCompletedStations } from '../data/rewardProgress';
 
 export function useQRScanner(onScanSuccess) {
   const [status, setStatus] = useState('idle'); // 'idle' | 'scanning' | 'success'
   const [cameraMode, setCameraMode] = useState('simulation'); // 'simulation' | 'live'
+  const [completedStations] = useState(getCompletedStations);
+
+  // Por defecto selecciona la primera posta aún no completada (1, 2 o 3)
+  const [selectedStationIndex, setSelectedStationIndex] = useState(() => {
+    const completed = getCompletedStations();
+    const nextIdx = SCAN_DATA.stations.findIndex(
+      (st) => !completed.includes(st.step)
+    );
+    return nextIdx !== -1 ? nextIdx : 0;
+  });
+
   const [scannedData, setScannedData] = useState(null);
   const videoRef = useRef(null);
   const streamRef = useRef(null);
@@ -30,29 +42,33 @@ export function useQRScanner(onScanSuccess) {
     }
   }, []);
 
-  // Función para disparar la detección del código QR solo al hacer clic en la cámara
+  // Función para disparar la detección del código QR al hacer clic en la cámara
   const triggerScan = useCallback(() => {
     if (status === 'scanning' || status === 'success') return;
     setStatus('scanning');
+
+    const station =
+      SCAN_DATA.stations[selectedStationIndex] || SCAN_DATA.discoveredSpecies;
 
     // Simula lectura activa del QR por 900ms con láser y efecto visual
     setTimeout(() => {
       playBeep();
       setStatus('success');
-      setScannedData(SCAN_DATA.discoveredSpecies);
+      setScannedData(station);
       if (onScanSuccess) {
-        onScanSuccess(SCAN_DATA.discoveredSpecies);
+        onScanSuccess(station);
       }
     }, 900);
-  }, [status, playBeep, onScanSuccess]);
+  }, [status, selectedStationIndex, playBeep, onScanSuccess]);
 
   // Manejo de cámara real (Webcam / Celular)
   useEffect(() => {
     if (cameraMode === 'live') {
-      navigator.mediaDevices?.getUserMedia?.({
-        video: { facingMode: 'environment' },
-        audio: false,
-      })
+      navigator.mediaDevices
+        ?.getUserMedia?.({
+          video: { facingMode: 'environment' },
+          audio: false,
+        })
         .then((stream) => {
           streamRef.current = stream;
           if (videoRef.current) {
@@ -77,8 +93,13 @@ export function useQRScanner(onScanSuccess) {
     };
   }, [cameraMode]);
 
-  // Reiniciar escáner si fuera necesario
   const resetScan = () => {
+    setScannedData(null);
+    setStatus('idle');
+  };
+
+  const selectStation = (index) => {
+    setSelectedStationIndex(index);
     setScannedData(null);
     setStatus('idle');
   };
@@ -92,6 +113,10 @@ export function useQRScanner(onScanSuccess) {
     scannedData,
     cameraMode,
     videoRef,
+    stations: SCAN_DATA.stations,
+    selectedStationIndex,
+    completedStations,
+    selectStation,
     triggerScan,
     resetScan,
     toggleCameraMode,
