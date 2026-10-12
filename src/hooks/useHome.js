@@ -9,15 +9,15 @@ export function useHome() {
   const [activeTab, setActiveTab] = useState('home');
   const [unlockedCharacters] = useState(getUnlockedCharacters);
   const [isRewardModalOpen, setIsRewardModalOpen] = useState(false);
+  const [selectedRewardIndex, setSelectedRewardIndex] = useState(0);
+  const [isFireModalOpen, setIsFireModalOpen] = useState(false);
 
   // Obtiene el nombre del usuario desde location.state, localStorage o el valor por defecto
   const userName = useMemo(() => {
-    // 1. Estado pasado por navegación (ej. tras registrarse)
     if (location.state?.userName?.trim()) {
       return location.state.userName.trim();
     }
 
-    // 2. LocalStorage guardado previamente
     try {
       const stored = localStorage.getItem('cielo_user');
       if (stored) {
@@ -30,7 +30,6 @@ export function useHome() {
       // Ignorar errores al parsear localStorage
     }
 
-    // 3. Fallback por defecto ("Juan")
     return HOME_DATA.defaultUserName;
   }, [location.state]);
 
@@ -57,12 +56,21 @@ export function useHome() {
     navigate('/library');
   };
 
-  const handleOpenReward = () => {
+  const handleOpenReward = (index = 0) => {
+    setSelectedRewardIndex(index);
     setIsRewardModalOpen(true);
   };
 
   const handleCloseReward = () => {
     setIsRewardModalOpen(false);
+  };
+
+  const handleOpenFireModal = () => {
+    setIsFireModalOpen(true);
+  };
+
+  const handleCloseFireModal = () => {
+    setIsFireModalOpen(false);
   };
 
   const handleGoToRegister = () => {
@@ -74,12 +82,16 @@ export function useHome() {
     activeTab,
     unlockedCharacters,
     isRewardModalOpen,
+    selectedRewardIndex,
+    isFireModalOpen,
     handleTabChange,
     handleStartGame,
     handleScanQR,
     handleOpenLibrary,
     handleOpenReward,
     handleCloseReward,
+    handleOpenFireModal,
+    handleCloseFireModal,
     handleGoToRegister,
   };
 }
