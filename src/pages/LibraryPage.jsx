@@ -1,6 +1,5 @@
 import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BottomNavbar } from '../components/common/BottomNavbar';
 import { OwlMascot } from '../components/home/OwlMascot';
 import { LIBRARY_CARDS, TROPHIC_LEVELS } from '../data/libraryData';
 import { getUnlockedCharacters } from '../data/rewardProgress';
@@ -725,14 +724,6 @@ export function LibraryPage() {
         </div>
       </main>
 
-      <BottomNavbar
-        activeTab="library"
-        onTabChange={(tabId) => {
-          if (tabId === 'home') navigate('/home');
-        }}
-        onScanQR={() => navigate('/scan')}
-        onOpenLibrary={() => navigate('/library')}
-      />
       {selectedCard && (
         <FichaDetailModal
           card={selectedCard}

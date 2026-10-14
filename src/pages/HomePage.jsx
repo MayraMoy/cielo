@@ -5,22 +5,18 @@ import { useTheme } from '../hooks/useTheme';
 import { useAccessibility } from '../hooks/useAccessibility';
 import { CharacterProgressCard } from '../components/home/CharacterProgressCard';
 import { DidYouKnowCard } from '../components/home/DidYouKnowCard';
-import { BottomNavbar } from '../components/common/BottomNavbar';
 import { CharacterRewardModal } from '../components/home/CharacterRewardModal';
 import { EmergencyFireModal } from '../components/home/EmergencyFireModal';
 
 export function HomePage() {
   const {
     userName,
-    activeTab,
     unlockedCharacters,
     openedRewards,
     isRewardModalOpen,
     selectedRewardIndex,
     isFireModalOpen,
-    handleTabChange,
     handleStartGame,
-    handleScanQR,
     handleOpenLibrary,
     handleOpenReward,
     handleCloseReward,
@@ -187,13 +183,6 @@ export function HomePage() {
         />
       </main>
 
-      {/* Barra de navegación inferior flotante anclada al celular */}
-      <BottomNavbar
-        activeTab={activeTab}
-        onTabChange={handleTabChange}
-        onScanQR={handleScanQR}
-        onOpenLibrary={handleOpenLibrary}
-      />
       {isRewardModalOpen && (
         <CharacterRewardModal
           rewardIndex={selectedRewardIndex}

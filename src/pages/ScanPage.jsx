@@ -3,7 +3,6 @@ import { useQRScanner } from '../hooks/useQRScanner';
 import { useUserProfile } from '../hooks/useUserProfile';
 import { SimpleQRScanner } from '../components/scan/SimpleQRScanner';
 import { ScanResultModal } from '../components/scan/ScanResultModal';
-import { BottomNavbar } from '../components/common/BottomNavbar';
 import qrCartelImg from '../assets/qr_cartel.png';
 
 export function ScanPage() {
@@ -195,16 +194,6 @@ export function ScanPage() {
           onClose={resetScan}
         />
       )}
-
-      {/* 6. NAVBAR INFERIOR */}
-      <BottomNavbar
-        activeTab="scan"
-        onTabChange={(tabId) => {
-          if (tabId === 'home') navigate('/home');
-        }}
-        onScanQR={triggerScan}
-        onOpenLibrary={() => navigate('/library')}
-      />
     </div>
   );
 }

@@ -3,7 +3,6 @@ import { useTrivia } from '../hooks/useTrivia';
 import { useUserProfile } from '../hooks/useUserProfile';
 import { TriviaCard } from '../components/trivia/TriviaCard';
 import { TriviaCompletedCard } from '../components/trivia/TriviaCompletedCard';
-import { BottomNavbar } from '../components/common/BottomNavbar';
 
 export function TriviaPage() {
   const navigate = useNavigate();
@@ -88,16 +87,6 @@ export function TriviaPage() {
           />
         )}
       </main>
-
-      {/* 3. NAVBAR INFERIOR FLOTANTE ANCLADO */}
-      <BottomNavbar
-        activeTab="scan"
-        onTabChange={(tabId) => {
-          if (tabId === 'home') navigate('/home');
-        }}
-        onScanQR={() => navigate('/scan')}
-        onOpenLibrary={() => navigate('/library')}
-      />
     </div>
   );
 }
