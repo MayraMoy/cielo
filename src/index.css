@@ -218,3 +218,24 @@ body {
   font-size: 1.95rem !important;
 }
 
+/* ========================================================
+   RED TRÓFICA - CONTRASTE Y LEGIBILIDAD GARANTIZADA
+   ======================================================== */
+.trophic-card,
+.trophic-card span,
+.trophic-card p,
+.trophic-card div,
+.trophic-modal,
+.trophic-modal h2,
+.trophic-modal p,
+.trophic-modal span,
+.trophic-modal button {
+  color: #11130E !important;
+}
+
+.trophic-card button[aria-label^="Información"],
+.trophic-card button[aria-label^="Información"] * {
+  color: #8D6500 !important;
+}
+
+
