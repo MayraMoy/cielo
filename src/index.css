@@ -226,6 +226,24 @@ body {
   line-height: 1.3rem !important;
 }
 
+.trophic-organism-name {
+  line-height: 1.15 !important;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+.large-text .trophic-organism-name {
+  font-size: 0.86rem !important;
+  line-height: 1.12 !important;
+  font-weight: 700 !important;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+.large-text .trophic-node-card {
+  min-height: 104px !important;
+}
+
 /* ========================================================
    RED TRÓFICA - CONTRASTE Y LEGIBILIDAD GARANTIZADA
    ======================================================== */

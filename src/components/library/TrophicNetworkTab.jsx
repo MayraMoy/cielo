@@ -4,8 +4,8 @@ import { useTheme } from '../../hooks/useTheme';
 
 const GRAPH_WIDTH = 360;
 const GRAPH_HEIGHT = 600;
-const NODE_WIDTH_PERCENT = 30;
-const NODE_HEIGHT = 92;
+const NODE_WIDTH_PERCENT = 31.5;
+const NODE_HEIGHT = 104;
 const NODE_HEIGHT_PERCENT = (NODE_HEIGHT / GRAPH_HEIGHT) * 100;
 
 const trophicLayers = [
@@ -62,7 +62,7 @@ function getLinkPath(food, consumer) {
 }
 
 function OrganismNode({ organism, isSelected, onSelect, isDarkMode = false }) {
-  const className = `absolute z-10 flex cursor-pointer flex-col items-center justify-center gap-1 rounded-2xl border px-1.5 py-1.5 text-center shadow-md transition-all duration-200 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 ${
+  const className = `trophic-node-card absolute z-10 flex cursor-pointer flex-col items-center justify-center rounded-2xl border px-1 py-1 text-center shadow-md transition-all duration-200 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 overflow-hidden ${
     isSelected
       ? isDarkMode
         ? 'border-[#C5D76A] bg-[#2E3B1C] ring-2 ring-[#DDEB7A] shadow-lg'
@@ -76,11 +76,11 @@ function OrganismNode({ organism, isSelected, onSelect, isDarkMode = false }) {
     <>
       <img
         src={organism.image}
-        alt={organism.name}
-        className="h-8 w-9 object-contain drop-shadow-sm"
+        alt=""
+        className="h-8 w-9 shrink-0 object-contain drop-shadow-sm mb-0.5 pointer-events-none"
       />
       <span
-        className={`text-xs font-bold leading-tight px-1 max-w-full break-words ${
+        className={`trophic-organism-name text-xs font-bold w-full text-center tracking-tight px-0.5 ${
           isDarkMode ? 'text-[#F4F6ED]' : 'text-[#1A1C16]'
         }`}
       >
@@ -94,7 +94,7 @@ function OrganismNode({ organism, isSelected, onSelect, isDarkMode = false }) {
     top: `${(organism.position.y / GRAPH_HEIGHT) * 100}%`,
     width: `${NODE_WIDTH_PERCENT}%`,
     height: `${NODE_HEIGHT_PERCENT}%`,
-    minHeight: 0,
+    minHeight: `${NODE_HEIGHT}px`,
     transform: 'translate(-50%, -50%)',
   };
 
