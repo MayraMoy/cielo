@@ -220,6 +220,12 @@ body {
   font-size: 1.95rem !important;
 }
 
+.large-text .trophic-network .trophic-network-instruction {
+  font-size: 0.92rem !important;
+  font-weight: 400 !important;
+  line-height: 1.3rem !important;
+}
+
 /* ========================================================
    RED TRÓFICA - CONTRASTE Y LEGIBILIDAD GARANTIZADA
    ======================================================== */
@@ -290,5 +296,3 @@ body {
 .dark .fire-modal-container .fire-contact-card span:last-child {
   color: #FFB18A !important;
 }
-
-

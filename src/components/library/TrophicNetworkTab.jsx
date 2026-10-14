@@ -1,262 +1,256 @@
-import { useMemo, useState } from 'react';
-import { TROPHIC_LEVELS } from '../../data/library/trophicLevels';
-import { TrophicInfoModal } from './TrophicInfoModal';
+import { useState } from 'react';
+import { TROPHIC_NETWORK } from '../../data/library/trophicNetwork';
 
-export function TrophicNetworkTab({ isJunior = false }) {
-  const [selectedLevel, setSelectedLevel] = useState(null);
-  const [isChallengeMode, setIsChallengeMode] = useState(false);
+const GRAPH_WIDTH = 360;
+const GRAPH_HEIGHT = 600;
+const NODE_WIDTH_PERCENT = 30;
+const NODE_HEIGHT = 92;
+const NODE_HEIGHT_PERCENT = (NODE_HEIGHT / GRAPH_HEIGHT) * 100;
 
-  const challengeItems = useMemo(
-    () => [
-      {
-        name: 'Molle',
-        role: 'producers',
-        clue: 'Fabrica su propio alimento con la luz del sol',
-      },
-      {
-        name: 'Carpincho',
-        role: 'primary-consumer',
-        clue: 'Come pastos y plantas cerca del agua (herbívoro)',
-      },
-      {
-        name: 'Halcón',
-        role: 'secondary-consumer',
-        clue: 'Ave rapaz cazadora que vigila desde las alturas',
-      },
-    ],
-    []
+const trophicLayers = [
+  {
+    id: 'tertiary',
+    label: 'Consumidores terciarios',
+    top: 0,
+    height: 150,
+    color: '#FFF4E7',
+  },
+  {
+    id: 'secondary',
+    label: 'Consumidores secundarios',
+    top: 150,
+    height: 150,
+    color: '#F0F5FB',
+  },
+  {
+    id: 'primary',
+    label: 'Consumidores primarios',
+    top: 300,
+    height: 150,
+    color: '#FFFBEA',
+  },
+  {
+    id: 'producer',
+    label: 'Productores',
+    top: 450,
+    height: 150,
+    color: '#F4F7E6',
+  },
+];
+
+function getLinkPath(food, consumer) {
+  const startX = food.position.x;
+  const startY = food.position.y - NODE_HEIGHT / 2;
+  const endX = consumer.position.x;
+  const endY = consumer.position.y + NODE_HEIGHT / 2;
+  const controlY = (startY + endY) / 2;
+
+  return `M ${startX} ${startY} C ${startX} ${controlY}, ${endX} ${controlY}, ${endX} ${endY}`;
+}
+
+function OrganismNode({ organism, isSelected, onSelect }) {
+  const className = `absolute z-10 flex cursor-pointer flex-col items-center justify-center gap-1 rounded-xl border px-1 py-1.5 text-center shadow-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#687320] ${
+    isSelected
+      ? 'border-[#566116] bg-[#E4E8C8] ring-2 ring-[#7E8B28]'
+      : 'border-[#AEBB72] bg-white hover:border-[#7E8B28]'
+  }`;
+  const content = (
+    <>
+      {organism.image ? (
+        <img
+          src={organism.image}
+          alt=""
+          className="h-7 w-8 object-contain"
+        />
+      ) : (
+        <span className="text-xl leading-none" aria-hidden="true">
+          {organism.icon}
+        </span>
+      )}
+      <span className="text-xs font-bold leading-tight text-[#1A1C16]">
+        {organism.name}
+      </span>
+    </>
   );
-
-  const [challengeIndex, setChallengeIndex] = useState(0);
-  const [feedback, setFeedback] = useState(null);
-  const [completedChallenge, setCompletedChallenge] = useState(false);
-
-  const currentTarget = challengeItems[challengeIndex];
-
-  const handleLevelGuess = (levelId) => {
-    if (!isChallengeMode || completedChallenge) return;
-
-    if (levelId === currentTarget.role) {
-      if (challengeIndex + 1 < challengeItems.length) {
-        setFeedback({
-          type: 'success',
-          text: `¡Muy bien! ${currentTarget.name} ubicado correctamente.`,
-        });
-        setChallengeIndex((prev) => prev + 1);
-      } else {
-        setFeedback({
-          type: 'success',
-          text: '🎉 ¡Felicitaciones! Armaste toda la red trófica de Villa Cielo.',
-        });
-        setCompletedChallenge(true);
-      }
-    } else {
-      setFeedback({
-        type: 'error',
-        text: `¡Casi! Leé la pista de ${currentTarget.name} y probá otro escalón.`,
-      });
-    }
-  };
-
-  const resetChallenge = () => {
-    setChallengeIndex(0);
-    setFeedback(null);
-    setCompletedChallenge(false);
+  const position = {
+    left: `${(organism.position.x / GRAPH_WIDTH) * 100}%`,
+    top: `${(organism.position.y / GRAPH_HEIGHT) * 100}%`,
+    width: `${NODE_WIDTH_PERCENT}%`,
+    height: `${NODE_HEIGHT_PERCENT}%`,
+    minHeight: 0,
+    transform: 'translate(-50%, -50%)',
   };
 
   return (
-    <section>
-      <div className="flex items-center justify-between gap-2 px-1">
-        <div>
-          <h2 className="text-base font-bold text-[#1A1C16]">
-            Arma la red trófica
-          </h2>
-          <p
-            className="pt-0.5 text-xs leading-relaxed text-[#3C4033]"
-          >
-            {isChallengeMode
-              ? 'Tocá el escalón correcto para ubicar a cada especie:'
-              : 'Relacioná los organismos para entender cómo se alimentan entre sí.'}
-          </p>
-        </div>
+    <button
+      type="button"
+      onClick={() => onSelect(organism.id)}
+      aria-pressed={isSelected}
+      aria-label={`Explorar conexiones de ${organism.name}`}
+      className={className}
+      style={position}
+    >
+      {content}
+    </button>
+  );
+}
 
-        <button
-          type="button"
-          onClick={() => {
-            setIsChallengeMode((prev) => !prev);
-            resetChallenge();
-          }}
-          className={`shrink-0 rounded-xl px-3.5 py-2 text-xs font-bold transition-all cursor-pointer border ${
-            isChallengeMode
-              ? 'bg-[#1A1C16] text-white border-[#1A1C16]'
-              : 'bg-[#F2F4E6] text-[#545C1E] border-[#B5C370] hover:bg-[#E4E8C8]'
-          }`}
-        >
-          {isChallengeMode ? 'Ver Mapa' : '🎮 Practicar'}
-        </button>
+export function TrophicNetworkTab({ isJunior = false }) {
+  const [selectedNodeId, setSelectedNodeId] = useState(null);
+  const focusedNode = TROPHIC_NETWORK.nodes.find(
+    (node) => node.id === selectedNodeId
+  );
+  const foodsForFocusedNode = selectedNodeId
+    ? TROPHIC_NETWORK.links
+        .filter((link) => link.consumer === selectedNodeId)
+        .map((link) =>
+          TROPHIC_NETWORK.nodes.find((node) => node.id === link.food)?.name
+        )
+    : [];
+  const consumersForFocusedNode = selectedNodeId
+    ? TROPHIC_NETWORK.links
+        .filter((link) => link.food === selectedNodeId)
+        .map((link) =>
+          TROPHIC_NETWORK.nodes.find((node) => node.id === link.consumer)?.name
+        )
+    : [];
+
+  const handleNodeSelect = (nodeId) => {
+    setSelectedNodeId((previous) => (previous === nodeId ? null : nodeId));
+  };
+
+  return (
+    <section className="trophic-network" aria-labelledby="trophic-network-title">
+      <div className="flex items-center px-1">
+        <div>
+          <h2
+            id="trophic-network-title"
+            className="text-lg font-bold text-[#1A1C16]"
+          >
+            Red trófica
+          </h2>
+        </div>
       </div>
 
-      {/* Tarjeta de consigna cuando el Modo Práctica está activo */}
-      {isChallengeMode && (
-        <div className="mt-3 rounded-2xl border border-[#B5C370] bg-white p-3.5 shadow-sm">
-          {!completedChallenge ? (
-            <div className="flex items-center justify-between gap-2">
-              <div>
-                <p className="text-xs font-bold text-[#1A1C16]">
-                  ¿En qué nivel va: <span className="text-[#7E8B28]">{currentTarget.name}</span>?
-                </p>
-                <p className="text-xs text-[#555A49] mt-0.5">
-                  Pista: {currentTarget.clue}
-                </p>
-              </div>
-              <span className="rounded-full bg-[#F2F4E6] border border-[#CCD69E] px-2.5 py-0.5 text-xs font-semibold text-[#687320]">
-                {challengeIndex + 1}/{challengeItems.length}
-              </span>
-            </div>
-          ) : (
-            <div className="flex items-center justify-between gap-2">
-              <p className="text-xs font-bold text-[#545C1E]">
-                🌟 ¡Red trófica completada con éxito!
-              </p>
-              <button
-                type="button"
-                onClick={resetChallenge}
-                className="rounded-xl bg-[#7E8B28] px-3 py-1.5 text-xs font-semibold text-white cursor-pointer"
-              >
-                Jugar de nuevo
-              </button>
-            </div>
-          )}
+      <p className="trophic-network-instruction mt-2 px-1 text-base font-normal leading-relaxed text-[#292D20]">
+        {isJunior
+          ? 'Tocá un ser vivo para ver cómo se conecta con los demás.'
+          : 'Tocá un organismo para explorar sus conexiones con la red.'}
+      </p>
 
-          {feedback && (
-            <p
-              className={`mt-2 text-xs font-semibold ${
-                feedback.type === 'success' ? 'text-[#687320]' : 'text-red-600'
-              }`}
-            >
-              {feedback.text}
-            </p>
-          )}
-        </div>
-      )}
-
-      <div className="relative mt-3.5 flex flex-col gap-2.5 px-1">
-        {TROPHIC_LEVELS.map((level) => (
-          <article
-            key={level.id}
-            onClick={() => isChallengeMode && handleLevelGuess(level.id)}
-            className={`trophic-card relative flex h-[88px] items-stretch overflow-hidden rounded-2xl border border-black/10 shadow-sm transition-transform ${
-              isChallengeMode
-                ? 'cursor-pointer hover:scale-[1.01] active:scale-[0.99] ring-2 ring-transparent hover:ring-[#7E8B28]'
-                : ''
-            }`}
-            style={{ backgroundColor: level.background }}
-          >
+      <div
+        className="relative mx-auto mt-2 w-full max-w-[360px] overflow-hidden rounded-2xl border border-[#D9DFC3] bg-[#FCFCF8] shadow-sm"
+        role="group"
+        aria-label="Red trófica: las flechas conectan alimentos y consumidores"
+      >
+        <div className="relative aspect-[360/600] w-full">
+          {trophicLayers.map((layer) => (
             <div
-              className="relative flex w-10 shrink-0 items-center justify-center px-1 text-center text-[10px] font-bold leading-tight !text-[#11130E]"
-              style={{ backgroundColor: level.accent }}
+              key={layer.id}
+              className="absolute inset-x-0 border-b border-[#E7EAD9]"
+              style={{
+                top: `${(layer.top / GRAPH_HEIGHT) * 100}%`,
+                height: `${(layer.height / GRAPH_HEIGHT) * 100}%`,
+                backgroundColor: layer.color,
+              }}
             >
-              <span
-                className="absolute left-1/2 top-1/2 w-[76px] -translate-x-1/2 -translate-y-1/2 -rotate-90 !text-[#11130E]"
-                aria-label={level.label}
-              >
-                {level.displayLabel.map((line) => (
-                  <span key={line} className="block whitespace-nowrap !text-[#11130E]">
-                    {line}
-                  </span>
-                ))}
+              <span className="absolute left-3 top-2 text-xs font-bold text-[#343B14]">
+                {layer.label}
               </span>
             </div>
-            <div className="relative z-10 flex min-w-0 flex-1 items-center justify-around gap-1 px-2">
-              {level.organisms.map((organism) => (
-                <div
-                  key={organism.name}
-                  className="flex min-w-0 flex-1 flex-col items-center"
-                >
-                  <img
-                    src={organism.image}
-                    alt=""
-                    className="h-12 w-14 object-contain"
-                  />
-                  <span className="max-w-full break-words text-center text-xs font-bold leading-tight !text-[#11130E]">
-                    {organism.name}
-                  </span>
-                </div>
-              ))}
+          ))}
+
+          <svg
+            viewBox={`0 0 ${GRAPH_WIDTH} ${GRAPH_HEIGHT}`}
+            preserveAspectRatio="none"
+            className="pointer-events-none absolute inset-0 z-[1] h-full w-full"
+            aria-hidden="true"
+          >
+            <defs>
+              <marker
+                id="trophic-arrow"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="5"
+                markerHeight="5"
+                orient="auto-start-reverse"
+              >
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#7E8B28" />
+              </marker>
+            </defs>
+            {TROPHIC_NETWORK.links.map((link) => {
+              const food = TROPHIC_NETWORK.nodes.find(
+                (node) => node.id === link.food
+              );
+              const consumer = TROPHIC_NETWORK.nodes.find(
+                (node) => node.id === link.consumer
+              );
+              const isHighlighted =
+                selectedNodeId &&
+                (selectedNodeId === link.food ||
+                  selectedNodeId === link.consumer);
+
+              return (
+                <path
+                  key={`${link.food}-${link.consumer}`}
+                  d={getLinkPath(food, consumer)}
+                  fill="none"
+                  stroke={isHighlighted ? '#566116' : '#91A044'}
+                  strokeWidth={isHighlighted ? '3.5' : '2'}
+                  strokeOpacity={selectedNodeId && !isHighlighted ? '0.45' : '0.8'}
+                  strokeDasharray="4 3"
+                  markerEnd="url(#trophic-arrow)"
+                />
+              );
+            })}
+          </svg>
+
+          {TROPHIC_NETWORK.nodes.map((organism) => (
+            <OrganismNode
+              key={organism.id}
+              organism={organism}
+              isSelected={selectedNodeId === organism.id}
+              onSelect={handleNodeSelect}
+            />
+          ))}
+        </div>
+      </div>
+
+      {focusedNode && (
+        <div
+          className="mt-3 rounded-xl border border-[#CCD69E] bg-white px-3.5 py-3 shadow-xs"
+          role="status"
+          aria-live="polite"
+        >
+          <div className="flex items-start justify-between gap-2">
+            <div>
+              <p className="text-sm font-bold text-[#1A1C16]">
+                {focusedNode.name}
+              </p>
+              {foodsForFocusedNode.length > 0 && (
+                <p className="mt-1 text-sm leading-relaxed text-[#343B14]">
+                  <span className="font-semibold">Se alimenta de:</span>{' '}
+                  {foodsForFocusedNode.join(', ')}.
+                </p>
+              )}
+              {consumersForFocusedNode.length > 0 && (
+                <p className="mt-1 text-sm leading-relaxed text-[#343B14]">
+                  <span className="font-semibold">Es alimento de:</span>{' '}
+                  {consumersForFocusedNode.join(', ')}.
+                </p>
+              )}
             </div>
             <button
               type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                setSelectedLevel(level);
-              }}
-              aria-label={`Información: ${level.label}`}
-              className="absolute right-2.5 top-2.5 z-20 flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#8D6500] text-xs font-bold text-[#8D6500] transition-transform hover:scale-110 cursor-pointer"
+              onClick={() => setSelectedNodeId(null)}
+              className="shrink-0 cursor-pointer rounded-full px-2 py-1 text-sm font-semibold text-[#3F4A12] hover:bg-[#F2F4E6]"
+              aria-label="Cerrar información del organismo"
             >
-              i
+              Cerrar
             </button>
-          </article>
-        ))}
-
-        {!isChallengeMode && (
-          <svg
-            viewBox="0 0 300 276"
-            className="pointer-events-none absolute inset-0 h-full w-full"
-            fill="none"
-            aria-hidden="true"
-          >
-            <path
-              d="M92 246C65 218 68 190 82 166"
-              stroke="#82921E"
-              strokeWidth="2"
-              markerEnd="url(#arrow)"
-            />
-            <path
-              d="M150 246C176 218 188 192 198 166"
-              stroke="#82921E"
-              strokeWidth="2"
-              markerEnd="url(#arrow)"
-            />
-            <path
-              d="M228 246C251 218 247 190 232 166"
-              stroke="#82921E"
-              strokeWidth="2"
-              markerEnd="url(#arrow)"
-            />
-            <path
-              d="M123 134C105 106 117 78 145 51"
-              stroke="#82921E"
-              strokeWidth="2"
-              markerEnd="url(#arrow)"
-            />
-            <path
-              d="M226 134C247 106 208 77 155 51"
-              stroke="#82921E"
-              strokeWidth="2"
-              markerEnd="url(#arrow)"
-            />
-            <defs>
-              <marker
-                id="arrow"
-                markerWidth="8"
-                markerHeight="8"
-                refX="6"
-                refY="4"
-                orient="auto"
-              >
-                <path d="M0 0 8 4 0 8" fill="#82921E" />
-              </marker>
-            </defs>
-          </svg>
-        )}
-      </div>
-
-      {selectedLevel && (
-        <TrophicInfoModal
-          level={selectedLevel}
-          isJunior={isJunior}
-          onClose={() => setSelectedLevel(null)}
-        />
+          </div>
+        </div>
       )}
     </section>
   );

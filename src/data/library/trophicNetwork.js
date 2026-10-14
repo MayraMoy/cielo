@@ -1,0 +1,87 @@
+import {
+  aveImg,
+  carpinchoImg,
+  fruitingShrubImg,
+  halconImg,
+  molleImg,
+  woodpeckerImg,
+} from './images';
+
+export const TROPHIC_NETWORK = {
+  nodes: [
+    {
+      id: 'molle',
+      name: 'Árbol Molle',
+      image: molleImg,
+      kind: 'producer',
+      position: { x: 60, y: 540 },
+    },
+    {
+      id: 'fruiting-shrub',
+      name: 'Arbusto frutal',
+      image: fruitingShrubImg,
+      kind: 'producer',
+      position: { x: 180, y: 540 },
+    },
+    {
+      id: 'wetland-plants',
+      name: 'Pastos y plantas acuáticas',
+      icon: '🌾',
+      kind: 'producer',
+      position: { x: 300, y: 540 },
+    },
+    {
+      id: 'insects',
+      name: 'Insectos y larvas',
+      icon: '🐛',
+      kind: 'primary',
+      position: { x: 100, y: 390 },
+    },
+    {
+      id: 'carpincho',
+      name: 'Carpincho',
+      image: carpinchoImg,
+      kind: 'primary',
+      position: { x: 260, y: 390 },
+    },
+    {
+      id: 'ave-insectivora',
+      name: 'Ave insectívora',
+      image: aveImg,
+      kind: 'secondary',
+      position: { x: 60, y: 240 },
+    },
+    {
+      id: 'carpintero',
+      name: 'Pájaro carpintero',
+      image: woodpeckerImg,
+      kind: 'secondary',
+      position: { x: 180, y: 240 },
+    },
+    {
+      id: 'small-prey',
+      name: 'Roedores y reptiles',
+      icon: '🦎',
+      kind: 'secondary',
+      position: { x: 300, y: 240 },
+    },
+    {
+      id: 'halcon',
+      name: 'Halcón',
+      image: halconImg,
+      kind: 'tertiary',
+      position: { x: 180, y: 95 },
+    },
+  ],
+  links: [
+    { food: 'molle', consumer: 'insects' },
+    { food: 'fruiting-shrub', consumer: 'insects' },
+    { food: 'fruiting-shrub', consumer: 'carpincho' },
+    { food: 'wetland-plants', consumer: 'carpincho' },
+    { food: 'insects', consumer: 'ave-insectivora' },
+    { food: 'insects', consumer: 'carpintero' },
+    { food: 'ave-insectivora', consumer: 'halcon' },
+    { food: 'carpintero', consumer: 'halcon' },
+    { food: 'small-prey', consumer: 'halcon' },
+  ],
+};
