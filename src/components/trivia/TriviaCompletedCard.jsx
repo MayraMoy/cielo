@@ -13,7 +13,7 @@ export function TriviaCompletedCard({
   const hasEarnedReward = score >= TRIVIA_DATA.minimumCorrectAnswers;
 
   return (
-    <div className="w-full max-w-[340px] bg-white rounded-3xl p-6 shadow-[0_8px_24px_rgba(0,0,0,0.14)] border border-[#D1D5DB] flex flex-col items-center text-center gap-4 animate-[modal-appear_220ms_ease-out]">
+    <div className="w-full max-w-[350px] bg-white rounded-3xl p-6 shadow-[0_6px_20px_rgba(0,0,0,0.08)] border border-[#E5E7EB] flex flex-col items-center text-center gap-4 animate-[modal-appear_220ms_ease-out] font-['Poppins']">
       {/* Icono de regalo animado */}
       {hasEarnedReward && (
         <div className="transform hover:scale-110 transition-transform my-1">
@@ -28,23 +28,19 @@ export function TriviaCompletedCard({
             <span>{unlockedTotal}/3 Regalos desbloqueados</span>
           </span>
         )}
-        <h2 className="text-2xl font-bold text-[#1A1C16] tracking-tight">
+        <h2 className="text-[22px] sm:text-[24px] font-bold text-[#1A1C16] tracking-tight">
           {hasEarnedReward
             ? isJunior
               ? reward.juniorTitle
               : reward.title
             : '¡Inténtalo de nuevo!'}
         </h2>
-        <p className="text-xs text-[#636856] mt-1">
+        <p className="text-[13px] text-[#555A49] mt-1 font-medium">
           Acertaste {score} de {totalQuestions} preguntas.
         </p>
       </div>
 
-      <p
-        className={`${
-          isJunior ? 'text-[13px]' : 'text-xs'
-        } leading-relaxed text-[#4A4E3E] bg-[#FAF9F5] p-3.5 rounded-xl border border-[#D8DDC7]`}
-      >
+      <p className="text-[14px] leading-relaxed text-[#2B2F25] bg-[#FAF9F5] p-4 rounded-2xl border border-[#E5E7EB]">
         {hasEarnedReward
           ? isJunior
             ? reward.juniorMessage
@@ -52,13 +48,13 @@ export function TriviaCompletedCard({
           : `Necesitas acertar al menos ${TRIVIA_DATA.minimumCorrectAnswers} de ${totalQuestions} preguntas para ganar el premio. ¡Vuelve a intentarlo!`}
       </p>
 
-      {/* Botones de acción */}
-      <div className="w-full flex flex-col gap-2 pt-1">
+      {/* Botones de acción unificados */}
+      <div className="w-full flex flex-col gap-2.5 pt-1">
         {hasEarnedReward ? (
           <button
             type="button"
             onClick={onGoHome}
-            className="w-full py-3 px-4 bg-[#7E8B28] hover:bg-[#6D7821] text-white text-sm font-medium rounded-xl shadow-sm transition-all duration-150 active:scale-[0.98] cursor-pointer"
+            className="w-full py-3 px-4 bg-[#7E8B28] hover:bg-[#6D7821] text-white text-[14.5px] font-semibold rounded-xl shadow-sm transition-all duration-150 active:scale-[0.98] cursor-pointer"
           >
             {isJunior ? '🎁 ¡Ir a abrir mi regalo!' : 'Ver mi avance en el Inicio'}
           </button>
@@ -66,7 +62,7 @@ export function TriviaCompletedCard({
           <button
             type="button"
             onClick={onRestart}
-            className="w-full py-3 px-4 bg-[#7E8B28] hover:bg-[#6D7821] text-white text-sm font-medium rounded-xl shadow-sm transition-all duration-150 active:scale-[0.98] cursor-pointer"
+            className="w-full py-3 px-4 bg-[#7E8B28] hover:bg-[#6D7821] text-white text-[14.5px] font-semibold rounded-xl shadow-sm transition-all duration-150 active:scale-[0.98] cursor-pointer"
           >
             Volver a intentar
           </button>
@@ -74,7 +70,7 @@ export function TriviaCompletedCard({
         <button
           type="button"
           onClick={hasEarnedReward ? onRestart : onGoHome}
-          className="w-full py-2.5 px-4 bg-transparent hover:bg-black/5 text-[#636856] text-xs font-medium rounded-xl transition-all cursor-pointer"
+          className="w-full py-2.5 px-4 bg-transparent hover:bg-black/5 text-[#555A49] text-xs font-medium rounded-xl transition-all cursor-pointer"
         >
           {hasEarnedReward ? 'Repetir la trivia' : 'Volver al inicio'}
         </button>

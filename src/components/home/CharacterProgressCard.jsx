@@ -10,9 +10,9 @@ export function CharacterProgressCard({
   const totalSteps = 3;
 
   return (
-    <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-[0_6px_20px_rgba(0,0,0,0.12)] border border-[#D1D5DB] transition-all">
-      {/* Título de la tarjeta */}
-      <h2 className="text-[15px] sm:text-[16px] font-medium text-[#1A1C16] mb-4">
+    <div className="bg-white rounded-3xl p-5 sm:p-6 shadow-[0_6px_20px_rgba(0,0,0,0.08)] border border-[#E5E7EB] transition-all font-['Poppins']">
+      {/* Título de la tarjeta unificado */}
+      <h2 className="text-[17px] sm:text-[18px] font-bold text-[#1A1C16] mb-3">
         {title}
       </h2>
 
@@ -25,8 +25,7 @@ export function CharacterProgressCard({
         aria-valuemax={totalSteps}
         aria-valuenow={Math.min(unlockedCount, totalSteps)}
       >
-        {/* Barra de progreso de personajes */}
-        <div className="absolute left-[16.6667%] right-[16.6667%] top-1/2 -translate-y-1/2 h-2.5 bg-[#D1D5DB] rounded-full z-0" />
+        <div className="absolute left-[16.6667%] right-[16.6667%] top-1/2 -translate-y-1/2 h-2.5 bg-[#E5E7EB] rounded-full z-0" />
         <div
           className="absolute left-[16.6667%] top-1/2 -translate-y-1/2 h-2.5 bg-[#7E8B28] rounded-full z-0 transition-[width] duration-700"
           style={{ width: `${(Math.min(unlockedCount, totalSteps) / totalSteps) * (2 / 3) * 100}%` }}
@@ -53,12 +52,12 @@ export function CharacterProgressCard({
         </div>
       </div>
 
-      {/* Botón de acción alineado a la derecha */}
+      {/* Botón de acción unificado */}
       <div className="flex justify-end mt-4">
         <button
           type="button"
           onClick={onStartGame}
-          className="bg-[#7E8B28] hover:bg-[#6D7821] text-white text-[13px] sm:text-sm font-medium px-5 py-2.5 rounded-lg shadow-sm transition-all duration-200 active:scale-[0.98] cursor-pointer"
+          className="bg-[#7E8B28] hover:bg-[#6D7821] text-white text-[14px] font-semibold px-5 py-2.5 rounded-xl shadow-sm transition-all duration-200 active:scale-[0.98] cursor-pointer"
         >
           {buttonText}
         </button>

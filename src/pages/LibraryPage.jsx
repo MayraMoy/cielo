@@ -26,50 +26,46 @@ function FichaDetailModal({ card, isJunior = false, onClose }) {
         role="dialog"
         aria-modal="true"
         aria-labelledby="ficha-title"
-        className="relative w-full max-w-[350px] rounded-2xl border border-[#E5E7EB] bg-white p-4 shadow-2xl"
+        className="relative w-full max-w-[355px] rounded-3xl border border-[#E5E7EB] bg-white p-5 shadow-2xl"
         onClick={(event) => event.stopPropagation()}
       >
         <button
           type="button"
           onClick={onClose}
-          className="absolute right-3 top-2 z-10 p-1 text-2xl leading-none text-[#1A1C16] cursor-pointer"
+          className="absolute right-3.5 top-3.5 z-10 p-1 text-2xl leading-none text-[#1A1C16] hover:bg-black/5 rounded-full cursor-pointer"
           aria-label="Cerrar ficha"
         >
           ×
         </button>
 
-        <div className="grid grid-cols-[100px_1fr] items-center gap-3 pr-5">
+        <div className="grid grid-cols-[105px_1fr] items-center gap-3.5 pr-4">
           <img
             src={card.image}
             alt={card.name}
             className="h-28 w-full object-contain"
           />
           <div className="min-w-0">
-            <span className="inline-flex items-center gap-1 rounded-full border border-[#B5C370] bg-[#F2F4E6] px-3 py-0.5 text-xs font-medium text-[#687320]">
+            <span className="inline-flex items-center gap-1 rounded-full border border-[#B5C370] bg-[#F2F4E6] px-2.5 py-0.5 text-xs font-semibold text-[#687320]">
               {card.category === 'Productor' ? '🌱' : '🐾'} {card.category}
             </span>
             <h2
               id="ficha-title"
-              className="mt-1.5 text-lg font-bold leading-tight text-[#1A1C16]"
+              className="mt-1.5 text-xl font-bold leading-tight text-[#1A1C16]"
             >
               {card.name}
             </h2>
             {!isJunior && card.scientificName && (
-              <p className="text-[11px] italic text-[#687320]">
+              <p className="text-xs italic text-[#687320] mt-0.5">
                 {card.scientificName}
               </p>
             )}
-            <p
-              className={`mt-1 ${
-                isJunior ? 'text-[12.5px]' : 'text-[11.5px]'
-              } leading-snug text-[#3C4033]`}
-            >
+            <p className="mt-1.5 text-sm leading-relaxed text-[#3C4033]">
               {description}
             </p>
           </div>
         </div>
 
-        <section className="mt-3 flex gap-3 rounded-xl bg-[#F4F8DE] p-3 shadow-[0_3px_5px_rgba(0,0,0,0.12)]">
+        <section className="mt-3.5 flex gap-3 rounded-2xl bg-[#F4F8DE] border border-[#CCD69E]/50 p-3.5 shadow-xs">
           <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#89931D] text-[#7E8B28]">
             <svg
               viewBox="0 0 24 24"
@@ -86,26 +82,18 @@ function FichaDetailModal({ card, isJunior = false, onClose }) {
             </svg>
           </span>
           <div>
-            <h3
-              className={`${
-                isJunior ? 'text-xs' : 'text-[11px]'
-              } font-semibold text-[#1A1C16]`}
-            >
+            <h3 className="text-xs font-bold text-[#1A1C16]">
               {isJunior
                 ? '¿Cómo ayuda al bosque?'
                 : '¿Qué aporta a la red trófica?'}
             </h3>
-            <p
-              className={`mt-1 ${
-                isJunior ? 'text-[12px]' : 'text-[11px]'
-              } leading-snug text-[#555A49]`}
-            >
+            <p className="mt-1 text-xs leading-relaxed text-[#555A49]">
               {contribution}
             </p>
           </div>
         </section>
 
-        <section className="relative mt-3 flex min-h-[76px] gap-3 overflow-hidden rounded-xl bg-[#F4F8DE] p-3 pr-16 shadow-[0_3px_5px_rgba(0,0,0,0.12)]">
+        <section className="relative mt-3 flex min-h-[76px] gap-3 overflow-hidden rounded-2xl bg-[#F4F8DE] border border-[#CCD69E]/50 p-3.5 pr-16 shadow-xs">
           <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#89931D] text-[#7E8B28]">
             <svg
               viewBox="0 0 24 24"
@@ -119,18 +107,10 @@ function FichaDetailModal({ card, isJunior = false, onClose }) {
             </svg>
           </span>
           <div>
-            <h3
-              className={`${
-                isJunior ? 'text-xs' : 'text-[11px]'
-              } font-semibold text-[#1A1C16]`}
-            >
+            <h3 className="text-xs font-bold text-[#1A1C16]">
               Se alimenta de...
             </h3>
-            <p
-              className={`mt-1 ${
-                isJunior ? 'text-[12px]' : 'text-[11px]'
-              } leading-snug text-[#555A49]`}
-            >
+            <p className="mt-1 text-xs leading-relaxed text-[#555A49]">
               {diet}
             </p>
           </div>
@@ -151,12 +131,12 @@ function TrophicInfoModal({ level, isJunior = false, onClose }) {
         role="dialog"
         aria-modal="true"
         aria-labelledby="trophic-info-title"
-        className="w-full max-w-[340px] overflow-hidden rounded-2xl shadow-2xl"
+        className="w-full max-w-[345px] overflow-hidden rounded-3xl border border-[#CCD69E] shadow-2xl"
         style={{ backgroundColor: level.background }}
         onClick={(event) => event.stopPropagation()}
       >
         <header
-          className="relative flex min-h-9 items-center justify-center px-10 py-2"
+          className="relative flex min-h-10 items-center justify-center px-10 py-2.5"
           style={{ backgroundColor: level.accent }}
         >
           <h2
@@ -168,14 +148,14 @@ function TrophicInfoModal({ level, isJunior = false, onClose }) {
           <button
             type="button"
             onClick={onClose}
-            className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-2xl leading-none text-[#1A1C16] cursor-pointer"
+            className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 text-2xl leading-none text-[#1A1C16] hover:bg-black/5 rounded-full cursor-pointer"
             aria-label="Cerrar información"
           >
             ×
           </button>
         </header>
 
-        <div className="grid min-h-[150px] grid-cols-[72px_1fr] items-center gap-2 p-3.5">
+        <div className="grid min-h-[150px] grid-cols-[76px_1fr] items-center gap-3 p-4">
           <div className="flex flex-col items-center justify-center gap-2">
             <img
               src={level.info.illustration[0].image}
@@ -201,17 +181,13 @@ function TrophicInfoModal({ level, isJunior = false, onClose }) {
               />
             )}
           </div>
-          <div
-            className={`flex flex-col justify-center gap-2.5 ${
-              isJunior ? 'text-[12.5px]' : 'text-[11px]'
-            } leading-snug text-[#1A1C16]`}
-          >
+          <div className="flex flex-col justify-center gap-2.5 text-sm leading-relaxed text-[#1A1C16]">
             <p>
               {isJunior && level.info.juniorDescription
                 ? level.info.juniorDescription
                 : level.info.description}
             </p>
-            <p className="font-semibold">{level.info.example}</p>
+            <p className="font-bold">{level.info.example}</p>
           </div>
         </div>
       </section>
@@ -237,12 +213,12 @@ function ExplorerProfileHeader({
       : '🌱 Visitante Curioso';
 
   return (
-    <section className="flex items-center justify-between gap-3 rounded-2xl border border-[#D1D5DB] bg-white px-4 py-3.5 shadow-[0_4px_12px_rgba(0,0,0,0.08)]">
-      <div className="flex items-center gap-3 min-w-0">
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#F2F4E6] border border-[#CCD69E] text-[#687320]">
+    <section className="flex items-center justify-between gap-3 rounded-3xl border border-[#E5E7EB] bg-white p-4 shadow-sm">
+      <div className="flex items-center gap-3.5 min-w-0">
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#F2F4E6] border border-[#CCD69E] text-[#687320]">
           {isJunior ? (
             <svg
-              className="w-5 h-5 text-[#687320]"
+              className="w-6 h-6 text-[#687320]"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -256,7 +232,7 @@ function ExplorerProfileHeader({
             </svg>
           ) : (
             <svg
-              className="w-5 h-5 text-[#545C1E]"
+              className="w-6 h-6 text-[#545C1E]"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -271,26 +247,26 @@ function ExplorerProfileHeader({
           )}
         </div>
         <div className="min-w-0">
-          <div className="flex items-center gap-1.5 flex-wrap">
-            <h1 className="text-sm font-bold text-[#1A1C16] truncate">
+          <div className="flex items-center gap-2 flex-wrap">
+            <h1 className="text-base font-bold text-[#1A1C16] truncate">
               {user?.fullName || 'Explorador Invitado'}
             </h1>
-            <span className="rounded-full bg-[#F2F4E6] border border-[#CFD79F] px-2 py-0.5 text-[10px] font-semibold text-[#545C1E]">
+            <span className="rounded-full bg-[#F2F4E6] border border-[#CFD79F] px-2.5 py-0.5 text-xs font-semibold text-[#545C1E]">
               {unlockedCardsCount}/{totalCardsCount} fichas
             </span>
           </div>
-          <p className="text-[11px] font-medium text-[#687320] mt-0.5">
+          <p className="text-xs font-semibold text-[#687320] mt-0.5">
             {rankBadge}
           </p>
           <div className="mt-1 flex items-center gap-2">
-            <span className="text-[10px] font-medium text-[#555A49]">
+            <span className="text-xs font-medium text-[#555A49]">
               {isJunior ? 'Guía Junior' : 'Guía Adulto'}
             </span>
             {!user?.fullName && (
               <button
                 type="button"
                 onClick={onGoRegister}
-                className="text-[10px] font-semibold text-[#7E8B28] underline underline-offset-2 cursor-pointer"
+                className="text-xs font-semibold text-[#7E8B28] underline underline-offset-2 cursor-pointer"
               >
                 • Registrarme
               </button>
@@ -320,7 +296,6 @@ function LockIcon() {
 
 function FichasTab({
   unlockedCharacters,
-  isJunior,
   onOpenCard,
   onGoScan,
 }) {
@@ -329,24 +304,24 @@ function FichasTab({
   return (
     <div>
       {lockedHintCard && (
-        <div className="mb-3 flex items-center justify-between gap-2 rounded-xl border border-[#B5C370] bg-[#F2F4E6] px-3 py-2.5 text-xs text-[#3C4033] animate-[modal-appear_180ms_ease-out]">
+        <div className="mb-3.5 flex items-center justify-between gap-2.5 rounded-2xl border border-[#B5C370] bg-[#F2F4E6] p-3.5 text-xs text-[#3C4033] shadow-xs animate-[modal-appear_180ms_ease-out]">
           <div>
-            <p className="font-bold text-[#545C1E]">
+            <p className="font-bold text-sm text-[#545C1E]">
               🔒 {lockedHintCard.name} está bloqueada
             </p>
-            <p className="text-[11px] mt-0.5">{lockedHintCard.unlockHint}</p>
+            <p className="text-xs mt-0.5 text-[#555A49]">{lockedHintCard.unlockHint}</p>
           </div>
           <button
             type="button"
             onClick={onGoScan}
-            className="shrink-0 rounded-lg bg-[#7E8B28] px-2.5 py-1.5 text-[11px] font-semibold text-white hover:bg-[#6D7821] cursor-pointer"
+            className="shrink-0 rounded-xl bg-[#7E8B28] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#6D7821] cursor-pointer"
           >
             Ir a QR
           </button>
         </div>
       )}
 
-      <div className="grid grid-cols-3 gap-x-3 gap-y-3.5 px-1 py-1">
+      <div className="grid grid-cols-3 gap-3 px-1 py-1">
         {LIBRARY_CARDS.map((card) => {
           const isUnlocked =
             card.unlocked || (card.unlockStep ?? 1) <= unlockedCharacters;
@@ -366,7 +341,7 @@ function FichasTab({
               aria-label={`${card.name}${
                 isUnlocked ? ', abrir ficha' : ', bloqueada (toca para ver pista)'
               }`}
-              className={`relative flex flex-col items-center justify-between rounded-xl bg-white p-2 text-center shadow-2xs border transition-transform active:scale-95 cursor-pointer ${
+              className={`relative flex flex-col items-center justify-between rounded-2xl bg-white p-2.5 text-center shadow-xs border transition-transform active:scale-95 cursor-pointer ${
                 isUnlocked
                   ? 'border-[#CFD79F] hover:border-[#7E8B28]'
                   : 'border-gray-200 opacity-75'
@@ -381,15 +356,13 @@ function FichasTab({
                   }`}
                 />
                 {!isUnlocked && (
-                  <span className="absolute right-0.5 top-0.5 rounded-full bg-white/95 p-1 text-[#1A1C16] shadow-2xs">
+                  <span className="absolute right-0.5 top-0.5 rounded-full bg-white/95 p-1 text-[#1A1C16] shadow-xs">
                     <LockIcon />
                   </span>
                 )}
               </div>
               <span
-                className={`mt-1 w-full truncate ${
-                  isJunior ? 'text-[11px]' : 'text-[10px]'
-                } font-semibold ${
+                className={`mt-1.5 w-full truncate text-xs font-semibold ${
                   isUnlocked ? 'text-[#1A1C16]' : 'text-gray-500'
                 }`}
               >
@@ -469,13 +442,11 @@ function TrophicNetworkTab({ isJunior = false }) {
     <section>
       <div className="flex items-center justify-between gap-2 px-1">
         <div>
-          <h2 className="text-base font-semibold text-[#1A1C16]">
+          <h2 className="text-base font-bold text-[#1A1C16]">
             Arma la red trófica
           </h2>
           <p
-            className={`pt-0.5 ${
-              isJunior ? 'text-[13px]' : 'text-xs'
-            } leading-snug text-[#3C4033]`}
+            className="pt-0.5 text-xs leading-relaxed text-[#3C4033]"
           >
             {isChallengeMode
               ? 'Tocá el escalón correcto para ubicar a cada especie:'
@@ -489,7 +460,7 @@ function TrophicNetworkTab({ isJunior = false }) {
             setIsChallengeMode((prev) => !prev);
             resetChallenge();
           }}
-          className={`shrink-0 rounded-xl px-3 py-1.5 text-[11px] font-semibold transition-all cursor-pointer border ${
+          className={`shrink-0 rounded-xl px-3.5 py-2 text-xs font-bold transition-all cursor-pointer border ${
             isChallengeMode
               ? 'bg-[#1A1C16] text-white border-[#1A1C16]'
               : 'bg-[#F2F4E6] text-[#545C1E] border-[#B5C370] hover:bg-[#E4E8C8]'
@@ -501,18 +472,18 @@ function TrophicNetworkTab({ isJunior = false }) {
 
       {/* Tarjeta de consigna cuando el Modo Práctica está activo */}
       {isChallengeMode && (
-        <div className="mt-2.5 rounded-xl border border-[#B5C370] bg-white p-3 shadow-xs">
+        <div className="mt-3 rounded-2xl border border-[#B5C370] bg-white p-3.5 shadow-sm">
           {!completedChallenge ? (
             <div className="flex items-center justify-between gap-2">
               <div>
                 <p className="text-xs font-bold text-[#1A1C16]">
                   ¿En qué nivel va: <span className="text-[#7E8B28]">{currentTarget.name}</span>?
                 </p>
-                <p className="text-[11px] text-[#555A49] mt-0.5">
+                <p className="text-xs text-[#555A49] mt-0.5">
                   Pista: {currentTarget.clue}
                 </p>
               </div>
-              <span className="rounded-full bg-[#F2F4E6] px-2.5 py-0.5 text-[10px] font-semibold text-[#687320]">
+              <span className="rounded-full bg-[#F2F4E6] border border-[#CCD69E] px-2.5 py-0.5 text-xs font-semibold text-[#687320]">
                 {challengeIndex + 1}/{challengeItems.length}
               </span>
             </div>
@@ -524,7 +495,7 @@ function TrophicNetworkTab({ isJunior = false }) {
               <button
                 type="button"
                 onClick={resetChallenge}
-                className="rounded-lg bg-[#7E8B28] px-2.5 py-1 text-[11px] font-semibold text-white cursor-pointer"
+                className="rounded-xl bg-[#7E8B28] px-3 py-1.5 text-xs font-semibold text-white cursor-pointer"
               >
                 Jugar de nuevo
               </button>
@@ -533,7 +504,7 @@ function TrophicNetworkTab({ isJunior = false }) {
 
           {feedback && (
             <p
-              className={`mt-1.5 text-[11px] font-medium ${
+              className={`mt-2 text-xs font-semibold ${
                 feedback.type === 'success' ? 'text-[#687320]' : 'text-red-600'
               }`}
             >
@@ -543,12 +514,12 @@ function TrophicNetworkTab({ isJunior = false }) {
         </div>
       )}
 
-      <div className="relative mt-3 flex flex-col gap-2 px-1">
+      <div className="relative mt-3.5 flex flex-col gap-2.5 px-1">
         {TROPHIC_LEVELS.map((level) => (
           <article
             key={level.id}
             onClick={() => isChallengeMode && handleLevelGuess(level.id)}
-            className={`relative flex h-[84px] items-stretch overflow-hidden rounded-xl border border-black/10 shadow-[0_3px_6px_rgba(0,0,0,0.18)] transition-transform ${
+            className={`relative flex h-[88px] items-stretch overflow-hidden rounded-2xl border border-black/10 shadow-sm transition-transform ${
               isChallengeMode
                 ? 'cursor-pointer hover:scale-[1.01] active:scale-[0.99] ring-2 ring-transparent hover:ring-[#7E8B28]'
                 : ''
@@ -556,7 +527,7 @@ function TrophicNetworkTab({ isJunior = false }) {
             style={{ backgroundColor: level.background }}
           >
             <div
-              className="relative flex w-10 shrink-0 items-center justify-center px-1 text-center text-[9px] font-medium leading-tight text-[#1A1C16]"
+              className="relative flex w-10 shrink-0 items-center justify-center px-1 text-center text-[10px] font-bold leading-tight text-[#1A1C16]"
               style={{ backgroundColor: level.accent }}
             >
               <span
@@ -581,7 +552,7 @@ function TrophicNetworkTab({ isJunior = false }) {
                     alt=""
                     className="h-12 w-14 object-contain"
                   />
-                  <span className="max-w-full break-words text-center text-[10px] font-semibold leading-tight text-[#1A1C16]">
+                  <span className="max-w-full break-words text-center text-xs font-semibold leading-tight text-[#1A1C16]">
                     {organism.name}
                   </span>
                 </div>
@@ -594,7 +565,7 @@ function TrophicNetworkTab({ isJunior = false }) {
                 setSelectedLevel(level);
               }}
               aria-label={`Información: ${level.label}`}
-              className="absolute right-2 top-2 z-20 flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#8D6500] text-[11px] font-bold text-[#8D6500] transition-transform hover:scale-110 cursor-pointer"
+              className="absolute right-2.5 top-2.5 z-20 flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#8D6500] text-xs font-bold text-[#8D6500] transition-transform hover:scale-110 cursor-pointer"
             >
               i
             </button>
@@ -691,7 +662,7 @@ export function LibraryPage() {
         />
 
         <div
-          className="mt-3.5 flex overflow-hidden rounded-lg bg-[#C6CBAA]"
+          className="mt-4 flex p-1 rounded-2xl bg-[#E4E8C8] border border-[#CCD69E]"
           role="tablist"
           aria-label="Secciones de la biblioteca"
         >
@@ -700,10 +671,10 @@ export function LibraryPage() {
             role="tab"
             aria-selected={activeSection === 'fichas'}
             onClick={() => setActiveSection('fichas')}
-            className={`flex-1 py-2 text-[11px] font-semibold transition-colors cursor-pointer ${
+            className={`flex-1 py-2.5 text-xs font-bold rounded-xl transition-all cursor-pointer ${
               activeSection === 'fichas'
-                ? 'bg-[#89931D] text-white'
-                : 'text-[#1A1C16]'
+                ? 'bg-[#7E8B28] text-white shadow-xs'
+                : 'text-[#4E5618] hover:text-[#1A1C16]'
             }`}
           >
             FICHAS ({unlockedCardsCount}/{LIBRARY_CARDS.length})
@@ -713,10 +684,10 @@ export function LibraryPage() {
             role="tab"
             aria-selected={activeSection === 'network'}
             onClick={() => setActiveSection('network')}
-            className={`flex-1 py-2 text-[11px] font-semibold transition-colors cursor-pointer ${
+            className={`flex-1 py-2.5 text-xs font-bold rounded-xl transition-all cursor-pointer ${
               activeSection === 'network'
-                ? 'bg-[#89931D] text-white'
-                : 'text-[#1A1C16]'
+                ? 'bg-[#7E8B28] text-white shadow-xs'
+                : 'text-[#4E5618] hover:text-[#1A1C16]'
             }`}
           >
             RED TRÓFICA
@@ -727,7 +698,6 @@ export function LibraryPage() {
           {activeSection === 'fichas' ? (
             <FichasTab
               unlockedCharacters={unlockedCharacters}
-              isJunior={isJunior}
               onOpenCard={setSelectedCard}
               onGoScan={() => navigate('/scan')}
             />

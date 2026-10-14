@@ -168,7 +168,7 @@ export const LIBRARY_CARDS = [
     image: woodpeckerImg,
     unlockStep: 3,
     category: 'Consumidor',
-    trophicRole: 'secondary-consumer',
+    trophicRole: 'primary-consumer',
     unlockHint: 'Escaneá la Estación 3 (Mirador del Cielo) en el lector QR para desbloquearlo.',
     description:
       'Ave de plumaje llamativo y pico cincelador que busca larvas e insectos en troncos secos.',
@@ -212,14 +212,13 @@ export const TROPHIC_LEVELS = [
     accent: '#FFAE4E',
     organisms: [
       { name: 'Halcón', image: halconImg },
-      { name: 'Carpintero', image: woodpeckerImg },
     ],
     info: {
       description:
-        'Los organismos que se comen a los consumidores primarios se llaman consumidores secundarios. Por lo general son carnívoros o depredadores.',
+        'En la cima de la red trófica están los depredadores que regulan el equilibrio natural de la reserva.',
       juniorDescription:
-        'Son los animales cazadores que se alimentan de otros animales más pequeños para mantener el equilibrio del bosque.',
-      example: 'Por ejemplo, el Halcón se alimenta de pequeños herbívoros.',
+        '¡El gran cazador del cielo! Se alimenta de otros animales más pequeños para mantener sano el bosque.',
+      example: 'Por ejemplo, el Halcón regula las poblaciones de pequeños roedores y aves.',
       illustration: [
         { name: 'Halcón', image: halconImg },
         { name: 'Carpincho', image: carpinchoImg },
@@ -233,8 +232,9 @@ export const TROPHIC_LEVELS = [
     background: '#FFF6A8',
     accent: '#FFF27A',
     organisms: [
-      { name: 'Ave insectívora', image: aveImg },
+      { name: 'Carpintero', image: woodpeckerImg },
       { name: 'Carpincho', image: carpinchoImg },
+      { name: 'Ave insectívora', image: aveImg },
     ],
     info: {
       description:

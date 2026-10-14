@@ -41,25 +41,21 @@ export function EmergencyFireModal({ isJunior = false, onClose }) {
         </h2>
 
         <p
-          className={`mt-1.5 ${
-            isJunior ? 'text-[13px]' : 'text-xs'
-          } leading-relaxed text-[#3C4033]`}
+          className="mt-2 text-sm leading-relaxed text-[#3C4033]"
         >
           {isJunior ? fireSafety.juniorIntro : fireSafety.adultIntro}
         </p>
 
         {/* Pasos de acción ante principio de incendio */}
-        <div className="mt-3.5 rounded-2xl bg-amber-50/90 border border-amber-200 p-3.5">
-          <h3 className="text-xs font-bold uppercase tracking-wide text-amber-900 mb-2">
+        <div className="mt-4 rounded-2xl bg-amber-50/90 border border-amber-200 p-4">
+          <h3 className="text-xs font-bold uppercase tracking-wide text-amber-900 mb-2.5">
             {isJunior ? '¿Qué hacer si ves humo?' : 'Protocolo de Actuación (PAS)'}
           </h3>
-          <ul className="flex flex-col gap-2">
+          <ul className="flex flex-col gap-2.5">
             {steps.map((step, idx) => (
               <li
                 key={idx}
-                className={`${
-                  isJunior ? 'text-[13px] font-medium' : 'text-[11.5px]'
-                } leading-snug text-[#2B2F25]`}
+                className="text-sm font-medium leading-snug text-[#2B2F25]"
               >
                 {step}
               </li>
@@ -68,17 +64,15 @@ export function EmergencyFireModal({ isJunior = false, onClose }) {
         </div>
 
         {/* Reglas de Prevención Ambiental */}
-        <div className="mt-3 rounded-2xl bg-[#F2F4E6] border border-[#CFD79F] p-3">
-          <h3 className="text-xs font-bold text-[#545C1E] mb-1.5">
+        <div className="mt-3.5 rounded-2xl bg-[#F2F4E6] border border-[#CFD79F] p-4">
+          <h3 className="text-xs font-bold text-[#545C1E] mb-2">
             🌿 Cuidado de la Reserva
           </h3>
-          <ul className="list-disc pl-4 space-y-1">
+          <ul className="list-disc pl-4 space-y-1.5">
             {fireSafety.preventionRules.map((rule, idx) => (
               <li
                 key={idx}
-                className={`${
-                  isJunior ? 'text-xs' : 'text-[11px]'
-                } text-[#3C4033] leading-snug`}
+                className="text-xs font-medium text-[#3C4033] leading-relaxed"
               >
                 {rule}
               </li>
@@ -87,8 +81,8 @@ export function EmergencyFireModal({ isJunior = false, onClose }) {
         </div>
 
         {/* Contactos Rápidos de Emergencia */}
-        <div className="mt-3.5">
-          <p className="text-[11px] font-semibold text-[#555A49] mb-2">
+        <div className="mt-4">
+          <p className="text-xs font-semibold text-[#555A49] mb-2">
             Líneas de emergencia directa:
           </p>
           <div className="grid grid-cols-3 gap-2">
@@ -96,12 +90,12 @@ export function EmergencyFireModal({ isJunior = false, onClose }) {
               <a
                 key={contact.number}
                 href={`tel:${contact.number}`}
-                className="flex flex-col items-center justify-center rounded-xl border border-red-200 bg-red-50/70 py-2 px-1 text-center transition-colors hover:bg-red-100"
+                className="flex flex-col items-center justify-center rounded-xl border border-red-200 bg-red-50/80 py-2.5 px-1.5 text-center transition-colors hover:bg-red-100 active:scale-95"
               >
                 <span className="text-sm font-bold text-red-700">
                   📞 {contact.number}
                 </span>
-                <span className="text-[10px] font-medium text-[#3C4033] leading-tight mt-0.5">
+                <span className="text-[11px] font-semibold text-[#3C4033] leading-tight mt-0.5">
                   {contact.label}
                 </span>
               </a>
@@ -112,7 +106,7 @@ export function EmergencyFireModal({ isJunior = false, onClose }) {
         <button
           type="button"
           onClick={onClose}
-          className="mt-4 w-full rounded-xl bg-[#7E8B28] px-4 py-2.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-[#6D7821] cursor-pointer"
+          className="mt-4 w-full rounded-xl bg-[#7E8B28] px-4 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#6D7821] active:scale-98 cursor-pointer"
         >
           {isJunior ? '¡Entendido, a cuidar el bosque!' : 'Entendido'}
         </button>

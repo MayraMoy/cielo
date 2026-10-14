@@ -34,10 +34,10 @@ export function HomePage() {
         {/* Barra superior: Tag de Modo y Botón SOS Incendios personalizados */}
         <div className="flex items-center justify-between gap-2">
           {/* Tag de Modo Informativo */}
-          <div className="inline-flex items-center gap-1.5 rounded-xl border border-[#CCD69E] bg-[#F2F4E6] px-3 py-1.5 text-[11px] font-semibold text-[#4E5618] shadow-[0_1px_2px_rgba(0,0,0,0.04)] select-none">
+          <div className="inline-flex items-center gap-1.5 rounded-xl border border-[#CCD69E] bg-[#F2F4E6] px-3 py-1.5 text-xs font-semibold text-[#4E5618] shadow-xs select-none">
             {isJunior ? (
               <svg
-                className="w-3.5 h-3.5 text-[#687320]"
+                className="w-4 h-4 text-[#687320]"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -51,7 +51,7 @@ export function HomePage() {
               </svg>
             ) : (
               <svg
-                className="w-3.5 h-3.5 text-[#545C1E]"
+                className="w-4 h-4 text-[#545C1E]"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -66,7 +66,7 @@ export function HomePage() {
             )}
             <span>{isJunior ? 'Guía Junior' : 'Guía Adulto'}</span>
             {user?.age ? (
-              <span className="text-[10px] font-normal text-[#687320]">
+              <span className="text-xs font-normal text-[#687320]">
                 • {user.age} años
               </span>
             ) : null}
@@ -76,11 +76,11 @@ export function HomePage() {
           <button
             type="button"
             onClick={handleOpenFireModal}
-            className="inline-flex items-center gap-1.5 rounded-xl border border-[#EAC3AF] bg-[#FDF3ED] px-3.5 py-1.5 text-[11px] font-semibold text-[#8C3A16] shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:bg-[#F9E6DB] active:scale-95 transition-all cursor-pointer"
+            className="inline-flex items-center gap-1.5 rounded-xl border border-[#EAC3AF] bg-[#FDF3ED] px-3.5 py-1.5 text-xs font-semibold text-[#8C3A16] shadow-xs hover:bg-[#F9E6DB] active:scale-95 transition-all cursor-pointer"
             aria-label="Prevención de incendios y protocolo de emergencias"
           >
             <svg
-              className="w-3.5 h-3.5 text-[#C2410C]"
+              className="w-4 h-4 text-[#C2410C]"
               viewBox="0 0 24 24"
               fill="currentColor"
               aria-hidden="true"

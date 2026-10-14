@@ -130,7 +130,7 @@ export function ScanPage() {
                 key={st.id}
                 type="button"
                 onClick={() => selectStation(idx)}
-                className={`px-2.5 py-1 rounded-full text-[11px] font-medium transition-all cursor-pointer border backdrop-blur-md flex items-center gap-1 ${
+                className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer border backdrop-blur-md flex items-center gap-1.5 ${
                   isSelected
                     ? 'bg-[#7E8B28] text-white border-[#B5C370] shadow-sm'
                     : 'bg-black/45 text-white/80 border-white/15 hover:bg-black/65'
@@ -179,7 +179,7 @@ export function ScanPage() {
             <path d="M480-260q75 0 127.5-52.5T660-440q0-75-52.5-127.5T480-620q-75 0-127.5 52.5T300-440q0 75 52.5 127.5T480-260Zm0-80q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM160-120q-33 0-56.5-23.5T80-200v-520q0-33 23.5-56.5T160-800h160l80-80h160l80 80h160q33 0 56.5 23.5T880-720v520q0 33-23.5 56.5T800-120H160Zm0-80h640v-520H654l-80-80H386l-80 80H160v520Zm320-260Z" />
           </svg>
         </button>
-        <span className="text-white/85 text-[11px] font-medium mt-1.5 drop-shadow-sm select-none">
+        <span className="text-white/90 text-xs font-semibold mt-2 drop-shadow-sm select-none text-center px-4">
           {isJunior
             ? '¡Tocá la cámara para leer el cartel QR!'
             : 'Presiona para escanear la estación seleccionada'}
