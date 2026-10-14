@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-poppins: 'Poppins', sans-serif;
   --color-olive-50: #F9F9F4;
@@ -237,5 +239,57 @@ body {
 .trophic-card button[aria-label^="Información"] * {
   color: #8D6500 !important;
 }
+
+/* ========================================================
+   MODAL DE EMERGENCIAS SOS - MODO OSCURO DE ALTA LEGIBILIDAD
+   ======================================================== */
+.dark .fire-modal-container {
+  background-color: #1C2117 !important;
+  color: #F4F6ED !important;
+}
+
+.dark .fire-modal-container h2 {
+  color: #FFFFFF !important;
+}
+
+.dark .fire-modal-container p {
+  color: #DDE2D3 !important;
+}
+
+.dark .fire-modal-container .fire-modal-pas {
+  background-color: #2D1D10 !important;
+  border-color: #F59E0B !important;
+}
+
+.dark .fire-modal-container .fire-modal-pas h3 {
+  color: #FCD34D !important;
+}
+
+.dark .fire-modal-container .fire-modal-pas li {
+  color: #FFFBEB !important;
+}
+
+.dark .fire-modal-container .fire-prevention-box {
+  background-color: #22291B !important;
+  border-color: #424E33 !important;
+}
+
+.dark .fire-modal-container .fire-prevention-box h3 {
+  color: #DDEB7A !important;
+}
+
+.dark .fire-modal-container .fire-prevention-box li {
+  color: #F4F6ED !important;
+}
+
+.dark .fire-modal-container .fire-contact-card {
+  background-color: rgba(69, 10, 10, 0.75) !important;
+  border-color: #B91C1C !important;
+}
+
+.dark .fire-modal-container .fire-contact-card span:last-child {
+  color: #FFFFFF !important;
+}
+
 
 
