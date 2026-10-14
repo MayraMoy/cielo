@@ -25,35 +25,68 @@ export function HomePage() {
     handleCloseFireModal,
   } = useHome();
 
-  const { user, isJunior, toggleMode } = useUserProfile();
+  const { user, isJunior } = useUserProfile();
 
   return (
     <div className="w-full flex-1 relative flex flex-col justify-between select-none">
       {/* Contenido principal con padding ajustado para pantalla de celular */}
       <main className="w-full px-5 pt-3 pb-28 flex flex-col gap-4">
-        {/* Barra superior de Modo (Niño/Adulto) y Botón SOS Incendios */}
+        {/* Barra superior: Tag de Modo y Botón SOS Incendios personalizados */}
         <div className="flex items-center justify-between gap-2">
-          <button
-            type="button"
-            onClick={toggleMode}
-            title="Haz clic para cambiar entre vista Niño (Tomás) y vista Adulto"
-            className="inline-flex items-center gap-1.5 rounded-full border border-[#B5C370] bg-[#F2F4E6] px-3 py-1 text-[11px] font-semibold text-[#545C1E] shadow-2xs transition-all hover:bg-[#E4E8C8] active:scale-95 cursor-pointer"
-          >
-            <span>{isJunior ? '👦 Modo Junior (≤12)' : '🧑 Modo Adulto'}</span>
+          {/* Tag de Modo Informativo */}
+          <div className="inline-flex items-center gap-1.5 rounded-xl border border-[#CCD69E] bg-[#F2F4E6] px-3 py-1.5 text-[11px] font-semibold text-[#4E5618] shadow-[0_1px_2px_rgba(0,0,0,0.04)] select-none">
+            {isJunior ? (
+              <svg
+                className="w-3.5 h-3.5 text-[#687320]"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+              </svg>
+            ) : (
+              <svg
+                className="w-3.5 h-3.5 text-[#545C1E]"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+              </svg>
+            )}
+            <span>{isJunior ? 'Guía Junior' : 'Guía Adulto'}</span>
             {user?.age ? (
-              <span className="text-[10px] font-normal opacity-80">
+              <span className="text-[10px] font-normal text-[#687320]">
                 • {user.age} años
               </span>
             ) : null}
-          </button>
+          </div>
 
+          {/* Botón SOS Incendios integrado a la paleta */}
           <button
             type="button"
             onClick={handleOpenFireModal}
-            className="inline-flex items-center gap-1 rounded-full border border-red-300 bg-red-50 px-3 py-1 text-[11px] font-semibold text-red-700 shadow-2xs transition-all hover:bg-red-100 active:scale-95 cursor-pointer"
-            aria-label="Prevención de incendios y emergencias"
+            className="inline-flex items-center gap-1.5 rounded-xl border border-[#EAC3AF] bg-[#FDF3ED] px-3.5 py-1.5 text-[11px] font-semibold text-[#8C3A16] shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:bg-[#F9E6DB] active:scale-95 transition-all cursor-pointer"
+            aria-label="Prevención de incendios y protocolo de emergencias"
           >
-            <span>🔥</span>
+            <svg
+              className="w-3.5 h-3.5 text-[#C2410C]"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M12 23c-4.97 0-9-4.03-9-9 0-3.64 2.22-6.66 4-9 .61-.8 1.94-.37 2 .67.15 2.65 1.76 4.33 3 5.33 1-1.33 1.5-3.33 1-5 1.5 1 4 3.5 4 8 0 4.97-4.03 9-9 9z" />
+            </svg>
             <span>{HOME_DATA.fireSafety.buttonLabel}</span>
           </button>
         </div>

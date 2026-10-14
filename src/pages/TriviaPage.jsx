@@ -32,10 +32,10 @@ export function TriviaPage() {
 
   return (
     <div className="w-full flex-1 relative flex flex-col justify-between items-center select-none bg-[#FAF9F5]">
-      {/* 1. BARRA SUPERIOR CON INDICADOR DE POSTA Y BOTÓN CERRAR "✕" */}
+      {/* 1. BARRA SUPERIOR CON INDICADOR DE ESTACIÓN Y BOTÓN CERRAR "✕" */}
       <div className="w-full flex items-center justify-between px-6 pt-2 z-20">
         <span className="text-xs font-semibold text-[#687320] bg-[#F2F4E6] border border-[#CFD79F] px-3 py-1 rounded-full">
-          🌿 Desafío Posta {stationStep}
+          🌿 Desafío Estación {stationStep}
         </span>
 
         <button

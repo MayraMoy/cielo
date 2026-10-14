@@ -5,7 +5,6 @@ import { Input } from '../components/ui/Input';
 import { Button } from '../components/ui/Button';
 import { useRegisterForm } from '../hooks/useRegisterForm';
 import { REGISTER_DATA } from '../data/registerData';
-import { setExperienceModeOverride } from '../data/userProfile';
 
 export function RegisterPage() {
   const navigate = useNavigate();
@@ -13,7 +12,6 @@ export function RegisterPage() {
   const handleSuccess = (data) => {
     try {
       localStorage.setItem('cielo_user', JSON.stringify(data));
-      setExperienceModeOverride(null);
     } catch (e) {
       console.error('Error al guardar usuario en localStorage:', e);
     }

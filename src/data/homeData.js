@@ -13,7 +13,7 @@ export const HOME_DATA = {
     title: "¿Sabías que...?",
     icon: "🌿",
     description:
-      'En la Reserva Villa Cielo, el Molle actúa como un "árbol nodriza": bajo su sombra y protección nacen y crecen orquídeas, bromelias y helechos que no podrían sobrevivir solos en el monte.',
+      'En la Reserva Villa Cielo, el árbol Molle actúa como un "árbol nodriza": bajo su sombra y protección nacen y crecen orquídeas, bromelias y helechos que no podrían sobrevivir solos en el monte.',
     juniorDescription:
       '¡El árbol Molle es como una "mamá paraguas" del bosque! Debajo de sus ramas cuida a plantitas bebés (como orquídeas y helechos) para que el sol fuerte no las lastime.',
   },
@@ -34,7 +34,7 @@ export const HOME_DATA = {
     ],
     adultSteps: [
       "1. PROTEGER: Retirate por el sendero marcado en dirección opuesta al viento y al humo.",
-      "2. AVISAR: Comunicá inmediatamente la ubicación (posta QR más cercana) a Bomberos (100) o Guardaparques.",
+      "2. AVISAR: Comunicá inmediatamente la ubicación (estación QR más cercana) a Bomberos (100) o Guardaparques.",
       "3. SOCORRER: Priorizá la evacuación de niños y personas mayores sin exponerte al frente de fuego.",
     ],
     preventionRules: [

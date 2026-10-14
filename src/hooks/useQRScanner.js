@@ -7,7 +7,7 @@ export function useQRScanner(onScanSuccess) {
   const [cameraMode, setCameraMode] = useState('simulation'); // 'simulation' | 'live'
   const [completedStations] = useState(getCompletedStations);
 
-  // Por defecto selecciona la primera posta aún no completada (1, 2 o 3)
+  // Por defecto selecciona la primera estación aún no completada (1, 2 o 3)
   const [selectedStationIndex, setSelectedStationIndex] = useState(() => {
     const completed = getCompletedStations();
     const nextIdx = SCAN_DATA.stations.findIndex(

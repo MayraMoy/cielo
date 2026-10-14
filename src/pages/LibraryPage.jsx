@@ -225,7 +225,6 @@ function ExplorerProfileHeader({
   unlockedCardsCount,
   totalCardsCount,
   unlockedCharacters,
-  onToggleMode,
   onGoRegister,
 }) {
   const rankBadge =
@@ -240,8 +239,36 @@ function ExplorerProfileHeader({
   return (
     <section className="flex items-center justify-between gap-3 rounded-2xl border border-[#D1D5DB] bg-white px-4 py-3.5 shadow-[0_4px_12px_rgba(0,0,0,0.08)]">
       <div className="flex items-center gap-3 min-w-0">
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#F2F4E6] border border-[#B5C370] text-lg">
-          {isJunior ? '👦' : '🧑'}
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#F2F4E6] border border-[#CCD69E] text-[#687320]">
+          {isJunior ? (
+            <svg
+              className="w-5 h-5 text-[#687320]"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+            </svg>
+          ) : (
+            <svg
+              className="w-5 h-5 text-[#545C1E]"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+            </svg>
+          )}
         </div>
         <div className="min-w-0">
           <div className="flex items-center gap-1.5 flex-wrap">
@@ -256,13 +283,9 @@ function ExplorerProfileHeader({
             {rankBadge}
           </p>
           <div className="mt-1 flex items-center gap-2">
-            <button
-              type="button"
-              onClick={onToggleMode}
-              className="text-[10px] font-semibold text-[#555A49] underline decoration-[#8A8F7B] underline-offset-2 hover:text-[#1A1C16] cursor-pointer"
-            >
-              Modo: {isJunior ? 'Junior (Niños)' : 'Adulto'} (Cambiar)
-            </button>
+            <span className="text-[10px] font-medium text-[#555A49]">
+              {isJunior ? 'Guía Junior' : 'Guía Adulto'}
+            </span>
             {!user?.fullName && (
               <button
                 type="button"
@@ -647,7 +670,7 @@ export function LibraryPage() {
   const [activeSection, setActiveSection] = useState('fichas');
   const [unlockedCharacters] = useState(getUnlockedCharacters);
   const [selectedCard, setSelectedCard] = useState(null);
-  const { user, isJunior, toggleMode } = useUserProfile();
+  const { user, isJunior } = useUserProfile();
 
   const unlockedCardsCount = useMemo(() => {
     return LIBRARY_CARDS.filter(
@@ -664,7 +687,6 @@ export function LibraryPage() {
           unlockedCardsCount={unlockedCardsCount}
           totalCardsCount={LIBRARY_CARDS.length}
           unlockedCharacters={unlockedCharacters}
-          onToggleMode={toggleMode}
           onGoRegister={() => navigate('/register')}
         />
 

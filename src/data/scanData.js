@@ -2,27 +2,27 @@ const STATIONS = [
   {
     step: 1,
     id: "molle",
-    stationLabel: "Posta 1: Monte Nativo",
-    name: "Molle",
+    stationLabel: "Estación 1: Monte Nativo",
+    name: "Árbol Molle",
     scientificName: "Schinus areira",
     tag: "Árbol Nodriza • Productor",
     reserve: "Reserva Villa Cielo",
     description:
-      "Bajo la sombra y protección del Molle nacen y crecen orquídeas, bromelias y helechos que no podrían sobrevivir solos en el monte serrano.",
+      "Bajo la sombra y protección del árbol Molle nacen y crecen orquídeas, bromelias y helechos que no podrían sobrevivir solos en el monte serrano.",
     juniorDescription:
-      "¡Encontraste al gran Molle! Es un árbol súper protector que les da sombra y casita a muchas plantas chiquitas y pajaritos.",
+      "¡Encontraste al gran Árbol Molle! Es un árbol nativo súper protector que les da sombra y casita a muchas plantas chiquitas y pajaritos.",
     curiosity:
       "Sus frutos dulces y picantes son conocidos como pimienta rosa y alimentan a decenas de aves de la región.",
     juniorCuriosity:
-      "¡Sus frutitas rojas parecen confites y a los pájaros de la reserva les encantan!",
+      "¡Las frutitas rojas del árbol Molle parecen confites y a los pájaros de la reserva les encantan!",
     rewardText:
-      "¡Superá la trivia de la Posta 1 para destrabar el Regalo #1 y nuevas fichas de flora y aves!",
+      "¡Superá la trivia de la Estación 1 para destrabar el Regalo #1 y nuevas fichas de flora y aves!",
     totalSteps: 3,
   },
   {
     step: 2,
     id: "carpincho",
-    stationLabel: "Posta 2: Sendero del Humedal",
+    stationLabel: "Estación 2: Sendero del Humedal",
     name: "Carpincho",
     scientificName: "Hydrochoerus hydrochaeris",
     tag: "Herbívoro • Consumidor Primario",
@@ -36,13 +36,13 @@ const STATIONS = [
     juniorCuriosity:
       "¡Puede quedarse abajo del agua dejando solo la nariz y los ojos afuera como si fuera un submarino!",
     rewardText:
-      "¡Superá la trivia de la Posta 2 para destrabar el Regalo #2 y sumar los consumidores a tu colección!",
+      "¡Superá la trivia de la Estación 2 para destrabar el Regalo #2 y sumar los consumidores a tu colección!",
     totalSteps: 3,
   },
   {
     step: 3,
     id: "halcon",
-    stationLabel: "Posta 3: Mirador del Cielo",
+    stationLabel: "Estación 3: Mirador del Cielo",
     name: "Halcón",
     scientificName: "Falco sparverius",
     tag: "Ave Rapaz • Consumidor Secundario",
@@ -56,7 +56,7 @@ const STATIONS = [
     juniorCuriosity:
       "¡Sus ojos tienen un súper zoom natural: puede ver un bichito en el pasto desde lo más alto del cielo!",
     rewardText:
-      "¡Respondé el desafío final de la Posta 3 para abrir el Regalo #3 y completar toda la colección de Villa Cielo!",
+      "¡Respondé el desafío final de la Estación 3 para abrir el Regalo #3 y completar toda la colección de Villa Cielo!",
     totalSteps: 3,
   },
 ];

@@ -100,7 +100,7 @@ export function ScanPage() {
                 ? 'Escaneando...'
                 : status === 'success'
                 ? '¡QR Detectado!'
-                : `Posta ${selectedStationIndex + 1} de 3`}
+                : `Estación ${selectedStationIndex + 1} de 3`}
             </span>
           </div>
 
@@ -115,11 +115,11 @@ export function ScanPage() {
           </button>
         </div>
 
-        {/* Selector de las 3 Postas QR del recorrido para demostración */}
+        {/* Selector de las 3 Estaciones QR del recorrido para demostración */}
         <div
           className="flex items-center justify-center gap-1.5"
           role="group"
-          aria-label="Seleccionar posta QR del recorrido"
+          aria-label="Seleccionar estación QR del recorrido"
         >
           {stations.map((st, idx) => {
             const isSelected = idx === selectedStationIndex;
@@ -137,7 +137,7 @@ export function ScanPage() {
                 }`}
               >
                 <span>
-                  Posta {st.step}: {st.name}
+                  Estación {st.step}: {st.name}
                 </span>
                 {isDone && (
                   <span className="text-[#DFFF67] font-bold" title="Completada">
@@ -176,13 +176,13 @@ export function ScanPage() {
             fill="#ffffff"
             className="transition-transform group-hover:scale-110"
           >
-            <path d="M480-260q75 0 127.5-52.5T660-440q0-75-52.5-127.5T480-620q-75 0-127.5 52.5T300-440q0 75 52.5 127.5T480-260Zm0-80q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM160-120q-33 0-56.5-23.5T80-200v-520q0-33 23.5-56.5T160-800h160l80-80h160l80 80h160q33 0 56.5-23.5T880-720v520q0 33-23.5 56.5T800-120H160Zm0-80h640v-520H654l-80-80H386l-80 80H160v520Zm320-260Z" />
+            <path d="M480-260q75 0 127.5-52.5T660-440q0-75-52.5-127.5T480-620q-75 0-127.5 52.5T300-440q0 75 52.5 127.5T480-260Zm0-80q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM160-120q-33 0-56.5-23.5T80-200v-520q0-33 23.5-56.5T160-800h160l80-80h160l80 80h160q33 0 56.5 23.5T880-720v520q0 33-23.5 56.5T800-120H160Zm0-80h640v-520H654l-80-80H386l-80 80H160v520Zm320-260Z" />
           </svg>
         </button>
         <span className="text-white/85 text-[11px] font-medium mt-1.5 drop-shadow-sm select-none">
           {isJunior
             ? '¡Tocá la cámara para leer el cartel QR!'
-            : 'Presiona para escanear la posta seleccionada'}
+            : 'Presiona para escanear la estación seleccionada'}
         </span>
       </div>
 

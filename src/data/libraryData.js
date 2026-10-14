@@ -1,27 +1,26 @@
 import halconImg from '../assets/4.png';
-import molleImg from '../assets/2.png';
+import molleImg from '../assets/6.png'; // 6.png es el árbol Molle
 import carpinchoImg from '../assets/3.png';
-import aveImg from '../assets/5.png';
-import woodpeckerImg from '../assets/8.png';
-import treeImg from '../assets/6.png';
-import shrubImg from '../assets/7.png';
-import fruitingShrubImg from '../assets/1.png';
-import primerPremioImg from '../assets/primerPremio.png';
+import aveImg from '../assets/5.png'; // 5.png es el ave insectívora
+import woodpeckerImg from '../assets/2.png'; // 2.png es el pájaro carpintero
+import shrubImg from '../assets/7.png'; // 7.png es el espinillo
+import fruitingShrubImg from '../assets/8.png'; // 8.png es el arbusto con frutos
+import serranoShrubImg from '../assets/1.png'; // 1.png es el arbusto serrano
 
 export const REWARD_CHARACTERS = [
   {
     step: 1,
-    name: 'Ave Insectívora y Flora del Monte',
-    badge: 'Premio 1 de 3 • Posta 1',
-    image: primerPremioImg,
-    unlockedSpeciesNames: ['Ave insectívora', 'Árbol', 'Arbusto'],
+    name: 'Árbol Molle y Aves del Monte',
+    badge: 'Premio 1 de 3 • Estación 1',
+    image: molleImg,
+    unlockedSpeciesNames: ['Árbol Molle', 'Ave insectívora', 'Arbusto serrano'],
     description:
-      '¡Desbloqueaste las especies del bosque nativo que viven junto al árbol Molle!',
+      '¡Desbloqueaste las especies del bosque nativo que crecen y se refugian junto al árbol Molle!',
   },
   {
     step: 2,
     name: 'Carpincho y Arbusto Frutal',
-    badge: 'Premio 2 de 3 • Posta 2',
+    badge: 'Premio 2 de 3 • Estación 2',
     image: carpinchoImg,
     unlockedSpeciesNames: ['Carpincho', 'Arbusto frutal'],
     description:
@@ -30,18 +29,18 @@ export const REWARD_CHARACTERS = [
   {
     step: 3,
     name: 'Halcón y Pájaro Carpintero',
-    badge: 'Premio 3 de 3 • Posta 3',
+    badge: 'Premio 3 de 3 • Estación 3',
     image: halconImg,
     unlockedSpeciesNames: ['Halcón', 'Carpintero'],
     description:
-      '¡Completaste las 3 postas! Ya tienes todas las aves y guardianes de Villa Cielo.',
+      '¡Completaste las 3 estaciones! Ya tienes todas las aves y guardianes de Villa Cielo.',
   },
 ];
 
 export const LIBRARY_CARDS = [
   {
     id: 'molle',
-    name: 'Molle',
+    name: 'Árbol Molle',
     scientificName: 'Schinus areira',
     image: molleImg,
     unlocked: true,
@@ -50,16 +49,16 @@ export const LIBRARY_CARDS = [
     trophicRole: 'producers',
     unlockHint: 'Desbloqueada desde el inicio de tu recorrido.',
     description:
-      'Árbol nativo de hojas resistentes y frutos aromáticos, conocido por brindar refugio a otras especies.',
+      'Árbol nativo de copa frondosa, hojas aromáticas y ramas colgantes, fundamental como refugio de biodiversidad.',
     juniorDescription:
-      'Es el árbol guardián de la reserva. Con sus ramas largas hace una sombrilla gigante para cuidar a otras plantas y pájaros.',
+      'Es el gran árbol guardián de la reserva. Con sus ramas largas hace una sombrilla gigante para cuidar a otras plantas y pájaros.',
     contribution:
-      'Su sombra protege a plantas jóvenes y sus frutos sirven de alimento y refugio para la fauna.',
+      'Actúa como árbol nodriza: su sombra protege a plantas jóvenes y sus frutos alimentan a la fauna silvestre.',
     juniorContribution:
       'Les da casa y comida a los pajaritos y protege del sol fuerte a las plantitas bebés.',
-    diet: 'Produce su propio alimento utilizando luz solar, agua y nutrientes del suelo.',
+    diet: 'Produce su propio alimento mediante fotosíntesis utilizando luz solar, agua y nutrientes del suelo.',
     juniorDiet:
-      '¡Fabrica su propia comida usando la energía del sol, agua de lluvia y tierra!',
+      '¡Fabrica su propia comida usando la energía del sol, agua de lluvia y tierra fértil!',
   },
   {
     id: 'ave-insectivora',
@@ -70,57 +69,37 @@ export const LIBRARY_CARDS = [
     unlockStep: 1,
     category: 'Consumidor',
     trophicRole: 'primary-consumer',
-    unlockHint: 'Escaneá la Posta 1 (Molle) y superá la trivia para desbloquearla.',
+    unlockHint: 'Escaneá la Estación 1 (Árbol Molle) y superá la trivia para desbloquearla.',
     description:
-      'Ave de pico fuerte que busca insectos entre la corteza y las ramas de los árboles.',
+      'Ave de pico fuerte y estilizado que busca insectos y larvas entre la corteza de los árboles.',
     juniorDescription:
       'Un pajarito súper curioso que recorre las ramas buscando bichitos escondidos en la corteza.',
     contribution:
-      'Ayuda a controlar las poblaciones de insectos y favorece el equilibrio del bosque.',
+      'Controla naturalmente las poblaciones de insectos, favoreciendo la salud de los árboles del bosque.',
     juniorContribution:
       'Cuida a los árboles comiéndose los insectos que podrían lastimar sus hojas.',
-    diet: 'Se alimenta principalmente de insectos, semillas y larvas que encuentra en los árboles.',
+    diet: 'Se alimenta principalmente de insectos, semillas y larvas que encuentra en los troncos.',
     juniorDiet: 'Come bichitos pequeños, orugas y semillas de los árboles.',
   },
   {
-    id: 'arbol',
-    name: 'Árbol nativo',
-    scientificName: 'Prosopis alba',
-    image: treeImg,
-    unlockStep: 1,
-    category: 'Productor',
-    trophicRole: 'producers',
-    unlockHint: 'Escaneá la Posta 1 (Molle) y superá la trivia para desbloquearlo.',
-    description:
-      'Planta leñosa de gran tamaño que brinda sombra, oxígeno y estructura al bosque.',
-    juniorDescription:
-      'Los gigantes verdes del parque: limpian el aire que respiramos y refrescan todo el sendero.',
-    contribution:
-      'Ofrece alimento y refugio, y produce oxígeno esencial para el ecosistema.',
-    juniorContribution:
-      'Fabrica aire puro y sostiene los nidos de muchas aves de Villa Cielo.',
-    diet: 'Produce su alimento mediante la fotosíntesis, a partir de luz, agua y dióxido de carbono.',
-    juniorDiet: 'Toma agua por sus raíces y usa la luz del sol en sus hojas verdes.',
-  },
-  {
-    id: 'arbusto',
+    id: 'arbusto-serrano',
     name: 'Arbusto serrano',
     scientificName: 'Baccharis salicifolia',
-    image: shrubImg,
+    image: serranoShrubImg,
     unlockStep: 1,
     category: 'Productor',
     trophicRole: 'producers',
-    unlockHint: 'Escaneá la Posta 1 (Molle) y superá la trivia para desbloquearlo.',
+    unlockHint: 'Escaneá la Estación 1 (Árbol Molle) y superá la trivia para desbloquearlo.',
     description:
-      'Planta leñosa de menor tamaño, con ramas que nacen cerca del suelo y protegen contra la erosión.',
+      'Planta leñosa autóctona que florece en las laderas serranas, protegiendo los suelos de la erosión.',
     juniorDescription:
       'Una planta bajita y tupida que funciona como escondite secreto para animalitos pequeños.',
     contribution:
-      'Aporta refugio y alimento a insectos, aves y pequeños mamíferos.',
+      'Aporta refugio y alimento a insectos polinizadores, aves y pequeños mamíferos.',
     juniorContribution:
       'Es el refugio favorito de mariposas, grillos y pajaritos cuando quieren descansar.',
-    diet: 'Produce su propio alimento usando luz solar, agua y nutrientes del suelo.',
-    juniorDiet: 'Usa el sol y el agua de la tierra para crecer fuerte.',
+    diet: 'Produce su propio alimento usando luz solar, agua y minerales del suelo.',
+    juniorDiet: 'Usa el sol y el agua de la tierra para crecer verde y fuerte.',
   },
   {
     id: 'carpincho',
@@ -130,13 +109,13 @@ export const LIBRARY_CARDS = [
     unlockStep: 2,
     category: 'Consumidor',
     trophicRole: 'primary-consumer',
-    unlockHint: 'Escaneá la Posta 2 (Sendero del Humedal) en el lector QR para desbloquearlo.',
+    unlockHint: 'Escaneá la Estación 2 (Sendero del Humedal) en el lector QR para desbloquearlo.',
     description:
       'El roedor más grande del mundo; vive cerca del agua y suele desplazarse en grupos familiares.',
     juniorDescription:
       '¡El roedor más grande y simpático! Le encanta nadar en familia y tomar sol en la orilla.',
     contribution:
-      'Transfiere la energía de las plantas a los animales que se alimentan de él y mantiene cortos los pastizales.',
+      'Transfiere la energía de las plantas a los carnívoros y mantiene cortos los pastizales ribereños.',
     juniorContribution:
       'Corta el pasto de forma natural y ayuda a que crezcan nuevas plantitas cerca del agua.',
     diet: 'Es herbívoro: come pastos, plantas acuáticas y frutos silvestres.',
@@ -150,16 +129,16 @@ export const LIBRARY_CARDS = [
     unlockStep: 2,
     category: 'Productor',
     trophicRole: 'producers',
-    unlockHint: 'Escaneá la Posta 2 (Sendero del Humedal) en el lector QR para desbloquearlo.',
+    unlockHint: 'Escaneá la Estación 2 (Sendero del Humedal) en el lector QR para desbloquearlo.',
     description:
-      'Arbusto nativo que produce flores y frutos dulces aprovechados por la fauna local.',
+      'Arbusto nativo con frutos redondeados y dulces, muy codiciados por aves y mamíferos de la reserva.',
     juniorDescription:
       '¡El supermercado natural del bosque! Da frutitas dulces que alimentan a aves y mamíferos.',
     contribution:
-      'Sus flores y frutos alimentan a distintos organismos y ayudan a sostener la red trófica.',
+      'Sus flores y frutos alimentan a decenas de organismos y sostienen la red trófica del humedal.',
     juniorContribution:
       'Sus frutas dan mucha energía a los animales que pasean por la reserva.',
-    diet: 'Produce su propio alimento mediante la fotosíntesis.',
+    diet: 'Produce su propio alimento mediante fotosíntesis a partir de energía solar.',
     juniorDiet: 'Crece gracias a la energía del sol y los minerales del suelo.',
   },
   {
@@ -170,37 +149,57 @@ export const LIBRARY_CARDS = [
     unlockStep: 3,
     category: 'Consumidor',
     trophicRole: 'secondary-consumer',
-    unlockHint: 'Escaneá la Posta 3 (Mirador del Cielo) en el lector QR para desbloquearlo.',
+    unlockHint: 'Escaneá la Estación 3 (Mirador del Cielo) en el lector QR para desbloquearlo.',
     description:
       'Ave rapaz que observa el entorno desde las alturas y ayuda a mantener el equilibrio natural.',
     juniorDescription:
       'El guardián del cielo: vuela rapidísimo y tiene una vista increíble desde las alturas.',
     contribution:
-      'Regula las poblaciones de otros animales y forma parte esencial de la red trófica como consumidor secundario.',
+      'Regula las poblaciones de roedores y reptiles, ocupando el nivel de consumidor secundario.',
     juniorContribution:
       'Mantiene el equilibrio del ecosistema en lo más alto de la cadena alimentaria.',
-    diet: 'Se alimenta de pequeños animales, como aves, reptiles y roedores.',
+    diet: 'Se alimenta de pequeños animales, como roedores, reptiles y pequeñas aves.',
     juniorDiet: 'Es carnívoro: se alimenta de otros animales más pequeños del monte.',
   },
   {
     id: 'carpintero',
-    name: 'Carpintero',
+    name: 'Pájaro Carpintero',
     scientificName: 'Colaptes melanochloros',
     image: woodpeckerImg,
     unlockStep: 3,
     category: 'Consumidor',
     trophicRole: 'secondary-consumer',
-    unlockHint: 'Escaneá la Posta 3 (Mirador del Cielo) en el lector QR para desbloquearlo.',
+    unlockHint: 'Escaneá la Estación 3 (Mirador del Cielo) en el lector QR para desbloquearlo.',
     description:
-      'Ave que usa su pico resistente para buscar larvas e insectos ocultos en troncos y ramas.',
+      'Ave de plumaje llamativo y pico cincelador que busca larvas e insectos en troncos secos.',
     juniorDescription:
       '¡El constructor del bosque! Golpea los troncos "toc-toc" con su pico fuerte para hacer huequitos.',
     contribution:
-      'Consume insectos de la madera y crea cavidades que luego sirven de nido para otras especies.',
+      'Consume insectos de la madera y crea cavidades que luego sirven de nido a otras especies.',
     juniorContribution:
       'Los huequitos que hace en los árboles después sirven como casita para otros pájaros.',
-    diet: 'Se alimenta de insectos y larvas que encuentra en la madera.',
+    diet: 'Se alimenta de insectos xilófagos y larvas que habitan dentro de la madera.',
     juniorDiet: 'Come larvas, hormigas y bichitos que viven dentro de los troncos.',
+  },
+  {
+    id: 'espinillo',
+    name: 'Espinillo',
+    scientificName: 'Vachellia caven',
+    image: shrubImg,
+    unlockStep: 3,
+    category: 'Productor',
+    trophicRole: 'producers',
+    unlockHint: 'Escaneá la Estación 3 (Mirador del Cielo) en el lector QR para desbloquearlo.',
+    description:
+      'Árbol o arbusto espinoso característico del monte cordobés, famoso por sus flores aromáticas doradas.',
+    juniorDescription:
+      'Tiene ramitas con espinas y pompones amarillos con un perfume riquísimo que atrae abejas.',
+    contribution:
+      'Fija nitrógeno al suelo enriqueciéndolo y brinda refugio impenetrable a aves pequeñas.',
+    juniorContribution:
+      'Mejora la tierra del monte y sus espinas protegen los nidos de los pájaros pequeños.',
+    diet: 'Produce su propio alimento a partir del sol y fija nutrientes atmosféricos al suelo.',
+    juniorDiet: 'Toma luz del sol y ayuda a enriquecer la tierra de la reserva.',
   },
 ];
 
@@ -211,7 +210,10 @@ export const TROPHIC_LEVELS = [
     displayLabel: ['Consumidor', 'secundario'],
     background: '#FFD8B0',
     accent: '#FFAE4E',
-    organisms: [{ name: 'Halcón', image: halconImg }],
+    organisms: [
+      { name: 'Halcón', image: halconImg },
+      { name: 'Carpintero', image: woodpeckerImg },
+    ],
     info: {
       description:
         'Los organismos que se comen a los consumidores primarios se llaman consumidores secundarios. Por lo general son carnívoros o depredadores.',
@@ -231,7 +233,7 @@ export const TROPHIC_LEVELS = [
     background: '#FFF6A8',
     accent: '#FFF27A',
     organisms: [
-      { name: 'Ave', image: aveImg },
+      { name: 'Ave insectívora', image: aveImg },
       { name: 'Carpincho', image: carpinchoImg },
     ],
     info: {
@@ -253,7 +255,7 @@ export const TROPHIC_LEVELS = [
     background: '#F0FF9A',
     accent: '#DFFF67',
     organisms: [
-      { name: 'Árbol', image: treeImg },
+      { name: 'Árbol Molle', image: molleImg },
       { name: 'Arbusto frutal', image: fruitingShrubImg },
     ],
     info: {

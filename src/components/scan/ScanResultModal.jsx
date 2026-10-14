@@ -21,14 +21,14 @@ export function ScanResultModal({
   return (
     <div className="absolute inset-0 z-50 bg-black/65 backdrop-blur-xs flex items-center justify-center p-3 animate-[modal-appear_220ms_ease-out]">
       <div className="w-full max-w-[350px] bg-white rounded-3xl p-5 shadow-2xl border border-[#D1D5DB] flex flex-col gap-3.5">
-        {/* Encabezado con medalla de posta */}
+        {/* Encabezado con medalla de estación */}
         <div className="flex items-center justify-between">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#F2F4E6] text-[#687320] border border-[#CFD79F]">
             <span>🌿</span>
             <span>{species.stationLabel || 'Especie descubierta'}</span>
           </span>
           <span className="text-[11px] font-semibold text-[#7E8B28] bg-[#7E8B28]/10 px-2.5 py-0.5 rounded-md">
-            Posta {species.step}/{species.totalSteps}
+            Estación {species.step}/{species.totalSteps}
           </span>
         </div>
 
@@ -91,14 +91,14 @@ export function ScanResultModal({
           >
             {isJunior
               ? '🎯 ¡Jugar Trivia y Ganar Regalo!'
-              : 'Responder Trivia de la Posta'}
+              : 'Responder Trivia de la Estación'}
           </button>
           <button
             type="button"
             onClick={onClose}
             className="w-full py-2 px-4 bg-transparent hover:bg-black/5 text-[#555A49] text-xs font-medium rounded-xl transition-all cursor-pointer"
           >
-            Elegir otra posta QR
+            Elegir otra estación QR
           </button>
         </div>
       </div>
