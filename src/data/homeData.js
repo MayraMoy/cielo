@@ -13,34 +13,32 @@ export const HOME_DATA = {
     title: "¿Sabías que...?",
     icon: "🌿",
     description:
-      'En la Reserva Villa Cielo, el árbol Molle actúa como un "árbol nodriza": bajo su sombra y protección nacen y crecen orquídeas, bromelias y helechos que no podrían sobrevivir solos en el monte.',
+      "El molle es un árbol nodriza: su sombra protege a orquídeas, bromelias y helechos jóvenes del monte.",
     juniorDescription:
-      '¡El árbol Molle es como una "mamá paraguas" del bosque! Debajo de sus ramas cuida a plantitas bebés (como orquídeas y helechos) para que el sol fuerte no las lastime.',
+      "¡El molle es como un paraguas! Su sombra protege a orquídeas y helechos pequeños del sol fuerte.",
   },
   fireSafety: {
-    badgeText: "Riesgo de Incendio: ALTO",
     buttonLabel: "SOS Incendios",
     modalTitle: "Prevención y Emergencias",
     juniorModalTitle: "¡Brigada Contra el Fuego! 🚒",
-    riskLevel: "Alto (Temporada Seca)",
     juniorIntro:
-      "Si ves humo o fueguito en la reserva, ¡nunca intentes apagarlo solo! Seguí estos 3 pasos de guardaparque:",
+      "Si ves humo o fuego, alejate. No intentes apagarlo y avisá a un adulto.",
     adultIntro:
-      "La Reserva Natural Municipal Villa Cielo posee pastizales y monte nativo altamente inflamables. Ante humo o principio de incendio, aplicá el protocolo PAS:",
+      "El fuego puede avanzar rápido en el monte. No intentes apagarlo: alejate y avisá.",
     juniorSteps: [
-      "1. ¡Avisale enseguida a un adulto que esté con vos!",
-      "2. Alejate caminando tranquilo en dirección contraria al humo.",
-      "3. Pedile a un mayor que llame a los Guardaparques o Bomberos (100).",
+      "Alejate del humo y del fuego.",
+      "Avisá a un adulto y llamen a Bomberos (100).",
+      "Si es seguro, ayudá a otras personas a alejarse.",
     ],
     adultSteps: [
-      "1. PROTEGER: Retirate por el sendero marcado en dirección opuesta al viento y al humo.",
-      "2. AVISAR: Comunicá inmediatamente la ubicación (estación QR más cercana) a Bomberos (100) o Guardaparques.",
-      "3. SOCORRER: Priorizá la evacuación de niños y personas mayores sin exponerte al frente de fuego.",
+      "Proteger: Alejate del fuego y del humo por un camino seguro.",
+      "Avisar: Llamá a Bomberos (100) e indicá la estación QR más cercana.",
+      "Socorrer: Ayudá a otras personas solo si no te acercás al fuego.",
     ],
     preventionRules: [
-      "Prohibido encender fuego o usar calentadores en toda la reserva.",
-      "No arrojes colillas de cigarrillos ni botellas/vidrios (efecto lupa).",
-      "Llevate todos tus residuos de regreso a casa.",
+      "No enciendas fuego ni uses calentadores.",
+      "No tires colillas ni vidrios.",
+      "Llevate tus residuos.",
     ],
     emergencyContacts: [
       { label: "Bomberos Voluntarios", number: "100" },

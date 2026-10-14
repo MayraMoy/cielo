@@ -11,7 +11,6 @@ export function useHome() {
   const [openedRewards, setOpenedRewards] = useState(getOpenedRewards);
   const [isRewardModalOpen, setIsRewardModalOpen] = useState(false);
   const [selectedRewardIndex, setSelectedRewardIndex] = useState(0);
-  const [isFireModalOpen, setIsFireModalOpen] = useState(false);
 
   // Obtiene el nombre del usuario desde location.state, localStorage o el valor por defecto
   const userName = useMemo(() => {
@@ -68,12 +67,8 @@ export function useHome() {
     setIsRewardModalOpen(false);
   };
 
-  const handleOpenFireModal = () => {
-    setIsFireModalOpen(true);
-  };
-
-  const handleCloseFireModal = () => {
-    setIsFireModalOpen(false);
+  const handleOpenFireSafety = () => {
+    navigate('/fire-safety');
   };
 
   const handleGoToRegister = () => {
@@ -87,15 +82,13 @@ export function useHome() {
     openedRewards,
     isRewardModalOpen,
     selectedRewardIndex,
-    isFireModalOpen,
     handleTabChange,
     handleStartGame,
     handleScanQR,
     handleOpenLibrary,
     handleOpenReward,
     handleCloseReward,
-    handleOpenFireModal,
-    handleCloseFireModal,
+    handleOpenFireSafety,
     handleGoToRegister,
   };
 }

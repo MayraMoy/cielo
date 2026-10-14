@@ -4,6 +4,7 @@ import { HomePage } from '../pages/HomePage';
 import { ScanPage } from '../pages/ScanPage';
 import { TriviaPage } from '../pages/TriviaPage';
 import { LibraryPage } from '../pages/LibraryPage';
+import { FireSafetyPage } from '../pages/FireSafetyPage';
 import { MobileFrame } from '../components/common/MobileFrame';
 
 export function AppRoutes() {
@@ -19,6 +20,7 @@ export function AppRoutes() {
           <Route path="/scanner" element={<ScanPage />} />
           <Route path="/trivia" element={<TriviaPage />} />
           <Route path="/library" element={<LibraryPage />} />
+          <Route path="/fire-safety" element={<FireSafetyPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </MobileFrame>

@@ -6,7 +6,6 @@ import { useAccessibility } from '../hooks/useAccessibility';
 import { CharacterProgressCard } from '../components/home/CharacterProgressCard';
 import { DidYouKnowCard } from '../components/home/DidYouKnowCard';
 import { CharacterRewardModal } from '../components/home/CharacterRewardModal';
-import { EmergencyFireModal } from '../components/home/EmergencyFireModal';
 
 export function HomePage() {
   const {
@@ -15,16 +14,14 @@ export function HomePage() {
     openedRewards,
     isRewardModalOpen,
     selectedRewardIndex,
-    isFireModalOpen,
     handleStartGame,
     handleOpenLibrary,
     handleOpenReward,
     handleCloseReward,
-    handleOpenFireModal,
-    handleCloseFireModal,
+    handleOpenFireSafety,
   } = useHome();
 
-  const { user, isJunior } = useUserProfile();
+  const { isJunior } = useUserProfile();
   const { isDarkMode, toggleDarkMode } = useTheme();
   const { isLargeText, toggleLargeText } = useAccessibility();
 
@@ -32,56 +29,15 @@ export function HomePage() {
     <div className="w-full flex-1 relative flex flex-col justify-between select-none">
       {/* Contenido principal con padding ajustado para pantalla de celular */}
       <main className="w-full px-5 pt-3 pb-28 flex flex-col gap-4">
-        {/* Barra superior: Tag de Modo, Toggle Modo Oscuro/Sol y Botón SOS Incendios */}
-        <div className="flex items-center justify-between gap-1.5 flex-wrap">
-          {/* Tag de Modo Informativo */}
-          <div className="inline-flex items-center gap-1.5 rounded-xl border border-[#CCD69E] bg-[#F2F4E6] px-3 py-1.5 text-xs font-semibold text-[#4E5618] shadow-xs select-none">
-            {isJunior ? (
-              <svg
-                className="w-4 h-4 text-[#687320]"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
-              </svg>
-            ) : (
-              <svg
-                className="w-4 h-4 text-[#545C1E]"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-              </svg>
-            )}
-            <span>{isJunior ? 'Guía Junior' : 'Guía Adulto'}</span>
-            {user?.age ? (
-              <span className="text-xs font-normal text-[#687320]">
-                • {user.age} años
-              </span>
-            ) : null}
-          </div>
-
+        <div className="flex items-center justify-between gap-2 flex-wrap">
           <div className="flex items-center gap-1.5">
-            {/* Botón Accesibilidad: Agrandar y Remarcar Texto (A+) */}
             <button
               type="button"
               onClick={toggleLargeText}
-              className={`inline-flex items-center justify-center rounded-xl border px-2.5 py-1.5 text-xs font-bold shadow-xs active:scale-95 transition-all cursor-pointer ${
+              className={`inline-flex items-center justify-center rounded-xl border px-2.5 py-1.5 text-xs font-bold active:scale-95 transition-all cursor-pointer ${
                 isLargeText
-                  ? 'border-[#7E8B28] bg-[#7E8B28] text-white'
-                  : 'border-[#CCD69E] bg-[#F2F4E6] text-[#4E5618] hover:bg-[#E4E8C8]'
+                  ? 'border-[#687320] bg-[#687320] text-white dark:border-[#879532] dark:bg-[#879532]'
+                  : 'border-[#CCD69E] bg-[#F2F4E6] text-[#4E5618] hover:bg-[#E4E8C8] dark:border-[#55623B] dark:bg-[#242B1E] dark:text-[#E3E9D5] dark:hover:bg-[#303A27]'
               }`}
               aria-label={isLargeText ? 'Desactivar texto agrandado' : 'Activar texto agrandado y remarcado (A+)'}
               title={isLargeText ? 'Modo Lectura Activo (A+)' : 'Agrandar y Remarcar Texto (A+)'}
@@ -89,11 +45,10 @@ export function HomePage() {
               <span className="text-[12px] font-extrabold tracking-tight">A+</span>
             </button>
 
-            {/* Botón Encendido/Apagado de Modo Oscuro (especial para sol directo) */}
             <button
               type="button"
               onClick={toggleDarkMode}
-              className="inline-flex items-center gap-1 rounded-xl border border-[#CCD69E] bg-[#F2F4E6] px-2.5 py-1.5 text-xs font-semibold text-[#4E5618] shadow-xs hover:bg-[#E4E8C8] active:scale-95 transition-all cursor-pointer"
+              className="inline-flex items-center gap-1 rounded-xl border border-[#CCD69E] bg-[#F2F4E6] px-2.5 py-1.5 text-xs font-semibold text-[#4E5618] hover:bg-[#E4E8C8] active:scale-95 transition-all cursor-pointer dark:border-[#55623B] dark:bg-[#242B1E] dark:text-[#E3E9D5] dark:hover:bg-[#303A27]"
               aria-label={isDarkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro para sol'}
               title={isDarkMode ? 'Modo Claro' : 'Modo Oscuro (Sol)'}
             >
@@ -121,33 +76,31 @@ export function HomePage() {
                 </>
               )}
             </button>
-
-            {/* Botón SOS Incendios integrado a la paleta */}
-            <button
-              type="button"
-              onClick={handleOpenFireModal}
-              className="inline-flex items-center gap-1.5 rounded-xl border border-[#EAC3AF] bg-[#FDF3ED] px-3 py-1.5 text-xs font-semibold text-[#8C3A16] shadow-xs hover:bg-[#F9E6DB] active:scale-95 transition-all cursor-pointer"
-              aria-label="Prevención de incendios y protocolo de emergencias"
-            >
-              <svg
-                className="w-4 h-4 text-[#C2410C]"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path d="M12 23c-4.97 0-9-4.03-9-9 0-3.64 2.22-6.66 4-9 .61-.8 1.94-.37 2 .67.15 2.65 1.76 4.33 3 5.33 1-1.33 1.5-3.33 1-5 1.5 1 4 3.5 4 8 0 4.97-4.03 9-9 9z" />
-              </svg>
-              <span>{HOME_DATA.fireSafety.buttonLabel}</span>
-            </button>
           </div>
+
+          <button
+            type="button"
+            onClick={handleOpenFireSafety}
+            className="inline-flex items-center gap-1.5 rounded-xl border border-[#EAC3AF] bg-[#FDF0E9] px-3 py-1.5 text-xs font-semibold text-[#7A3213] hover:bg-[#F9E3D8] active:scale-95 transition-all cursor-pointer dark:border-[#74472F] dark:bg-[#35251D] dark:text-[#FFD1B6] dark:hover:bg-[#443025]"
+            aria-label="Prevención de incendios y protocolo de emergencias"
+          >
+            <svg
+              className="w-4 h-4 text-[#A83B12] dark:text-[#FF9A61]"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M12 23c-4.97 0-9-4.03-9-9 0-3.64 2.22-6.66 4-9 .61-.8 1.94-.37 2 .67.15 2.65 1.76 4.33 3 5.33 1-1.33 1.5-3.33 1-5 1.5 1 4 3.5 4 8 0 4.97-4.03 9-9 9z" />
+            </svg>
+            <span>{HOME_DATA.fireSafety.buttonLabel}</span>
+          </button>
         </div>
 
-        {/* Saludo de bienvenida */}
-        <header className="mb-0.5">
-          <h1 className="text-[26px] font-medium text-[#1A1C16] leading-tight tracking-tight">
+        <header className="mb-1 pl-0.5 pt-1">
+          <h1 className="text-[26px] font-medium text-[#1E201A] leading-[1.08] tracking-[-0.05em] dark:text-[#F4F6ED]">
             {isJunior ? HOME_DATA.juniorGreeting : HOME_DATA.greeting}
           </h1>
-          <p className="text-[28px] font-semibold text-[#7E8B28] leading-tight tracking-tight mt-0.5">
+          <p className="text-[34px] font-black text-[#6F7D1F] leading-[0.9] tracking-[-0.07em] mt-1.5 dark:text-[#DDEB7A]">
             {userName}
           </p>
         </header>
@@ -191,12 +144,6 @@ export function HomePage() {
             handleCloseReward();
             handleOpenLibrary();
           }}
-        />
-      )}
-      {isFireModalOpen && (
-        <EmergencyFireModal
-          isJunior={isJunior}
-          onClose={handleCloseFireModal}
         />
       )}
     </div>

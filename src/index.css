@@ -244,7 +244,7 @@ body {
    MODAL DE EMERGENCIAS SOS - MODO OSCURO DE ALTA LEGIBILIDAD
    ======================================================== */
 .dark .fire-modal-container {
-  background-color: #1C2117 !important;
+  background-color: #1B2018 !important;
   color: #F4F6ED !important;
 }
 
@@ -253,43 +253,42 @@ body {
 }
 
 .dark .fire-modal-container p {
-  color: #DDE2D3 !important;
+  color: #E1E7D8 !important;
 }
 
 .dark .fire-modal-container .fire-modal-pas {
-  background-color: #2D1D10 !important;
-  border-color: #F59E0B !important;
+  background-color: #302419 !important;
+  border-color: #8C632A !important;
 }
 
 .dark .fire-modal-container .fire-modal-pas h3 {
-  color: #FCD34D !important;
+  color: #FFE3A1 !important;
 }
 
 .dark .fire-modal-container .fire-modal-pas li {
-  color: #FFFBEB !important;
+  color: #FFF8E9 !important;
 }
 
 .dark .fire-modal-container .fire-prevention-box {
-  background-color: #22291B !important;
-  border-color: #424E33 !important;
+  background-color: #22291C !important;
+  border-color: #465239 !important;
 }
 
 .dark .fire-modal-container .fire-prevention-box h3 {
-  color: #DDEB7A !important;
+  color: #E2EC9D !important;
 }
 
 .dark .fire-modal-container .fire-prevention-box li {
-  color: #F4F6ED !important;
+  color: #E7EBDD !important;
 }
 
 .dark .fire-modal-container .fire-contact-card {
-  background-color: rgba(69, 10, 10, 0.75) !important;
-  border-color: #B91C1C !important;
+  background-color: #30211C !important;
+  border-color: #714737 !important;
 }
 
 .dark .fire-modal-container .fire-contact-card span:last-child {
-  color: #FFFFFF !important;
+  color: #FFB18A !important;
 }
-
 
 

@@ -1,5 +1,5 @@
 import { GiftBox } from './GiftBox';
-import { REWARD_CHARACTERS } from '../../data/libraryData';
+import { REWARD_CHARACTERS } from '../../data/library/rewardCharacters';
 
 export function CharacterRewardModal({ rewardIndex = 0, onClose, onOpenLibrary }) {
   const reward = REWARD_CHARACTERS[rewardIndex] || REWARD_CHARACTERS[0];

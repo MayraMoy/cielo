@@ -18,6 +18,8 @@ export function MobileFrame({ children }) {
       location.pathname.startsWith('/scanner') ||
       location.pathname.startsWith('/trivia')
     ? 'scan'
+    : location.pathname.startsWith('/fire-safety')
+    ? ''
     : 'home';
 
   return (
