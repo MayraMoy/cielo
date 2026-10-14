@@ -76,3 +76,84 @@ body {
   }
 }
 
+/* ========================================================
+   MODO OSCURO / ALTO CONTRASTE PARA EXTERIORES (SOL DIRECTO)
+   ======================================================== */
+.dark {
+  background-color: #141710 !important;
+  color: #F4F6ED !important;
+}
+
+.dark .bg-\[\#FAF9F5\] {
+  background-color: #141710 !important;
+}
+
+.dark .bg-white {
+  background-color: #1F241A !important;
+}
+
+.dark .bg-\[\#F7F6F0\] {
+  background-color: #272E21 !important;
+}
+
+.dark .bg-\[\#F2F4E6\] {
+  background-color: #2A3222 !important;
+}
+
+.dark .bg-\[\#F4F8DE\] {
+  background-color: #2D3624 !important;
+}
+
+.dark .bg-\[\#FDF3ED\] {
+  background-color: #38241C !important;
+}
+
+.dark .bg-\[\#E4E8C8\] {
+  background-color: #2C3524 !important;
+}
+
+.dark .text-\[\#1A1C16\] {
+  color: #F4F6ED !important;
+}
+
+.dark .text-\[\#3C4033\] {
+  color: #DDE2D3 !important;
+}
+
+.dark .text-\[\#555A49\],
+.dark .text-\[\#666B5A\],
+.dark .text-gray-500 {
+  color: #B8BFAC !important;
+}
+
+.dark .text-\[\#2B2F25\] {
+  color: #E6EADF !important;
+}
+
+.dark .border-\[\#E5E7EB\],
+.dark .border-gray-200 {
+  border-color: #353D2B !important;
+}
+
+.dark .border-\[\#CCD69E\],
+.dark .border-\[\#CFD79F\],
+.dark .border-\[\#B5C370\] {
+  border-color: #55623B !important;
+}
+
+.dark .text-\[\#4E5618\],
+.dark .text-\[\#545C1E\],
+.dark .text-\[\#687320\] {
+  color: #D3DF83 !important;
+}
+
+.dark .text-\[\#7E8B28\] {
+  color: #DDEB7A !important;
+}
+
+.dark .shadow-sm,
+.dark .shadow-xs,
+.dark .shadow-2xs {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45) !important;
+}
+

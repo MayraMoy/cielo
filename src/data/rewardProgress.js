@@ -45,3 +45,31 @@ export function unlockCharacterByStation(stationStep = 1) {
 export function unlockFirstCharacter() {
   return unlockCharacterByStation(1);
 }
+
+export const OPENED_REWARDS_KEY = 'cielo_opened_rewards';
+
+export function getOpenedRewards() {
+  try {
+    const raw = localStorage.getItem(OPENED_REWARDS_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+export function markRewardAsOpened(rewardIndex = 0) {
+  try {
+    const opened = getOpenedRewards();
+    const idx = Number(rewardIndex);
+    if (!opened.includes(idx)) {
+      opened.push(idx);
+      localStorage.setItem(OPENED_REWARDS_KEY, JSON.stringify(opened));
+    }
+    return opened;
+  } catch (error) {
+    console.error('Error al guardar regalo abierto:', error);
+    return getOpenedRewards();
+  }
+}

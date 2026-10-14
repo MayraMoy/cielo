@@ -4,6 +4,7 @@ export function CharacterProgressCard({
   title,
   buttonText,
   unlockedCount = 0,
+  openedRewards = [],
   onOpenReward,
   onStartGame,
 }) {
@@ -35,6 +36,7 @@ export function CharacterProgressCard({
         <div className="relative z-10 flex items-center justify-around w-full px-2">
           {Array.from({ length: totalSteps }, (_, index) => {
             const isUnlocked = index < unlockedCount;
+            const isOpened = openedRewards.includes(index);
 
             return (
               <button
@@ -42,10 +44,19 @@ export function CharacterProgressCard({
                 type="button"
                 onClick={() => isUnlocked && onOpenReward(index)}
                 disabled={!isUnlocked}
-                aria-label={isUnlocked ? `Abrir premio ${index + 1}` : `Premio ${index + 1} bloqueado`}
+                aria-label={
+                  isUnlocked
+                    ? isOpened
+                      ? `Ver premio ${index + 1} reclamado`
+                      : `Abrir premio ${index + 1}`
+                    : `Premio ${index + 1} bloqueado`
+                }
                 className={`rounded-full transition-transform ${isUnlocked ? 'cursor-pointer hover:scale-110 focus-visible:outline-2 focus-visible:outline-[#7E8B28]' : 'cursor-not-allowed opacity-50'}`}
               >
-                <GiftBox className={`w-14 h-14 sm:w-16 sm:h-16 ${isUnlocked ? 'animate-[gift-bounce_1.8s_ease-in-out_infinite]' : ''}`} />
+                <GiftBox
+                  isOpen={isOpened}
+                  className={`w-14 h-14 sm:w-16 sm:h-16 ${isUnlocked && !isOpened ? 'animate-[gift-bounce_1.8s_ease-in-out_infinite]' : ''}`}
+                />
               </button>
             );
           })}

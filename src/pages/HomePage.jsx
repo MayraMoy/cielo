@@ -1,6 +1,7 @@
 import { HOME_DATA } from '../data/homeData';
 import { useHome } from '../hooks/useHome';
 import { useUserProfile } from '../hooks/useUserProfile';
+import { useTheme } from '../hooks/useTheme';
 import { CharacterProgressCard } from '../components/home/CharacterProgressCard';
 import { DidYouKnowCard } from '../components/home/DidYouKnowCard';
 import { BottomNavbar } from '../components/common/BottomNavbar';
@@ -12,6 +13,7 @@ export function HomePage() {
     userName,
     activeTab,
     unlockedCharacters,
+    openedRewards,
     isRewardModalOpen,
     selectedRewardIndex,
     isFireModalOpen,
@@ -26,13 +28,14 @@ export function HomePage() {
   } = useHome();
 
   const { user, isJunior } = useUserProfile();
+  const { isDarkMode, toggleDarkMode } = useTheme();
 
   return (
     <div className="w-full flex-1 relative flex flex-col justify-between select-none">
       {/* Contenido principal con padding ajustado para pantalla de celular */}
       <main className="w-full px-5 pt-3 pb-28 flex flex-col gap-4">
-        {/* Barra superior: Tag de Modo y Botón SOS Incendios personalizados */}
-        <div className="flex items-center justify-between gap-2">
+        {/* Barra superior: Tag de Modo, Toggle Modo Oscuro/Sol y Botón SOS Incendios */}
+        <div className="flex items-center justify-between gap-1.5 flex-wrap">
           {/* Tag de Modo Informativo */}
           <div className="inline-flex items-center gap-1.5 rounded-xl border border-[#CCD69E] bg-[#F2F4E6] px-3 py-1.5 text-xs font-semibold text-[#4E5618] shadow-xs select-none">
             {isJunior ? (
@@ -72,23 +75,58 @@ export function HomePage() {
             ) : null}
           </div>
 
-          {/* Botón SOS Incendios integrado a la paleta */}
-          <button
-            type="button"
-            onClick={handleOpenFireModal}
-            className="inline-flex items-center gap-1.5 rounded-xl border border-[#EAC3AF] bg-[#FDF3ED] px-3.5 py-1.5 text-xs font-semibold text-[#8C3A16] shadow-xs hover:bg-[#F9E6DB] active:scale-95 transition-all cursor-pointer"
-            aria-label="Prevención de incendios y protocolo de emergencias"
-          >
-            <svg
-              className="w-4 h-4 text-[#C2410C]"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-hidden="true"
+          <div className="flex items-center gap-1.5">
+            {/* Botón Encendido/Apagado de Modo Oscuro (especial para sol directo) */}
+            <button
+              type="button"
+              onClick={toggleDarkMode}
+              className="inline-flex items-center gap-1 rounded-xl border border-[#CCD69E] bg-[#F2F4E6] px-2.5 py-1.5 text-xs font-semibold text-[#4E5618] shadow-xs hover:bg-[#E4E8C8] active:scale-95 transition-all cursor-pointer"
+              aria-label={isDarkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro para sol'}
+              title={isDarkMode ? 'Modo Claro' : 'Modo Oscuro (Sol)'}
             >
-              <path d="M12 23c-4.97 0-9-4.03-9-9 0-3.64 2.22-6.66 4-9 .61-.8 1.94-.37 2 .67.15 2.65 1.76 4.33 3 5.33 1-1.33 1.5-3.33 1-5 1.5 1 4 3.5 4 8 0 4.97-4.03 9-9 9z" />
-            </svg>
-            <span>{HOME_DATA.fireSafety.buttonLabel}</span>
-          </button>
+              {isDarkMode ? (
+                <>
+                  <svg className="w-3.5 h-3.5 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="5" />
+                    <line x1="12" y1="1" x2="12" y2="3" />
+                    <line x1="12" y1="21" x2="12" y2="23" />
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                    <line x1="1" y1="12" x2="3" y2="12" />
+                    <line x1="21" y1="12" x2="23" y2="12" />
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                  </svg>
+                  <span>Día</span>
+                </>
+              ) : (
+                <>
+                  <svg className="w-3.5 h-3.5 text-[#545C1E]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                  </svg>
+                  <span>Sol</span>
+                </>
+              )}
+            </button>
+
+            {/* Botón SOS Incendios integrado a la paleta */}
+            <button
+              type="button"
+              onClick={handleOpenFireModal}
+              className="inline-flex items-center gap-1.5 rounded-xl border border-[#EAC3AF] bg-[#FDF3ED] px-3 py-1.5 text-xs font-semibold text-[#8C3A16] shadow-xs hover:bg-[#F9E6DB] active:scale-95 transition-all cursor-pointer"
+              aria-label="Prevención de incendios y protocolo de emergencias"
+            >
+              <svg
+                className="w-4 h-4 text-[#C2410C]"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M12 23c-4.97 0-9-4.03-9-9 0-3.64 2.22-6.66 4-9 .61-.8 1.94-.37 2 .67.15 2.65 1.76 4.33 3 5.33 1-1.33 1.5-3.33 1-5 1.5 1 4 3.5 4 8 0 4.97-4.03 9-9 9z" />
+              </svg>
+              <span>{HOME_DATA.fireSafety.buttonLabel}</span>
+            </button>
+          </div>
         </div>
 
         {/* Saludo de bienvenida */}
@@ -114,6 +152,7 @@ export function HomePage() {
               : HOME_DATA.characterCard.buttonText
           }
           unlockedCount={unlockedCharacters}
+          openedRewards={openedRewards}
           onOpenReward={handleOpenReward}
           onStartGame={handleStartGame}
         />

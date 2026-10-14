@@ -1,13 +1,14 @@
 import { useState, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { HOME_DATA } from '../data/homeData';
-import { getUnlockedCharacters } from '../data/rewardProgress';
+import { getUnlockedCharacters, getOpenedRewards, markRewardAsOpened } from '../data/rewardProgress';
 
 export function useHome() {
   const location = useLocation();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('home');
   const [unlockedCharacters] = useState(getUnlockedCharacters);
+  const [openedRewards, setOpenedRewards] = useState(getOpenedRewards);
   const [isRewardModalOpen, setIsRewardModalOpen] = useState(false);
   const [selectedRewardIndex, setSelectedRewardIndex] = useState(0);
   const [isFireModalOpen, setIsFireModalOpen] = useState(false);
@@ -57,6 +58,8 @@ export function useHome() {
   };
 
   const handleOpenReward = (index = 0) => {
+    const updated = markRewardAsOpened(index);
+    setOpenedRewards([...updated]);
     setSelectedRewardIndex(index);
     setIsRewardModalOpen(true);
   };
@@ -81,6 +84,7 @@ export function useHome() {
     userName,
     activeTab,
     unlockedCharacters,
+    openedRewards,
     isRewardModalOpen,
     selectedRewardIndex,
     isFireModalOpen,
