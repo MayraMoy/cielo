@@ -10,6 +10,7 @@ export function MobileFrame({ children }) {
   const navigate = useNavigate();
 
   const isAuthPage = location.pathname === '/' || location.pathname === '/register';
+  const effectiveDarkMode = isAuthPage ? false : isDarkMode;
   const showBottomNavbar = !isAuthPage;
 
   const activeTab = location.pathname.startsWith('/library')
@@ -25,19 +26,19 @@ export function MobileFrame({ children }) {
   return (
     <div
       className={`min-h-screen w-full flex items-center justify-center p-2 sm:p-5 select-none font-['Poppins'] transition-colors duration-200 ${
-        isDarkMode ? 'bg-[#10120B]' : 'bg-[#E8E6DE]'
+        effectiveDarkMode ? 'bg-[#10120B]' : 'bg-[#E8E6DE]'
       }`}
     >
       {/* Marco exterior del Celular */}
       <div
         className={`relative w-full max-w-[390px] h-[844px] max-h-[96vh] rounded-[50px] border-[10px] sm:border-[12px] border-[#1C1F16] shadow-[0_25px_60px_-10px_rgba(0,0,0,0.35),0_10px_20px_rgba(0,0,0,0.15)] ring-1 ring-black/20 flex flex-col overflow-hidden transition-colors duration-200 ${
-          isDarkMode ? 'dark bg-[#141710] text-[#F4F6ED]' : 'bg-[#FAF9F5] text-[#1A1C16]'
+          effectiveDarkMode ? 'dark bg-[#141710] text-[#F4F6ED]' : 'bg-[#FAF9F5] text-[#1A1C16]'
         } ${isLargeText ? 'large-text' : ''}`}
       >
         {/* BARRA SUPERIOR DE ESTADO / DYNAMIC ISLAND */}
         <div
           className={`pt-3 pb-1 px-7 flex items-center justify-between text-xs font-medium select-none z-50 transition-colors duration-200 ${
-            isDarkMode ? 'bg-[#141710] text-[#F4F6ED]' : 'bg-[#FAF9F5] text-[#1A1C16]'
+            effectiveDarkMode ? 'bg-[#141710] text-[#F4F6ED]' : 'bg-[#FAF9F5] text-[#1A1C16]'
           }`}
         >
           {/* Hora */}
@@ -61,12 +62,12 @@ export function MobileFrame({ children }) {
             {/* Batería */}
             <div
               className={`w-5 h-2.5 border rounded-sm p-0.5 flex items-center ${
-                isDarkMode ? 'border-[#F4F6ED]' : 'border-[#1A1C16]'
+                effectiveDarkMode ? 'border-[#F4F6ED]' : 'border-[#1A1C16]'
               }`}
             >
               <div
                 className={`w-full h-full rounded-[1px] ${
-                  isDarkMode ? 'bg-[#F4F6ED]' : 'bg-[#1A1C16]'
+                  effectiveDarkMode ? 'bg-[#F4F6ED]' : 'bg-[#1A1C16]'
                 }`}
               />
             </div>
@@ -93,12 +94,12 @@ export function MobileFrame({ children }) {
         {/* BARRA INFERIOR DE INICIO (HOME INDICATOR) */}
         <div
           className={`w-full pb-2 pt-1 flex justify-center pointer-events-none select-none z-50 transition-colors duration-200 ${
-            isDarkMode ? 'bg-[#141710]' : 'bg-[#FAF9F5]'
+            effectiveDarkMode ? 'bg-[#141710]' : 'bg-[#FAF9F5]'
           }`}
         >
           <div
             className={`w-32 h-1 rounded-full ${
-              isDarkMode ? 'bg-white/30' : 'bg-[#1A1C16]/25'
+              effectiveDarkMode ? 'bg-white/30' : 'bg-[#1A1C16]/25'
             }`}
           />
         </div>

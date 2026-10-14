@@ -3,9 +3,9 @@ import { TROPHIC_NETWORK } from '../../data/library/trophicNetwork';
 import { useTheme } from '../../hooks/useTheme';
 
 const GRAPH_WIDTH = 360;
-const GRAPH_HEIGHT = 600;
-const NODE_WIDTH_PERCENT = 31.5;
-const NODE_HEIGHT = 104;
+const GRAPH_HEIGHT = 680;
+const NODE_WIDTH_PERCENT = 31.2;
+const NODE_HEIGHT = 98;
 const NODE_HEIGHT_PERCENT = (NODE_HEIGHT / GRAPH_HEIGHT) * 100;
 
 const trophicLayers = [
@@ -13,7 +13,7 @@ const trophicLayers = [
     id: 'tertiary',
     label: 'Consumidores terciarios',
     top: 0,
-    height: 150,
+    height: 170,
     color: '#FFF4E7',
     darkColor: '#251D14',
     textColor: '#8D4314',
@@ -22,8 +22,8 @@ const trophicLayers = [
   {
     id: 'secondary',
     label: 'Consumidores secundarios',
-    top: 150,
-    height: 150,
+    top: 170,
+    height: 170,
     color: '#F0F5FB',
     darkColor: '#16212E',
     textColor: '#214B77',
@@ -32,8 +32,8 @@ const trophicLayers = [
   {
     id: 'primary',
     label: 'Consumidores primarios',
-    top: 300,
-    height: 150,
+    top: 340,
+    height: 170,
     color: '#FFFBEA',
     darkColor: '#252312',
     textColor: '#705F12',
@@ -42,8 +42,8 @@ const trophicLayers = [
   {
     id: 'producer',
     label: 'Productores',
-    top: 450,
-    height: 150,
+    top: 510,
+    height: 170,
     color: '#F4F7E6',
     darkColor: '#1A2313',
     textColor: '#4E5B18',
@@ -143,7 +143,12 @@ export function TrophicNetworkTab({ isJunior = false }) {
   };
 
   return (
-    <section className="trophic-network pb-28" aria-labelledby="trophic-network-title">
+    <section
+      className={`trophic-network transition-all duration-300 ${
+        focusedNode ? 'pb-28' : 'pb-4'
+      }`}
+      aria-labelledby="trophic-network-title"
+    >
       <div className="flex items-center px-1">
         <div>
           <h2
@@ -176,7 +181,7 @@ export function TrophicNetworkTab({ isJunior = false }) {
         role="group"
         aria-label="Red trófica: las flechas conectan alimentos y consumidores"
       >
-        <div className="relative aspect-[360/600] w-full">
+        <div className="relative aspect-[360/680] w-full">
           {trophicLayers.map((layer) => (
             <div
               key={layer.id}
@@ -190,8 +195,16 @@ export function TrophicNetworkTab({ isJunior = false }) {
               }}
             >
               <span
-                className="absolute left-3 top-2 text-xs font-black tracking-wide"
-                style={{ color: isDarkMode ? layer.darkTextColor : layer.textColor }}
+                className="absolute left-3 top-2.5 z-[6] inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-black uppercase tracking-wider shadow-xs backdrop-blur-sm border transition-colors"
+                style={{
+                  color: isDarkMode ? layer.darkTextColor : layer.textColor,
+                  backgroundColor: isDarkMode
+                    ? 'rgba(26, 31, 20, 0.94)'
+                    : 'rgba(255, 255, 255, 0.94)',
+                  borderColor: isDarkMode
+                    ? 'rgba(255, 255, 255, 0.12)'
+                    : 'rgba(0, 0, 0, 0.08)',
+                }}
               >
                 {layer.label}
               </span>

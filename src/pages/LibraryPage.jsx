@@ -23,7 +23,11 @@ export function LibraryPage() {
 
   return (
     <div className="relative flex w-full flex-1 flex-col select-none bg-[#FAF9F5]">
-      <main className="flex-1 px-5 pb-40 pt-5">
+      <main
+        className={`flex-1 px-5 pt-5 transition-all duration-300 ${
+          activeSection === 'network' ? 'pb-10' : 'pb-40'
+        }`}
+      >
         <ExplorerProfileHeader
           user={user}
           unlockedCardsCount={unlockedCardsCount}
