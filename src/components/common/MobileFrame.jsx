@@ -1,12 +1,14 @@
 import { useTheme } from '../../hooks/useTheme';
+import { useAccessibility } from '../../hooks/useAccessibility';
 
 export function MobileFrame({ children }) {
   const { isDarkMode } = useTheme();
+  const { isLargeText } = useAccessibility();
 
   return (
     <div className={`min-h-screen w-full flex items-center justify-center p-2 sm:p-5 select-none font-['Poppins'] transition-colors duration-200 ${isDarkMode ? 'bg-[#10120B]' : 'bg-[#E8E6DE]'}`}>
       {/* Marco exterior del Celular */}
-      <div className={`relative w-full max-w-[390px] h-[844px] max-h-[96vh] rounded-[50px] border-[10px] sm:border-[12px] border-[#1C1F16] shadow-[0_25px_60px_-10px_rgba(0,0,0,0.35),0_10px_20px_rgba(0,0,0,0.15)] ring-1 ring-black/20 flex flex-col overflow-hidden transition-colors duration-200 ${isDarkMode ? 'dark bg-[#141710] text-[#F4F6ED]' : 'bg-[#FAF9F5] text-[#1A1C16]'}`}>
+      <div className={`relative w-full max-w-[390px] h-[844px] max-h-[96vh] rounded-[50px] border-[10px] sm:border-[12px] border-[#1C1F16] shadow-[0_25px_60px_-10px_rgba(0,0,0,0.35),0_10px_20px_rgba(0,0,0,0.15)] ring-1 ring-black/20 flex flex-col overflow-hidden transition-colors duration-200 ${isDarkMode ? 'dark bg-[#141710] text-[#F4F6ED]' : 'bg-[#FAF9F5] text-[#1A1C16]'} ${isLargeText ? 'large-text' : ''}`}>
         
         {/* BARRA SUPERIOR DE ESTADO / DYNAMIC ISLAND */}
         <div className={`pt-3 pb-1 px-7 flex items-center justify-between text-xs font-medium select-none z-50 transition-colors duration-200 ${isDarkMode ? 'bg-[#141710] text-[#F4F6ED]' : 'bg-[#FAF9F5] text-[#1A1C16]'}`}>

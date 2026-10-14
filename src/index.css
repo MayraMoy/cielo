@@ -157,3 +157,64 @@ body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45) !important;
 }
 
+/* ========================================================
+   MODO LECTURA / ACCESIBILIDAD TIPOGRÁFICA (TEXTO REMARCADO)
+   ======================================================== */
+.large-text p,
+.large-text span,
+.large-text button,
+.large-text h1,
+.large-text h2,
+.large-text h3,
+.large-text li,
+.large-text a {
+  font-weight: 600 !important;
+}
+
+.large-text .text-xs {
+  font-size: 0.88rem !important;
+  line-height: 1.38rem !important;
+}
+
+.large-text .text-sm {
+  font-size: 1.05rem !important;
+  line-height: 1.55rem !important;
+}
+
+.large-text .text-\[13px\] {
+  font-size: 0.98rem !important;
+  line-height: 1.45rem !important;
+}
+
+.large-text .text-\[14px\] {
+  font-size: 1.05rem !important;
+  line-height: 1.55rem !important;
+}
+
+.large-text .text-base {
+  font-size: 1.18rem !important;
+  line-height: 1.65rem !important;
+}
+
+.large-text .text-lg {
+  font-size: 1.28rem !important;
+  line-height: 1.75rem !important;
+}
+
+.large-text .text-xl {
+  font-size: 1.42rem !important;
+  line-height: 1.85rem !important;
+}
+
+.large-text .text-\[22px\] {
+  font-size: 1.55rem !important;
+}
+
+.large-text .text-\[26px\] {
+  font-size: 1.75rem !important;
+}
+
+.large-text .text-\[28px\] {
+  font-size: 1.95rem !important;
+}
+

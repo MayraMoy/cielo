@@ -5,6 +5,7 @@ import { OwlMascot } from '../components/home/OwlMascot';
 import { LIBRARY_CARDS, TROPHIC_LEVELS } from '../data/libraryData';
 import { getUnlockedCharacters } from '../data/rewardProgress';
 import { useUserProfile } from '../hooks/useUserProfile';
+import { useAccessibility } from '../hooks/useAccessibility';
 
 function FichaDetailModal({ card, isJunior = false, onClose }) {
   const description =
@@ -203,6 +204,8 @@ function ExplorerProfileHeader({
   unlockedCharacters,
   onGoRegister,
 }) {
+  const { isLargeText, toggleLargeText } = useAccessibility();
+
   const rankBadge =
     unlockedCharacters >= 3
       ? '🏅 Guardaparque Maestro'
@@ -274,6 +277,21 @@ function ExplorerProfileHeader({
           </div>
         </div>
       </div>
+
+      {/* Botón Accesibilidad A+ para agrandar tipografía */}
+      <button
+        type="button"
+        onClick={toggleLargeText}
+        className={`shrink-0 inline-flex items-center justify-center rounded-xl border px-2.5 py-1.5 text-xs font-bold shadow-xs active:scale-95 transition-all cursor-pointer ${
+          isLargeText
+            ? 'border-[#7E8B28] bg-[#7E8B28] text-white'
+            : 'border-[#CCD69E] bg-[#F2F4E6] text-[#4E5618] hover:bg-[#E4E8C8]'
+        }`}
+        aria-label={isLargeText ? 'Desactivar texto agrandado' : 'Activar texto agrandado y remarcado (A+)'}
+        title={isLargeText ? 'Modo Lectura Activo (A+)' : 'Agrandar y Remarcar Texto (A+)'}
+      >
+        <span className="text-[12px] font-extrabold tracking-tight">A+</span>
+      </button>
     </section>
   );
 }

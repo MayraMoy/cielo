@@ -2,6 +2,7 @@ import { HOME_DATA } from '../data/homeData';
 import { useHome } from '../hooks/useHome';
 import { useUserProfile } from '../hooks/useUserProfile';
 import { useTheme } from '../hooks/useTheme';
+import { useAccessibility } from '../hooks/useAccessibility';
 import { CharacterProgressCard } from '../components/home/CharacterProgressCard';
 import { DidYouKnowCard } from '../components/home/DidYouKnowCard';
 import { BottomNavbar } from '../components/common/BottomNavbar';
@@ -29,6 +30,7 @@ export function HomePage() {
 
   const { user, isJunior } = useUserProfile();
   const { isDarkMode, toggleDarkMode } = useTheme();
+  const { isLargeText, toggleLargeText } = useAccessibility();
 
   return (
     <div className="w-full flex-1 relative flex flex-col justify-between select-none">
@@ -76,6 +78,21 @@ export function HomePage() {
           </div>
 
           <div className="flex items-center gap-1.5">
+            {/* Botón Accesibilidad: Agrandar y Remarcar Texto (A+) */}
+            <button
+              type="button"
+              onClick={toggleLargeText}
+              className={`inline-flex items-center justify-center rounded-xl border px-2.5 py-1.5 text-xs font-bold shadow-xs active:scale-95 transition-all cursor-pointer ${
+                isLargeText
+                  ? 'border-[#7E8B28] bg-[#7E8B28] text-white'
+                  : 'border-[#CCD69E] bg-[#F2F4E6] text-[#4E5618] hover:bg-[#E4E8C8]'
+              }`}
+              aria-label={isLargeText ? 'Desactivar texto agrandado' : 'Activar texto agrandado y remarcado (A+)'}
+              title={isLargeText ? 'Modo Lectura Activo (A+)' : 'Agrandar y Remarcar Texto (A+)'}
+            >
+              <span className="text-[12px] font-extrabold tracking-tight">A+</span>
+            </button>
+
             {/* Botón Encendido/Apagado de Modo Oscuro (especial para sol directo) */}
             <button
               type="button"

@@ -1,10 +1,13 @@
 import { AppRoutes } from './routes/AppRoutes';
 import { ThemeProvider } from './context/ThemeContext';
+import { AccessibilityProvider } from './context/AccessibilityContext';
 
 function App() {
   return (
     <ThemeProvider>
-      <AppRoutes />
+      <AccessibilityProvider>
+        <AppRoutes />
+      </AccessibilityProvider>
     </ThemeProvider>
   );
 }
