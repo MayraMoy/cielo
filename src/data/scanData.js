@@ -8,15 +8,14 @@ const STATIONS = [
     tag: "Árbol Nodriza • Productor",
     reserve: "Reserva Villa Cielo",
     description:
-      "Bajo la sombra y protección del árbol Molle nacen y crecen orquídeas, bromelias y helechos que no podrían sobrevivir solos en el monte serrano.",
+      "Árbol protector que da sombra y refugio a orquídeas, bromelias y helechos del monte serrano.",
     juniorDescription:
-      "¡Encontraste al gran Árbol Molle! Es un árbol nativo súper protector que les da sombra y casita a muchas plantas chiquitas y pajaritos.",
+      "¡El gran Árbol Nodriza! Da sombra y casita a muchas plantas chiquitas y pajaritos.",
     curiosity:
-      "Sus frutos dulces y picantes son conocidos como pimienta rosa y alimentan a decenas de aves de la región.",
+      "Sus frutos dulces y picantes (pimienta rosa) alimentan a decenas de aves locales.",
     juniorCuriosity:
-      "¡Las frutitas rojas del árbol Molle parecen confites y a los pájaros de la reserva les encantan!",
-    rewardText:
-      "¡Superá la trivia de la Estación 1 para destrabar el Regalo #1 y nuevas fichas de flora y aves!",
+      "¡Sus frutitas rojas parecen confites y a los pájaros les encantan!",
+    rewardText: "Superá la trivia para ganar el Regalo #1 y nuevas fichas.",
     totalSteps: 3,
   },
   {
@@ -28,15 +27,14 @@ const STATIONS = [
     tag: "Herbívoro • Consumidor Primario",
     reserve: "Reserva Villa Cielo",
     description:
-      "El roedor más grande del mundo habita las zonas bajas cercanas al agua. Al alimentarse de pastos y plantas acuáticas, conecta a los productores con el resto de la red trófica.",
+      "El roedor más grande del mundo habita zonas húmedas. Conecta a los productores con el resto de la red trófica.",
     juniorDescription:
-      "¡Descubriste la huella del Carpincho! Es un animal súper amigable que nada genial y come pastito cerca del agua.",
+      "¡El gran nadador del humedal! Come pastito cerca del agua y es súper amigable.",
     curiosity:
-      "Sus ojos, orejas y nariz están alineados en la parte alta de su cabeza para poder ver y respirar mientras nada casi sumergido.",
+      "Sus ojos, orejas y nariz están alineados arriba para ver y respirar casi sumergido.",
     juniorCuriosity:
-      "¡Puede quedarse abajo del agua dejando solo la nariz y los ojos afuera como si fuera un submarino!",
-    rewardText:
-      "¡Superá la trivia de la Estación 2 para destrabar el Regalo #2 y sumar los consumidores a tu colección!",
+      "¡Puede quedarse bajo el agua dejando solo la nariz como un submarino!",
+    rewardText: "Superá la trivia para destrabar el Regalo #2 y sumar consumidores.",
     totalSteps: 3,
   },
   {
@@ -48,15 +46,14 @@ const STATIONS = [
     tag: "Ave Rapaz • Consumidor Secundario",
     reserve: "Reserva Villa Cielo",
     description:
-      "Desde las copas más altas y barrancas de la reserva, el Halcón regula las poblaciones de roedores, insectos y pequeñas aves, manteniendo sano el ecosistema.",
+      "Desde las alturas, regula poblaciones de roedores e insectos, manteniendo sano el ecosistema.",
     juniorDescription:
-      "¡Llegaste al mirador del Halcón! Tiene una vista de superhéroe para vigilar todo el bosque desde arriba de los árboles.",
+      "¡El vigilante del bosque! Tiene una vista de superhéroe desde lo alto.",
     curiosity:
-      "Su visión es hasta 8 veces más aguda que la del ser humano, permitiéndole detectar presas a cientos de metros.",
+      "Su visión es hasta 8 veces más aguda que la humana, detectando presas a metros de distancia.",
     juniorCuriosity:
-      "¡Sus ojos tienen un súper zoom natural: puede ver un bichito en el pasto desde lo más alto del cielo!",
-    rewardText:
-      "¡Respondé el desafío final de la Estación 3 para abrir el Regalo #3 y completar toda la colección de Villa Cielo!",
+      "¡Tiene súper zoom natural para ver bichitos desde el cielo!",
+    rewardText: "Respondé el desafío final para abrir el Regalo #3 y completar la colección.",
     totalSteps: 3,
   },
 ];
