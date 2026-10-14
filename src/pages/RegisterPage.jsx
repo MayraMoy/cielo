@@ -33,10 +33,10 @@ export function RegisterPage() {
           {/* Header: Logo + Title + Subtitle */}
           <div className="flex flex-col items-center text-center mb-7">
             <Logo className="w-16 h-16 mb-4" />
-            <h1 className="text-[26px] font-semibold text-[#1A1C16] tracking-tight mb-2">
+            <h1 className="text-[26px] font-semibold text-[#1A1C16] dark:text-[#F4F6ED] tracking-tight mb-2">
               {REGISTER_DATA.title}
             </h1>
-            <p className="text-[14px] leading-relaxed text-[#666B5A] max-w-[320px]">
+            <p className="text-[14px] leading-relaxed text-[#666B5A] dark:text-[#B8BFAC] max-w-[320px]">
               {REGISTER_DATA.subtitle}
             </p>
           </div>
