@@ -5,6 +5,9 @@ import {
   halconImg,
   molleImg,
   woodpeckerImg,
+  insectsImg,
+  reptilesImg,
+  pastosImg,
 } from './images';
 
 export const TROPHIC_NETWORK = {
@@ -26,14 +29,14 @@ export const TROPHIC_NETWORK = {
     {
       id: 'wetland-plants',
       name: 'Pastos y plantas acuáticas',
-      icon: '🌾',
+      image: pastosImg,
       kind: 'producer',
       position: { x: 300, y: 540 },
     },
     {
       id: 'insects',
       name: 'Insectos y larvas',
-      icon: '🐛',
+      image: insectsImg,
       kind: 'primary',
       position: { x: 100, y: 390 },
     },
@@ -61,7 +64,7 @@ export const TROPHIC_NETWORK = {
     {
       id: 'small-prey',
       name: 'Roedores y reptiles',
-      icon: '🦎',
+      image: reptilesImg,
       kind: 'secondary',
       position: { x: 300, y: 240 },
     },
