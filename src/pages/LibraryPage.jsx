@@ -24,9 +24,7 @@ export function LibraryPage() {
   return (
     <div className="relative flex w-full flex-1 flex-col select-none bg-[#FAF9F5] dark:bg-[#141710] transition-colors">
       <main
-        className={`flex-1 px-5 pt-5 transition-all duration-300 ${
-          activeSection === 'network' ? 'pb-10' : 'pb-40'
-        }`}
+        className="flex-1 px-5 pt-5 pb-36 transition-all duration-300"
       >
         <ExplorerProfileHeader
           user={user}
@@ -53,7 +51,7 @@ export function LibraryPage() {
                 : 'text-[#4E5618] dark:text-[#B3BE8E] hover:text-[#1A1C16] dark:hover:text-white'
             }`}
           >
-            FICHAS ({unlockedCardsCount}/{LIBRARY_CARDS.length})
+            Fichas ({unlockedCardsCount}/{LIBRARY_CARDS.length})
           </button>
           <button
             type="button"
@@ -66,7 +64,7 @@ export function LibraryPage() {
                 : 'text-[#4E5618] dark:text-[#B3BE8E] hover:text-[#1A1C16] dark:hover:text-white'
             }`}
           >
-            RED TRÓFICA
+            Red trófica
           </button>
         </div>
 

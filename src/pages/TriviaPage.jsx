@@ -31,12 +31,8 @@ export function TriviaPage() {
 
   return (
     <div className="w-full flex-1 relative flex flex-col justify-between items-center select-none bg-[#FAF9F5]">
-      {/* 1. BARRA SUPERIOR CON INDICADOR DE ESTACIÓN Y BOTÓN CERRAR "✕" */}
-      <div className="w-full flex items-center justify-between px-6 pt-2 z-20">
-        <span className="text-xs font-semibold text-[#687320] bg-[#F2F4E6] border border-[#CFD79F] px-3 py-1 rounded-full">
-          🌿 Desafío Estación {stationStep}
-        </span>
-
+      {/* 1. BARRA SUPERIOR CON BOTÓN CERRAR "✕" */}
+      <div className="w-full flex items-center justify-end px-6 pt-3 z-20">
         <button
           type="button"
           onClick={() => navigate('/home')}
@@ -60,7 +56,7 @@ export function TriviaPage() {
       </div>
 
       {/* 2. CONTENIDO PRINCIPAL: TARJETA DE TRIVIA O FINALIZACIÓN */}
-      <main className="w-full px-4 flex justify-center items-center my-auto pb-24 pt-1">
+      <main className="w-full px-4 flex justify-center items-center my-auto pb-8 pt-1">
         {!isFinished ? (
           <TriviaCard
             question={currentQuestion}

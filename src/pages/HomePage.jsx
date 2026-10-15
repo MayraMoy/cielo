@@ -48,13 +48,13 @@ export function HomePage() {
             <button
               type="button"
               onClick={toggleDarkMode}
-              className="inline-flex items-center gap-1 rounded-xl border border-[#CCD69E] bg-[#F2F4E6] px-2.5 py-1.5 text-xs font-semibold text-[#4E5618] hover:bg-[#E4E8C8] active:scale-95 transition-all cursor-pointer dark:border-[#55623B] dark:bg-[#242B1E] dark:text-[#E3E9D5] dark:hover:bg-[#303A27]"
-              aria-label={isDarkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro para sol'}
-              title={isDarkMode ? 'Modo Claro' : 'Modo Oscuro (Sol)'}
+              className="inline-flex items-center gap-1.5 rounded-xl border border-[#CCD69E] bg-[#F2F4E6] px-2.5 py-1.5 text-xs font-semibold text-[#4E5618] hover:bg-[#E4E8C8] active:scale-95 transition-all cursor-pointer dark:border-[#55623B] dark:bg-[#242B1E] dark:text-[#E3E9D5] dark:hover:bg-[#303A27]"
+              aria-label={isDarkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
+              title={isDarkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
             >
               {isDarkMode ? (
                 <>
-                  <svg className="w-3.5 h-3.5 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <svg className="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     <circle cx="12" cy="12" r="5" />
                     <line x1="12" y1="1" x2="12" y2="3" />
                     <line x1="12" y1="21" x2="12" y2="23" />
@@ -72,7 +72,7 @@ export function HomePage() {
                   <svg className="w-3.5 h-3.5 text-[#545C1E]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
                   </svg>
-                  <span>Sol</span>
+                  <span>Noche</span>
                 </>
               )}
             </button>
@@ -81,11 +81,11 @@ export function HomePage() {
           <button
             type="button"
             onClick={handleOpenFireSafety}
-            className="inline-flex items-center gap-1.5 rounded-xl border border-[#EAC3AF] bg-[#FDF0E9] px-3 py-1.5 text-xs font-semibold text-[#7A3213] hover:bg-[#F9E3D8] active:scale-95 transition-all cursor-pointer dark:border-[#74472F] dark:bg-[#35251D] dark:text-[#FFD1B6] dark:hover:bg-[#443025]"
+            className="inline-flex items-center gap-1.5 rounded-xl bg-[#A83B12] hover:bg-[#8F320F] text-white px-3 py-1.5 text-xs font-bold shadow-xs active:scale-95 transition-all cursor-pointer dark:bg-[#C85A27] dark:hover:bg-[#B34E1E]"
             aria-label="Prevención de incendios y protocolo de emergencias"
           >
             <svg
-              className="w-4 h-4 text-[#A83B12] dark:text-[#FF9A61]"
+              className="w-4 h-4 text-white"
               viewBox="0 0 24 24"
               fill="currentColor"
               aria-hidden="true"

@@ -41,11 +41,15 @@ export function TriviaCard({
           Pregunta {currentIndex + 1} de {totalQuestions}
         </span>
         <span
-          className={`px-2.5 py-1 rounded-full text-xs font-bold ${
+          className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold ${
             timeLeft <= 3 ? 'text-red-700 bg-red-100' : 'text-[#555A49] bg-[#FAF9F5]'
           }`}
         >
-          ⏱ {timeLeft}s
+          <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+          <span>{timeLeft}s</span>
         </span>
       </div>
 
@@ -82,7 +86,7 @@ export function TriviaCard({
       {/* AVISO DE TIEMPO AGOTADO */}
       {isTimeUp && (
         <div className="bg-red-50 border border-red-200 text-red-700 text-xs py-2 px-3 rounded-xl text-center font-semibold animate-pulse">
-          ⏰ ¡Se acabó el tiempo! Mirá la respuesta correcta:
+          ¡Se acabó el tiempo! Mirá la respuesta correcta:
         </div>
       )}
 
@@ -129,10 +133,10 @@ export function TriviaCard({
             <div className="flex-1">
               <p className="text-xs font-bold text-[#545C1E] mb-1">
                 {isCorrect
-                  ? '✅ ¡Respuesta correcta!'
+                  ? '¡Respuesta correcta!'
                   : isTimeUp
-                  ? '💡 Aprendamos juntos:'
-                  : '💡 ¡Casi! Así funciona en la reserva:'}
+                  ? 'Aprendamos juntos:'
+                  : '¡Casi! Así funciona en la reserva:'}
               </p>
               <p className="text-[13.5px] leading-relaxed text-[#2B2F25]">
                 {explanationText}
@@ -146,7 +150,7 @@ export function TriviaCard({
             onClick={onNextQuestion}
             className="w-full py-3 px-4 bg-[#7E8B28] hover:bg-[#6D7821] text-white text-[14.5px] font-semibold rounded-xl shadow-sm transition-all active:scale-[0.98] cursor-pointer"
           >
-            {isLastQuestion ? 'Ver resultado final 🎉' : 'Siguiente pregunta →'}
+            {isLastQuestion ? 'Ver resultado final' : 'Siguiente pregunta →'}
           </button>
         </div>
       )}

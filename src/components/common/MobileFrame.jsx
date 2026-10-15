@@ -11,7 +11,7 @@ export function MobileFrame({ children }) {
 
   const isAuthPage = location.pathname === '/' || location.pathname === '/register';
   const effectiveDarkMode = isAuthPage ? false : isDarkMode;
-  const showBottomNavbar = !isAuthPage;
+  const showBottomNavbar = !isAuthPage && !location.pathname.startsWith('/trivia');
 
   const activeTab = location.pathname.startsWith('/library')
     ? 'library'

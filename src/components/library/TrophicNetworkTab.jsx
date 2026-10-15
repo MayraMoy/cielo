@@ -195,7 +195,7 @@ export function TrophicNetworkTab({ isJunior = false }) {
               }}
             >
               <span
-                className="absolute left-3 top-2.5 z-[6] inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-black uppercase tracking-wider shadow-xs backdrop-blur-sm border transition-colors"
+                className="absolute left-3 top-2.5 z-[6] inline-flex items-center px-2.5 py-0.5 rounded-lg text-xs font-bold shadow-xs border transition-colors"
                 style={{
                   color: isDarkMode ? layer.darkTextColor : layer.textColor,
                   backgroundColor: isDarkMode

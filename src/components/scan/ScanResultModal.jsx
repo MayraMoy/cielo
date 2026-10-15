@@ -24,11 +24,10 @@ export function ScanResultModal({
         
         {/* Cabecera */}
         <div className="flex items-center justify-between">
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#F2F4E6] dark:bg-[#2A3320] text-[#687320] dark:text-[#C4D864] border border-[#CFD79F] dark:border-[#425032]">
-            <span>🌿</span>
-            <span>{species.stationLabel || 'Especie descubierta'}</span>
+          <span className="text-xs font-bold text-[#556018] dark:text-[#C4D864] tracking-tight">
+            {species.stationLabel || 'Especie descubierta'}
           </span>
-          <span className="text-xs font-medium text-[#7E8B28] dark:text-[#A8B848]">
+          <span className="text-xs font-medium text-[#727763] dark:text-[#9EA48F]">
             Est. {species.step}/{species.totalSteps}
           </span>
         </div>
