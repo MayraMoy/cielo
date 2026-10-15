@@ -67,7 +67,7 @@ export function FichaDetailModal({ card, isJunior = false, onClose }) {
         role="dialog"
         aria-modal="true"
         aria-labelledby="ficha-title"
-        className="relative w-full max-w-[340px] overflow-hidden rounded-3xl border border-[#E5E7EB] bg-white shadow-2xl transition-all"
+        className="relative w-full max-w-[340px] overflow-hidden rounded-3xl border border-[#E5E7EB] dark:border-[#38402D] bg-white dark:bg-[#1A1F15] shadow-2xl transition-all"
         onClick={(event) => event.stopPropagation()}
       >
         {/* --- PORTADA SUPERIOR CON INFORMACIÓN SUPERPUESTA Y CAPA OSCURA --- */}
@@ -120,13 +120,13 @@ export function FichaDetailModal({ card, isJunior = false, onClose }) {
         {/* --- CUERPO DEL MODAL --- */}
         <div className="p-4.5">
           {/* Descripción */}
-          <p className="text-xs leading-relaxed text-[#434837]">
+          <p className="text-xs leading-relaxed text-[#434837] dark:text-[#D1D8C5]">
             {description}
           </p>
 
           {/* Bloque 1: Aporte a la Red Trófica / Bosque */}
-          <section className="mt-3.5 flex items-start gap-3 rounded-2xl border border-[#DCE3B5] bg-[#F7F9EE] p-3 shadow-2xs">
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[#E2EA81]/40 border border-[#CBD598] text-[#545C1E]">
+          <section className="mt-3.5 flex items-start gap-3 rounded-2xl border border-[#DCE3B5] dark:border-[#3E492D] bg-[#F7F9EE] dark:bg-[#232A1C] p-3 shadow-2xs">
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[#E2EA81]/40 dark:bg-[#344023] border border-[#CBD598] dark:border-[#4B5A34] text-[#545C1E] dark:text-[#DDEB7A]">
               <svg
                 viewBox="0 0 24 24"
                 className="h-4.5 w-4.5"
@@ -142,20 +142,20 @@ export function FichaDetailModal({ card, isJunior = false, onClose }) {
               </svg>
             </span>
             <div className="min-w-0 flex-1">
-              <h3 className="text-xs font-bold text-[#1A1C16]">
+              <h3 className="text-xs font-bold text-[#1A1C16] dark:text-[#F4F6ED]">
                 {isJunior
                   ? '¿Cómo ayuda al bosque?'
                   : '¿Qué aporta a la red trófica?'}
               </h3>
-              <p className="mt-1 text-xs leading-relaxed text-[#4A503D]">
+              <p className="mt-1 text-xs leading-relaxed text-[#4A503D] dark:text-[#C5CEB8]">
                 {contribution}
               </p>
             </div>
           </section>
 
           {/* Bloque 2: Alimentación con la Mascota Contenida */}
-          <section className="relative mt-2.5 flex items-start gap-3 rounded-2xl border border-[#DCE3B5] bg-[#F7F9EE] p-3 shadow-2xs">
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[#E2EA81]/40 border border-[#CBD598] text-[#545C1E]">
+          <section className="relative mt-2.5 flex items-start gap-3 rounded-2xl border border-[#DCE3B5] dark:border-[#3E492D] bg-[#F7F9EE] dark:bg-[#232A1C] p-3 shadow-2xs">
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[#E2EA81]/40 dark:bg-[#344023] border border-[#CBD598] dark:border-[#4B5A34] text-[#545C1E] dark:text-[#DDEB7A]">
               <svg
                 viewBox="0 0 24 24"
                 className="h-4.5 w-4.5"
@@ -168,10 +168,10 @@ export function FichaDetailModal({ card, isJunior = false, onClose }) {
               </svg>
             </span>
             <div className="min-w-0 flex-1 pr-12">
-              <h3 className="text-xs font-bold text-[#1A1C16]">
+              <h3 className="text-xs font-bold text-[#1A1C16] dark:text-[#F4F6ED]">
                 Se alimenta de...
               </h3>
-              <p className="mt-1 text-xs leading-relaxed text-[#4A503D]">
+              <p className="mt-1 text-xs leading-relaxed text-[#4A503D] dark:text-[#C5CEB8]">
                 {diet}
               </p>
             </div>

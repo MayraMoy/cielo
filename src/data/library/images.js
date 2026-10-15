@@ -6,8 +6,26 @@ import woodpeckerImg from '../../assets/2.png'; // 2.png es el pájaro carpinter
 import shrubImg from '../../assets/7.png'; // 7.png es el espinillo
 import fruitingShrubImg from '../../assets/8.png'; // 8.png es el arbusto con frutos
 import serranoShrubImg from '../../assets/1.png'; // 1.png es el arbusto serrano
-import arbol from '../../assets/arbol.jpg'; // 9.png es el árbol genérico
-import ave from '../../assets/aveinsectivora.jpg'; // 10.png es el ave genérica
-import arbusto from '../../assets/arbusto.jpg'; // 11.png es el arbusto genérico
+import arbol from '../../assets/arbol.jpg';
+import ave from '../../assets/aveinsectivora.jpg';
+import arbusto from '../../assets/arbusto.jpg';
+import insectsImg from '../../assets/insects.png';
+import reptilesImg from '../../assets/reptiles.png';
+import pastosImg from '../../assets/pastos.png';
 
-export { halconImg, molleImg, carpinchoImg, aveImg, woodpeckerImg, shrubImg, fruitingShrubImg, serranoShrubImg, arbol, ave, arbusto };
+export {
+  halconImg,
+  molleImg,
+  carpinchoImg,
+  aveImg,
+  woodpeckerImg,
+  shrubImg,
+  fruitingShrubImg,
+  serranoShrubImg,
+  arbol,
+  ave,
+  arbusto,
+  insectsImg,
+  reptilesImg,
+  pastosImg,
+};

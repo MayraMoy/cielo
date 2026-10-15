@@ -26,13 +26,16 @@ export function FichasTab({
 
   return (
     <div>
+      {/* Alerta / Pista de carta bloqueada */}
       {lockedHintCard && (
-        <div className="mb-3.5 flex items-center justify-between gap-2.5 rounded-2xl border border-[#B5C370] bg-[#F2F4E6] p-3.5 text-xs text-[#3C4033] shadow-xs animate-[modal-appear_180ms_ease-out]">
+        <div className="mb-3.5 flex items-center justify-between gap-2.5 rounded-2xl border border-[#B5C370] dark:border-[#3D482B] bg-[#F2F4E6] dark:bg-[#1F2718] p-3.5 text-xs text-[#3C4033] dark:text-[#DDE2D3] shadow-xs animate-[modal-appear_180ms_ease-out]">
           <div>
-            <p className="font-bold text-sm text-[#545C1E]">
+            <p className="font-bold text-sm text-[#545C1E] dark:text-[#DDEB7A]">
               🔒 {lockedHintCard.name} está bloqueada
             </p>
-            <p className="text-xs mt-0.5 text-[#555A49]">{lockedHintCard.unlockHint}</p>
+            <p className="text-xs mt-0.5 text-[#555A49] dark:text-[#A8B298]">
+              {lockedHintCard.unlockHint}
+            </p>
           </div>
           <button
             type="button"
@@ -44,6 +47,7 @@ export function FichasTab({
         </div>
       )}
 
+      {/* Cuadrícula de fichas */}
       <div className="grid grid-cols-3 gap-3 px-1 py-1">
         {LIBRARY_CARDS.map((card) => {
           const isUnlocked =
@@ -62,12 +66,14 @@ export function FichasTab({
                 }
               }}
               aria-label={`${card.name}${
-                isUnlocked ? ', abrir ficha' : ', bloqueada (toca para ver pista)'
-              }`}
-              className={`relative flex flex-col items-center justify-between rounded-2xl bg-white p-2.5 text-center shadow-xs border transition-transform active:scale-95 cursor-pointer ${
                 isUnlocked
-                  ? 'border-[#CFD79F] hover:border-[#7E8B28]'
-                  : 'border-gray-200 opacity-75'
+                  ? ', abrir ficha'
+                  : ', bloqueada (toca para ver pista)'
+              }`}
+              className={`relative flex flex-col items-center justify-between rounded-2xl bg-white dark:bg-[#1A1F14] p-2.5 text-center shadow-xs border transition-all active:scale-95 cursor-pointer ${
+                isUnlocked
+                  ? 'border-[#CFD79F] dark:border-[#353E2A] hover:border-[#7E8B28]'
+                  : 'border-gray-200 dark:border-[#2C3322] opacity-80'
               }`}
             >
               <div className="relative h-20 w-full flex items-center justify-center">
@@ -75,18 +81,20 @@ export function FichasTab({
                   src={card.image}
                   alt={card.name}
                   className={`h-full w-full object-contain ${
-                    isUnlocked ? '' : 'grayscale opacity-55'
+                    isUnlocked ? '' : 'grayscale opacity-50 dark:opacity-40'
                   }`}
                 />
                 {!isUnlocked && (
-                  <span className="absolute right-0.5 top-0.5 rounded-full bg-white/95 p-1 text-[#1A1C16] shadow-xs">
+                  <span className="absolute right-0.5 top-0.5 rounded-full bg-white/95 dark:bg-[#252E1B] p-1 text-[#1A1C16] dark:text-[#DDEB7A] border border-black/5 dark:border-[#3D482B] shadow-xs transition-colors">
                     <LockIcon />
                   </span>
                 )}
               </div>
               <span
                 className={`mt-1.5 w-full truncate text-xs font-semibold ${
-                  isUnlocked ? 'text-[#1A1C16]' : 'text-gray-500'
+                  isUnlocked
+                    ? 'text-[#1A1C16] dark:text-[#F4F6ED]'
+                    : 'text-gray-500 dark:text-[#8E977F]'
                 }`}
               >
                 {card.name}

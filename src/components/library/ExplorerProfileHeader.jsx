@@ -1,14 +1,16 @@
 import { useAccessibility } from '../../hooks/useAccessibility';
 
-// SVG nativo equivalente a la brújula "explore" de Material Symbols
-const ExploreIcon = () => (
+// SVG de usuario para la ficha de perfil (con soporte para modo oscuro)
+const UserProfileIcon = ({
+  className = 'w-7 h-7 text-[#545C1E] dark:text-[#DDEB7A]',
+}) => (
   <svg
-    className="w-6 h-6 text-[#545C1E]"
-    viewBox="0 0 24 24"
+    viewBox="0 0 32 32"
     fill="currentColor"
+    className={className}
     aria-hidden="true"
   >
-    <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM6.5 17.5L9.5 9.5L17.5 6.5L14.5 14.5L6.5 17.5ZM12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" />
+    <path d="M 16 5 C 12.145852 5 9 8.1458513 9 12 C 9 14.408843 10.23116 16.55212 12.09375 17.8125 C 8.5266131 19.342333 6 22.881262 6 27 L 8 27 C 8 22.569334 11.569334 19 16 19 C 20.430666 19 24 22.569334 24 27 L 26 27 C 26 22.881262 23.473387 19.342333 19.90625 17.8125 C 21.76884 16.55212 23 14.408843 23 12 C 23 8.1458513 19.854148 5 16 5 z M 16 7 C 18.773268 7 21 9.2267317 21 12 C 21 14.773268 18.773268 17 16 17 C 13.226732 17 11 14.773268 11 12 C 11 9.2267317 13.226732 7 16 7 z" />
   </svg>
 );
 
@@ -31,25 +33,25 @@ export function ExplorerProfileHeader({
       : 'Visitante Curioso';
 
   return (
-    <section className="flex items-center justify-between gap-3 rounded-3xl border border-[#E5E7EB] bg-white p-4 shadow-xs">
+    <section className="flex items-center justify-between gap-3 rounded-3xl border border-[#E5E7EB] dark:border-[#2C3520] bg-white dark:bg-[#1A1F14] p-4 shadow-xs transition-colors">
       <div className="flex items-center gap-3.5 min-w-0">
         
-        {/* Contenedor del icono de la brújula */}
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#F2F4E6] border border-[#CCD69E] shadow-2xs">
-          <ExploreIcon />
+        {/* Contenedor del avatar con el icono de usuario */}
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#F2F4E6] dark:bg-[#252E1B] border border-[#CCD69E] dark:border-[#3D482B] shadow-2xs">
+          <UserProfileIcon />
         </div>
 
         <div className="min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
-            <h1 className="text-base font-bold text-[#1A1C16] truncate">
+            <h1 className="text-base font-bold text-[#1A1C16] dark:text-[#F4F6ED] truncate">
               {user?.fullName || 'Explorador Invitado'}
             </h1>
-            <span className="rounded-full bg-[#F2F4E6] border border-[#CFD79F] px-2.5 py-0.5 text-xs font-semibold text-[#545C1E]">
+            <span className="rounded-full bg-[#F2F4E6] dark:bg-[#252E1B] border border-[#CFD79F] dark:border-[#3D482B] px-2.5 py-0.5 text-xs font-semibold text-[#545C1E] dark:text-[#DDEB7A]">
               {unlockedCardsCount}/{totalCardsCount} fichas
             </span>
           </div>
 
-          <p className="text-xs font-semibold text-[#687320] mt-0.5">
+          <p className="text-xs font-semibold text-[#687320] dark:text-[#A4B544] mt-0.5">
             {rankBadge}
           </p>
 
@@ -58,7 +60,7 @@ export function ExplorerProfileHeader({
               <button
                 type="button"
                 onClick={onGoRegister}
-                className="text-xs font-semibold text-[#7E8B28] underline underline-offset-2 cursor-pointer hover:text-[#545C1E] transition-colors"
+                className="text-xs font-semibold text-[#7E8B28] dark:text-[#A4B544] underline underline-offset-2 cursor-pointer hover:text-[#545C1E] dark:hover:text-[#DDEB7A] transition-colors"
               >
                 • Registrarme
               </button>
@@ -74,10 +76,18 @@ export function ExplorerProfileHeader({
         className={`shrink-0 inline-flex items-center justify-center rounded-xl border px-2.5 py-1.5 text-xs font-bold shadow-xs active:scale-95 transition-all cursor-pointer ${
           isLargeText
             ? 'border-[#7E8B28] bg-[#7E8B28] text-white'
-            : 'border-[#CCD69E] bg-[#F2F4E6] text-[#4E5618] hover:bg-[#E4E8C8]'
+            : 'border-[#CCD69E] dark:border-[#3D482B] bg-[#F2F4E6] dark:bg-[#252E1B] text-[#4E5618] dark:text-[#DDEB7A] hover:bg-[#E4E8C8] dark:hover:bg-[#2F3A22]'
         }`}
-        aria-label={isLargeText ? 'Desactivar texto agrandado' : 'Activar texto agrandado y remarcado (A+)'}
-        title={isLargeText ? 'Modo Lectura Activo (A+)' : 'Agrandar y Remarcar Texto (A+)'}
+        aria-label={
+          isLargeText
+            ? 'Desactivar texto agrandado'
+            : 'Activar texto agrandado y remarcado (A+)'
+        }
+        title={
+          isLargeText
+            ? 'Modo Lectura Activo (A+)'
+            : 'Agrandar y Remarcar Texto (A+)'
+        }
       >
         <span className="text-[12px] font-extrabold tracking-tight">A+</span>
       </button>

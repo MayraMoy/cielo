@@ -3,9 +3,9 @@ import { TROPHIC_NETWORK } from '../../data/library/trophicNetwork';
 import { useTheme } from '../../hooks/useTheme';
 
 const GRAPH_WIDTH = 360;
-const GRAPH_HEIGHT = 600;
-const NODE_WIDTH_PERCENT = 30;
-const NODE_HEIGHT = 92;
+const GRAPH_HEIGHT = 680;
+const NODE_WIDTH_PERCENT = 31.2;
+const NODE_HEIGHT = 98;
 const NODE_HEIGHT_PERCENT = (NODE_HEIGHT / GRAPH_HEIGHT) * 100;
 
 const trophicLayers = [
@@ -13,33 +13,41 @@ const trophicLayers = [
     id: 'tertiary',
     label: 'Consumidores terciarios',
     top: 0,
-    height: 150,
+    height: 170,
     color: '#FFF4E7',
-    darkColor: '#30261F',
+    darkColor: '#251D14',
+    textColor: '#8D4314',
+    darkTextColor: '#FFC899',
   },
   {
     id: 'secondary',
     label: 'Consumidores secundarios',
-    top: 150,
-    height: 150,
+    top: 170,
+    height: 170,
     color: '#F0F5FB',
-    darkColor: '#202A32',
+    darkColor: '#16212E',
+    textColor: '#214B77',
+    darkTextColor: '#B9DAFB',
   },
   {
     id: 'primary',
     label: 'Consumidores primarios',
-    top: 300,
-    height: 150,
+    top: 340,
+    height: 170,
     color: '#FFFBEA',
-    darkColor: '#302F1F',
+    darkColor: '#252312',
+    textColor: '#705F12',
+    darkTextColor: '#FDE047',
   },
   {
     id: 'producer',
     label: 'Productores',
-    top: 450,
-    height: 150,
+    top: 510,
+    height: 170,
     color: '#F4F7E6',
-    darkColor: '#263020',
+    darkColor: '#1A2313',
+    textColor: '#4E5B18',
+    darkTextColor: '#D9EE85',
   },
 ];
 
@@ -53,36 +61,40 @@ function getLinkPath(food, consumer) {
   return `M ${startX} ${startY} C ${startX} ${controlY}, ${endX} ${controlY}, ${endX} ${endY}`;
 }
 
-function OrganismNode({ organism, isSelected, onSelect }) {
-  const className = `absolute z-10 flex cursor-pointer flex-col items-center justify-center gap-1 rounded-xl border px-1 py-1.5 text-center shadow-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#687320] ${
+function OrganismNode({ organism, isSelected, onSelect, isDarkMode = false }) {
+  const className = `trophic-node-card absolute z-10 flex cursor-pointer flex-col items-center justify-center rounded-2xl border px-1 py-1 text-center shadow-md transition-all duration-200 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 overflow-hidden ${
     isSelected
-      ? 'border-[#566116] bg-[#E4E8C8] ring-2 ring-[#7E8B28] dark:border-[#A4B544] dark:bg-[#303A27] dark:ring-[#A4B544]'
-      : 'border-[#AEBB72] bg-white hover:border-[#7E8B28] dark:border-[#55623B] dark:hover:border-[#A4B544]'
+      ? isDarkMode
+        ? 'border-[#C5D76A] bg-[#2E3B1C] ring-2 ring-[#DDEB7A] shadow-lg'
+        : 'border-[#566116] bg-[#E4E8C8] ring-2 ring-[#7E8B28] shadow-lg'
+      : isDarkMode
+      ? 'border-[#475432] bg-[#202619] hover:border-[#8E9F44]'
+      : 'border-[#CCD69E] bg-white hover:border-[#7E8B28]'
   }`;
+
   const content = (
     <>
-      {organism.image ? (
-        <img
-          src={organism.image}
-          alt=""
-          className="h-7 w-8 object-contain"
-        />
-      ) : (
-        <span className="text-xl leading-none" aria-hidden="true">
-          {organism.icon}
-        </span>
-      )}
-      <span className="text-xs font-bold leading-tight text-[#1A1C16]">
+      <img
+        src={organism.image}
+        alt=""
+        className="h-8 w-9 shrink-0 object-contain drop-shadow-sm mb-0.5 pointer-events-none"
+      />
+      <span
+        className={`trophic-organism-name text-xs font-bold w-full text-center tracking-tight px-0.5 ${
+          isDarkMode ? 'text-[#F4F6ED]' : 'text-[#1A1C16]'
+        }`}
+      >
         {organism.name}
       </span>
     </>
   );
+
   const position = {
     left: `${(organism.position.x / GRAPH_WIDTH) * 100}%`,
     top: `${(organism.position.y / GRAPH_HEIGHT) * 100}%`,
     width: `${NODE_WIDTH_PERCENT}%`,
     height: `${NODE_HEIGHT_PERCENT}%`,
-    minHeight: 0,
+    minHeight: `${NODE_HEIGHT}px`,
     transform: 'translate(-50%, -50%)',
   };
 
@@ -101,24 +113,29 @@ function OrganismNode({ organism, isSelected, onSelect }) {
 }
 
 export function TrophicNetworkTab({ isJunior = false }) {
-  const [selectedNodeId, setSelectedNodeId] = useState(null);
   const { isDarkMode } = useTheme();
+  const [selectedNodeId, setSelectedNodeId] = useState(null);
+
   const focusedNode = TROPHIC_NETWORK.nodes.find(
     (node) => node.id === selectedNodeId
   );
+
   const foodsForFocusedNode = selectedNodeId
     ? TROPHIC_NETWORK.links
         .filter((link) => link.consumer === selectedNodeId)
         .map((link) =>
           TROPHIC_NETWORK.nodes.find((node) => node.id === link.food)?.name
         )
+        .filter(Boolean)
     : [];
+
   const consumersForFocusedNode = selectedNodeId
     ? TROPHIC_NETWORK.links
         .filter((link) => link.food === selectedNodeId)
         .map((link) =>
           TROPHIC_NETWORK.nodes.find((node) => node.id === link.consumer)?.name
         )
+        .filter(Boolean)
     : [];
 
   const handleNodeSelect = (nodeId) => {
@@ -126,41 +143,69 @@ export function TrophicNetworkTab({ isJunior = false }) {
   };
 
   return (
-    <section className="trophic-network" aria-labelledby="trophic-network-title">
+    <section
+      className={`trophic-network transition-all duration-300 ${
+        focusedNode ? 'pb-28' : 'pb-4'
+      }`}
+      aria-labelledby="trophic-network-title"
+    >
       <div className="flex items-center px-1">
         <div>
           <h2
             id="trophic-network-title"
-            className="text-lg font-bold text-[#1A1C16]"
+            className={`text-lg font-bold ${
+              isDarkMode ? 'text-[#F4F6ED]' : 'text-[#1A1C16]'
+            }`}
           >
             Red trófica
           </h2>
         </div>
       </div>
 
-      <p className="trophic-network-instruction mt-2 px-1 text-base font-normal leading-relaxed text-[#292D20] dark:text-[#DDE2D3]">
+      <p
+        className={`trophic-network-instruction mt-2 px-1 text-sm font-medium leading-relaxed ${
+          isDarkMode ? 'text-[#DDE2D3]' : 'text-[#555A49]'
+        }`}
+      >
         {isJunior
           ? 'Tocá un ser vivo para ver cómo se conecta con los demás.'
           : 'Tocá un organismo para explorar sus conexiones con la red.'}
       </p>
 
       <div
-        className="trophic-network-chart relative mx-auto mt-2 w-full max-w-[360px] overflow-hidden rounded-2xl border border-[#D9DFC3] bg-[#FCFCF8] shadow-sm dark:border-[#3D4633] dark:bg-[#1F241A]"
+        className={`relative mx-auto mt-2 w-full max-w-[360px] overflow-hidden rounded-2xl border shadow-sm transition-colors ${
+          isDarkMode
+            ? 'border-[#3D4633] bg-[#1A1E14]'
+            : 'border-[#D9DFC3] bg-[#FCFCF8]'
+        }`}
         role="group"
         aria-label="Red trófica: las flechas conectan alimentos y consumidores"
       >
-        <div className="relative aspect-[360/600] w-full">
+        <div className="relative aspect-[360/680] w-full">
           {trophicLayers.map((layer) => (
             <div
               key={layer.id}
-              className="absolute inset-x-0 border-b border-[#E7EAD9] dark:border-[#3D4633]"
+              className={`absolute inset-x-0 border-b transition-colors ${
+                isDarkMode ? 'border-white/10' : 'border-[#E7EAD9]'
+              }`}
               style={{
                 top: `${(layer.top / GRAPH_HEIGHT) * 100}%`,
                 height: `${(layer.height / GRAPH_HEIGHT) * 100}%`,
                 backgroundColor: isDarkMode ? layer.darkColor : layer.color,
               }}
             >
-              <span className="absolute left-3 top-2 text-xs font-bold text-[#343B14] dark:text-[#E1E7D8]">
+              <span
+                className="absolute left-3 top-2.5 z-[6] inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-black uppercase tracking-wider shadow-xs backdrop-blur-sm border transition-colors"
+                style={{
+                  color: isDarkMode ? layer.darkTextColor : layer.textColor,
+                  backgroundColor: isDarkMode
+                    ? 'rgba(26, 31, 20, 0.94)'
+                    : 'rgba(255, 255, 255, 0.94)',
+                  borderColor: isDarkMode
+                    ? 'rgba(255, 255, 255, 0.12)'
+                    : 'rgba(0, 0, 0, 0.08)',
+                }}
+              >
                 {layer.label}
               </span>
             </div>
@@ -182,10 +227,7 @@ export function TrophicNetworkTab({ isJunior = false }) {
                 markerHeight="5"
                 orient="auto-start-reverse"
               >
-                <path
-                  d="M 0 0 L 10 5 L 0 10 z"
-                  fill={isDarkMode ? '#C4D864' : '#7E8B28'}
-                />
+                <path d="M 0 0 L 10 5 L 0 10 z" fill={isDarkMode ? '#A4B544' : '#7E8B28'} />
               </marker>
             </defs>
             {TROPHIC_NETWORK.links.map((link) => {
@@ -206,16 +248,12 @@ export function TrophicNetworkTab({ isJunior = false }) {
                   d={getLinkPath(food, consumer)}
                   fill="none"
                   stroke={
-                    isDarkMode
-                      ? isHighlighted
-                        ? '#E2EE9D'
-                        : '#A8BD50'
-                      : isHighlighted
-                        ? '#566116'
-                        : '#91A044'
+                    isHighlighted
+                      ? isDarkMode ? '#DDEB7A' : '#566116'
+                      : isDarkMode ? '#768832' : '#91A044'
                   }
                   strokeWidth={isHighlighted ? '3.5' : '2'}
-                  strokeOpacity={selectedNodeId && !isHighlighted ? '0.45' : '0.8'}
+                  strokeOpacity={selectedNodeId && !isHighlighted ? '0.35' : '0.9'}
                   strokeDasharray="4 3"
                   markerEnd="url(#trophic-arrow)"
                 />
@@ -229,6 +267,7 @@ export function TrophicNetworkTab({ isJunior = false }) {
               organism={organism}
               isSelected={selectedNodeId === organism.id}
               onSelect={handleNodeSelect}
+              isDarkMode={isDarkMode}
             />
           ))}
         </div>
@@ -236,24 +275,64 @@ export function TrophicNetworkTab({ isJunior = false }) {
 
       {focusedNode && (
         <div
-          className="mt-3 rounded-xl border border-[#CCD69E] bg-white px-3.5 py-3 shadow-xs dark:border-[#55623B] dark:bg-[#1F241A]"
+          className={`mt-3 rounded-2xl border p-4 shadow-sm transition-colors ${
+            isDarkMode
+              ? 'border-[#424E33] bg-[#202619]'
+              : 'border-[#CCD69E] bg-white'
+          }`}
           role="status"
           aria-live="polite"
         >
           <div className="flex items-start justify-between gap-2">
-            <div>
-              <p className="text-sm font-bold text-[#1A1C16]">
-                {focusedNode.name}
-              </p>
+            <div className="flex-1">
+              <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+                <span
+                  className={`text-base font-black ${
+                    isDarkMode ? 'text-[#F4F6ED]' : 'text-[#1A1C16]'
+                  }`}
+                >
+                  {focusedNode.name}
+                </span>
+                <span
+                  className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${
+                    isDarkMode
+                      ? 'border-[#55623B] bg-[#2A3420] text-[#DDEB7A]'
+                      : 'border-[#CCD69E] bg-[#F2F4E6] text-[#545C1E]'
+                  }`}
+                >
+                  {trophicLayers.find((l) => l.id === focusedNode.kind)?.label ||
+                    'Organismo'}
+                </span>
+              </div>
               {foodsForFocusedNode.length > 0 && (
-                <p className="mt-1 text-sm leading-relaxed text-[#343B14] dark:text-[#DDE2D3]">
-                  <span className="font-semibold">Se alimenta de:</span>{' '}
+                <p
+                  className={`mt-1 text-sm leading-relaxed ${
+                    isDarkMode ? 'text-[#DDE2D3]' : 'text-[#343B14]'
+                  }`}
+                >
+                  <span
+                    className={`font-bold ${
+                      isDarkMode ? 'text-[#DDEB7A]' : 'text-[#545C1E]'
+                    }`}
+                  >
+                    Se alimenta de:
+                  </span>{' '}
                   {foodsForFocusedNode.join(', ')}.
                 </p>
               )}
               {consumersForFocusedNode.length > 0 && (
-                <p className="mt-1 text-sm leading-relaxed text-[#343B14] dark:text-[#DDE2D3]">
-                  <span className="font-semibold">Es alimento de:</span>{' '}
+                <p
+                  className={`mt-1 text-sm leading-relaxed ${
+                    isDarkMode ? 'text-[#DDE2D3]' : 'text-[#343B14]'
+                  }`}
+                >
+                  <span
+                    className={`font-bold ${
+                      isDarkMode ? 'text-[#DDEB7A]' : 'text-[#545C1E]'
+                    }`}
+                  >
+                    Es alimento de:
+                  </span>{' '}
                   {consumersForFocusedNode.join(', ')}.
                 </p>
               )}
@@ -261,7 +340,11 @@ export function TrophicNetworkTab({ isJunior = false }) {
             <button
               type="button"
               onClick={() => setSelectedNodeId(null)}
-              className="shrink-0 cursor-pointer rounded-full px-2 py-1 text-sm font-semibold text-[#3F4A12] hover:bg-[#F2F4E6] dark:text-[#DDEB7A] dark:hover:bg-[#2A3222]"
+              className={`shrink-0 cursor-pointer rounded-xl px-3 py-1.5 text-xs font-bold transition-colors ${
+                isDarkMode
+                  ? 'bg-[#2A3420] text-[#DDEB7A] hover:bg-[#344026]'
+                  : 'bg-[#F2F4E6] text-[#4E5618] hover:bg-[#E4E8C8]'
+              }`}
               aria-label="Cerrar información del organismo"
             >
               Cerrar
