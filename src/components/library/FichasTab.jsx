@@ -1,60 +1,32 @@
 import { useState } from 'react';
-import { LIBRARY_CARDS } from '../../data/library/libraryCards';
-
-export function LockIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className="h-4 w-4"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      aria-hidden="true"
-    >
-      <rect x="5" y="10" width="14" height="11" rx="1.5" />
-      <path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3" />
-    </svg>
-  );
-}
+import { useLanguage } from '../../hooks/useLanguage';
+import { LockIcon } from './LockIcon';
+import { LockedCardToast } from './LockedCardToast';
 
 export function FichasTab({
+  cards = [],
   unlockedCharacters,
   onOpenCard,
   onGoScan,
 }) {
+  const { t } = useLanguage();
   const [lockedHintCard, setLockedHintCard] = useState(null);
 
   return (
     <div>
-      {/* Alerta / Pista de carta bloqueada */}
+      {/* Toast de carta bloqueada */}
       {lockedHintCard && (
-        <div className="mb-3.5 flex items-center justify-between gap-2.5 rounded-2xl border border-[#B5C370] dark:border-[#3D482B] bg-[#F2F4E6] dark:bg-[#1F2718] p-3.5 text-xs text-[#3C4033] dark:text-[#DDE2D3] shadow-xs animate-[modal-appear_180ms_ease-out]">
-          <div className="flex items-start gap-2">
-            <span className="text-[#545C1E] dark:text-[#DDEB7A] mt-0.5 shrink-0">
-              <LockIcon />
-            </span>
-            <div>
-              <p className="font-bold text-sm text-[#545C1E] dark:text-[#DDEB7A]">
-                {lockedHintCard.name} está bloqueada
-              </p>
-              <p className="text-xs mt-0.5 text-[#555A49] dark:text-[#A8B298]">
-                {lockedHintCard.unlockHint}
-              </p>
-            </div>
-          </div>
-          <button
-            type="button"
-            onClick={onGoScan}
-            className="shrink-0 rounded-xl bg-[#7E8B28] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#6D7821] cursor-pointer"
-          >
-            Ir a QR
-          </button>
-        </div>
+        <LockedCardToast
+          key={lockedHintCard.id}
+          card={lockedHintCard}
+          onGoScan={onGoScan}
+          onClose={() => setLockedHintCard(null)}
+        />
       )}
 
       {/* Cuadrícula de fichas en 2 columnas legibles */}
       <div className="grid grid-cols-2 gap-3.5 px-1 py-1">
-        {LIBRARY_CARDS.map((card) => {
+        {cards.map((card) => {
           const isUnlocked =
             card.unlocked || (card.unlockStep ?? 1) <= unlockedCharacters;
 
@@ -70,11 +42,11 @@ export function FichasTab({
                   setLockedHintCard(card);
                 }
               }}
-              aria-label={`${card.name}${
+              aria-label={
                 isUnlocked
-                  ? ', abrir ficha'
-                  : ', bloqueada (toca para ver pista)'
-              }`}
+                  ? t('library.fichas.openCard', { name: card.name })
+                  : t('library.fichas.lockedHintAria', { name: card.name })
+              }
               className={`relative flex flex-col items-center justify-between rounded-2xl bg-white dark:bg-[#1A1F14] p-3 text-center shadow-xs border transition-all active:scale-95 cursor-pointer ${
                 isUnlocked
                   ? 'border-[#CFD79F] dark:border-[#353E2A] hover:border-[#7E8B28]'

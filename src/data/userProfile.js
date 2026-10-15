@@ -24,3 +24,11 @@ export function getExperienceMode() {
   }
   return 'adult';
 }
+
+export function clearStoredUser() {
+  try {
+    localStorage.removeItem(USER_STORAGE_KEY);
+  } catch (e) {
+    console.error('Error al cerrar sesión:', e);
+  }
+}

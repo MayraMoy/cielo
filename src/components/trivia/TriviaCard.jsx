@@ -1,4 +1,5 @@
 import { OwlMascot } from '../home/OwlMascot';
+import { useLanguage } from '../../hooks/useLanguage';
 
 export function TriviaCard({
   question,
@@ -14,6 +15,7 @@ export function TriviaCard({
   onSelectOption,
   onNextQuestion,
 }) {
+  const { t } = useLanguage();
   const timerBarStyle =
     timeLeft <= 3
       ? 'bg-red-500'
@@ -38,7 +40,10 @@ export function TriviaCard({
       {/* Cabecera: Progreso de pregunta y segundos restantes */}
       <div className="flex items-center justify-between text-xs font-semibold text-[#545C1E]">
         <span className="rounded-full bg-[#F2F4E6] border border-[#CFD79F] px-3 py-1">
-          Pregunta {currentIndex + 1} de {totalQuestions}
+          {t('trivia.questionCounter', {
+            current: currentIndex + 1,
+            total: totalQuestions,
+          })}
         </span>
         <span
           className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold ${
@@ -72,7 +77,7 @@ export function TriviaCard({
       <div
         className="w-full h-2 bg-[#E5E7EB] rounded-full overflow-hidden relative"
         role="progressbar"
-        aria-label="Tiempo restante para responder"
+        aria-label={t('trivia.timerAria')}
         aria-valuemin={0}
         aria-valuemax={100}
         aria-valuenow={timerPercentage}
@@ -86,7 +91,7 @@ export function TriviaCard({
       {/* AVISO DE TIEMPO AGOTADO */}
       {isTimeUp && (
         <div className="bg-red-50 border border-red-200 text-red-700 text-xs py-2 px-3 rounded-xl text-center font-semibold animate-pulse">
-          ¡Se acabó el tiempo! Mirá la respuesta correcta:
+          {t('trivia.timeUp')}
         </div>
       )}
 
@@ -133,10 +138,10 @@ export function TriviaCard({
             <div className="flex-1">
               <p className="text-xs font-bold text-[#545C1E] mb-1">
                 {isCorrect
-                  ? '¡Respuesta correcta!'
+                  ? t('trivia.correctTitle')
                   : isTimeUp
-                  ? 'Aprendamos juntos:'
-                  : '¡Casi! Así funciona en la reserva:'}
+                  ? t('trivia.timeUpTitle')
+                  : t('trivia.wrongTitle')}
               </p>
               <p className="text-[13.5px] leading-relaxed text-[#2B2F25]">
                 {explanationText}
@@ -150,7 +155,7 @@ export function TriviaCard({
             onClick={onNextQuestion}
             className="w-full py-3 px-4 bg-[#7E8B28] hover:bg-[#6D7821] text-white text-[14.5px] font-semibold rounded-xl shadow-sm transition-all active:scale-[0.98] cursor-pointer"
           >
-            {isLastQuestion ? 'Ver resultado final' : 'Siguiente pregunta →'}
+            {isLastQuestion ? t('trivia.seeResult') : t('trivia.next')}
           </button>
         </div>
       )}

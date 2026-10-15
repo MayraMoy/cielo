@@ -4,12 +4,14 @@ import { ExplorerProfileHeader } from '../components/library/ExplorerProfileHead
 import { FichaDetailModal } from '../components/library/FichaDetailModal';
 import { FichasTab } from '../components/library/FichasTab';
 import { TrophicNetworkTab } from '../components/library/TrophicNetworkTab';
-import { LIBRARY_CARDS } from '../data/library/libraryCards';
 import { getUnlockedCharacters } from '../data/rewardProgress';
 import { useUserProfile } from '../hooks/useUserProfile';
+import { useLanguage } from '../hooks/useLanguage';
 
 export function LibraryPage() {
   const navigate = useNavigate();
+  const { t, content } = useLanguage();
+  const LIBRARY_CARDS = content.library.cards;
   const [activeSection, setActiveSection] = useState('fichas');
   const [unlockedCharacters] = useState(getUnlockedCharacters);
   const [selectedCard, setSelectedCard] = useState(null);
@@ -19,7 +21,7 @@ export function LibraryPage() {
     return LIBRARY_CARDS.filter(
       (c) => c.unlocked || (c.unlockStep ?? 1) <= unlockedCharacters
     ).length;
-  }, [unlockedCharacters]);
+  }, [LIBRARY_CARDS, unlockedCharacters]);
 
   return (
     <div className="relative flex w-full flex-1 flex-col select-none bg-[#FAF9F5] dark:bg-[#141710] transition-colors">
@@ -33,12 +35,13 @@ export function LibraryPage() {
           totalCardsCount={LIBRARY_CARDS.length}
           unlockedCharacters={unlockedCharacters}
           onGoRegister={() => navigate('/register')}
+          onOpenProfile={() => navigate('/profile')}
         />
 
         <div
           className="mt-4 flex p-1 rounded-2xl bg-[#E4E8C8] dark:bg-[#202619] border border-[#CCD69E] dark:border-[#353E2A] transition-colors"
           role="tablist"
-          aria-label="Secciones de la biblioteca"
+          aria-label={t('library.tabs.sectionsAria')}
         >
           <button
             type="button"
@@ -51,7 +54,10 @@ export function LibraryPage() {
                 : 'text-[#4E5618] dark:text-[#B3BE8E] hover:text-[#1A1C16] dark:hover:text-white'
             }`}
           >
-            Fichas ({unlockedCardsCount}/{LIBRARY_CARDS.length})
+            {t('library.tabs.fichas', {
+              n: unlockedCardsCount,
+              total: LIBRARY_CARDS.length,
+            })}
           </button>
           <button
             type="button"
@@ -64,13 +70,14 @@ export function LibraryPage() {
                 : 'text-[#4E5618] dark:text-[#B3BE8E] hover:text-[#1A1C16] dark:hover:text-white'
             }`}
           >
-            Red trófica
+            {t('library.tabs.network')}
           </button>
         </div>
 
         <div className="mt-3.5">
           {activeSection === 'fichas' ? (
             <FichasTab
+              cards={LIBRARY_CARDS}
               unlockedCharacters={unlockedCharacters}
               onOpenCard={setSelectedCard}
               onGoScan={() => navigate('/scan')}

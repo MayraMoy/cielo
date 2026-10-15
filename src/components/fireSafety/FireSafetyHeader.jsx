@@ -1,3 +1,5 @@
+import { useLanguage } from '../../hooks/useLanguage';
+
 function ArrowLeft() {
   return (
     <svg
@@ -39,6 +41,7 @@ export function FireSafetyHeader({
   fireSafety,
   onBack,
 }) {
+  const { t } = useLanguage();
   return (
     <>
       <button
@@ -51,7 +54,7 @@ export function FireSafetyHeader({
         }`}
       >
         <ArrowLeft />
-        Volver al inicio
+        {t('common.backHome')}
       </button>
 
       <header className="mb-10">
@@ -82,7 +85,7 @@ export function FireSafetyHeader({
 
           <div className="min-w-0 flex-1">
             <h2 className="text-base font-bold leading-snug tracking-tight sm:text-lg">
-              Ante un incendio
+              {t('fireSafety.anteIncendio')}
             </h2>
             <p className="mt-1.5 text-sm font-normal leading-relaxed opacity-95 sm:text-base">
               {isJunior ? fireSafety.juniorIntro : fireSafety.adultIntro}

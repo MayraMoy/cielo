@@ -1,3 +1,6 @@
+import { useLanguage } from '../../hooks/useLanguage';
+import { useDismissAnimation } from '../../hooks/useDismissAnimation';
+import { Portal } from '../common/Portal';
 import { GiftBox } from '../home/GiftBox';
 
 export function ScanResultModal({
@@ -6,6 +9,8 @@ export function ScanResultModal({
   onStartTrivia,
   onClose,
 }) {
+  const { t } = useLanguage();
+  const { isClosing, requestClose } = useDismissAnimation(onClose, 220);
   if (!species) return null;
 
   const descriptionText =
@@ -19,16 +24,29 @@ export function ScanResultModal({
       : species.curiosity;
 
   return (
-    <div className="absolute inset-0 z-50 bg-black/75 backdrop-blur-xs flex items-center justify-center p-3 animate-[modal-appear_220ms_ease-out] font-['Poppins']">
-      <div className="w-full max-w-[340px] bg-white dark:bg-[#1E231B] rounded-3xl p-6 shadow-2xl border border-[#E5E7EB] dark:border-[#2D3528] flex flex-col gap-4 transition-colors">
+    <Portal>
+      <div
+        className={`absolute inset-0 z-[70] bg-black/75 backdrop-blur-xs flex items-center justify-center p-3 font-['Poppins'] ${
+          isClosing
+            ? 'animate-[overlay-fade-out_220ms_ease-in_forwards]'
+            : 'animate-[overlay-fade-in_180ms_ease-out]'
+        }`}
+      >
+      <div
+        className={`w-full max-w-[340px] bg-white dark:bg-[#1E231B] rounded-3xl p-6 shadow-2xl border border-[#E5E7EB] dark:border-[#2D3528] flex flex-col gap-4 transition-colors ${
+          isClosing
+            ? 'animate-[modal-disappear_200ms_ease-in_forwards]'
+            : 'animate-[modal-appear_220ms_ease-out]'
+        }`}
+      >
         
         {/* Cabecera */}
         <div className="flex items-center justify-between">
           <span className="text-xs font-bold text-[#556018] dark:text-[#C4D864] tracking-tight">
-            {species.stationLabel || 'Especie descubierta'}
+            {species.stationLabel || t('scan.discoveredFallback')}
           </span>
           <span className="text-xs font-medium text-[#727763] dark:text-[#9EA48F]">
-            Est. {species.step}/{species.totalSteps}
+            {t('scan.stationShort', { step: species.step, total: species.totalSteps })}
           </span>
         </div>
 
@@ -68,10 +86,10 @@ export function ScanResultModal({
           <GiftBox className="w-9 h-9 shrink-0 animate-[gift-bounce_1.8s_ease-in-out_infinite]" />
           <div className="min-w-0">
             <p className="text-xs font-bold text-[#1A1C16] dark:text-[#F3F4F1]">
-              Regalo #{species.step} disponible
+              {t('scan.giftAvailable', { n: species.step })}
             </p>
             <p className="text-[11px] text-[#555A49] dark:text-[#9EA48F] leading-tight truncate">
-              {species.rewardText}
+              {isJunior ? t('scan.playToWinGift') : species.rewardText}
             </p>
           </div>
         </div>
@@ -83,18 +101,19 @@ export function ScanResultModal({
             onClick={onStartTrivia}
             className="w-full py-3 px-4 bg-[#7E8B28] hover:bg-[#6D7821] dark:bg-[#8D9C2D] dark:hover:bg-[#7E8B28] text-white text-sm font-semibold rounded-xl shadow-sm transition-all cursor-pointer"
           >
-            {isJunior ? '🎯 ¡Jugar Trivia y Ganar Regalo!' : 'Responder Trivia de la Estación'}
+            {isJunior ? t('scan.playGame') : t('scan.answerTrivia')}
           </button>
           <button
             type="button"
-            onClick={onClose}
+            onClick={requestClose}
             className="w-full py-2 px-4 bg-transparent hover:bg-black/5 dark:hover:bg-white/5 text-[#727763] dark:text-[#9EA48F] text-xs font-medium rounded-xl transition-all cursor-pointer"
           >
-            Elegir otra estación QR
+            {t('scan.chooseAnother')}
           </button>
         </div>
 
       </div>
-    </div>
+      </div>
+    </Portal>
   );
 }

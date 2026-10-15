@@ -1,4 +1,7 @@
+import { useLanguage } from '../../hooks/useLanguage';
+
 export function SimpleQRScanner({ isScanning, isSuccess }) {
+  const { t } = useLanguage();
   return (
     <div className="relative w-full h-full flex flex-col items-center justify-center pointer-events-none select-none">
       
@@ -83,10 +86,10 @@ export function SimpleQRScanner({ isScanning, isSuccess }) {
       <div className="mt-6 px-6 text-center">
         <p className="text-white/90 text-[13px] font-medium drop-shadow-md">
           {isScanning
-            ? "Escaneando código QR..."
+            ? t('scan.scannerScanning')
             : isSuccess
-            ? "¡Código detectado con éxito!"
-            : "Centra el código QR en el visor y presiona la cámara"}
+            ? t('scan.scannerSuccess')
+            : t('scan.scannerIdle')}
         </p>
       </div>
     </div>

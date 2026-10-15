@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { TROPHIC_NETWORK } from '../../data/library/trophicNetwork';
 import { useTheme } from '../../hooks/useTheme';
+import { useLanguage } from '../../hooks/useLanguage';
 
 const GRAPH_WIDTH = 360;
 const GRAPH_HEIGHT = 680;
@@ -11,7 +11,7 @@ const NODE_HEIGHT_PERCENT = (NODE_HEIGHT / GRAPH_HEIGHT) * 100;
 const trophicLayers = [
   {
     id: 'tertiary',
-    label: 'Consumidores terciarios',
+    labelKey: 'library.trophic.layers.tertiary',
     top: 0,
     height: 170,
     color: '#FFF4E7',
@@ -21,7 +21,7 @@ const trophicLayers = [
   },
   {
     id: 'secondary',
-    label: 'Consumidores secundarios',
+    labelKey: 'library.trophic.layers.secondary',
     top: 170,
     height: 170,
     color: '#F0F5FB',
@@ -31,7 +31,7 @@ const trophicLayers = [
   },
   {
     id: 'primary',
-    label: 'Consumidores primarios',
+    labelKey: 'library.trophic.layers.primary',
     top: 340,
     height: 170,
     color: '#FFFBEA',
@@ -41,7 +41,7 @@ const trophicLayers = [
   },
   {
     id: 'producer',
-    label: 'Productores',
+    labelKey: 'library.trophic.layers.producer',
     top: 510,
     height: 170,
     color: '#F4F7E6',
@@ -62,6 +62,7 @@ function getLinkPath(food, consumer) {
 }
 
 function OrganismNode({ organism, isSelected, onSelect, isDarkMode = false }) {
+  const { t } = useLanguage();
   const className = `trophic-node-card absolute z-10 flex cursor-pointer flex-col items-center justify-center rounded-2xl border px-1 py-1 text-center shadow-md transition-all duration-200 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 overflow-hidden ${
     isSelected
       ? isDarkMode
@@ -103,7 +104,7 @@ function OrganismNode({ organism, isSelected, onSelect, isDarkMode = false }) {
       type="button"
       onClick={() => onSelect(organism.id)}
       aria-pressed={isSelected}
-      aria-label={`Explorar conexiones de ${organism.name}`}
+      aria-label={t('library.trophic.exploreAria', { name: organism.name })}
       className={className}
       style={position}
     >
@@ -114,6 +115,8 @@ function OrganismNode({ organism, isSelected, onSelect, isDarkMode = false }) {
 
 export function TrophicNetworkTab({ isJunior = false }) {
   const { isDarkMode } = useTheme();
+  const { t, content } = useLanguage();
+  const TROPHIC_NETWORK = content.library.trophic;
   const [selectedNodeId, setSelectedNodeId] = useState(null);
 
   const focusedNode = TROPHIC_NETWORK.nodes.find(
@@ -157,7 +160,7 @@ export function TrophicNetworkTab({ isJunior = false }) {
               isDarkMode ? 'text-[#F4F6ED]' : 'text-[#1A1C16]'
             }`}
           >
-            Red trófica
+            {t('library.trophic.title')}
           </h2>
         </div>
       </div>
@@ -168,8 +171,8 @@ export function TrophicNetworkTab({ isJunior = false }) {
         }`}
       >
         {isJunior
-          ? 'Tocá un ser vivo para ver cómo se conecta con los demás.'
-          : 'Tocá un organismo para explorar sus conexiones con la red.'}
+          ? t('library.trophic.instructionJunior')
+          : t('library.trophic.instruction')}
       </p>
 
       <div
@@ -179,7 +182,7 @@ export function TrophicNetworkTab({ isJunior = false }) {
             : 'border-[#D9DFC3] bg-[#FCFCF8]'
         }`}
         role="group"
-        aria-label="Red trófica: las flechas conectan alimentos y consumidores"
+        aria-label={t('library.trophic.groupAria')}
       >
         <div className="relative aspect-[360/680] w-full">
           {trophicLayers.map((layer) => (
@@ -206,7 +209,7 @@ export function TrophicNetworkTab({ isJunior = false }) {
                     : 'rgba(0, 0, 0, 0.08)',
                 }}
               >
-                {layer.label}
+                {t(layer.labelKey)}
               </span>
             </div>
           ))}
@@ -300,8 +303,10 @@ export function TrophicNetworkTab({ isJunior = false }) {
                       : 'border-[#CCD69E] bg-[#F2F4E6] text-[#545C1E]'
                   }`}
                 >
-                  {trophicLayers.find((l) => l.id === focusedNode.kind)?.label ||
-                    'Organismo'}
+                  {(() => {
+                    const layer = trophicLayers.find((l) => l.id === focusedNode.kind);
+                    return layer ? t(layer.labelKey) : t('library.trophic.organism');
+                  })()}
                 </span>
               </div>
               {foodsForFocusedNode.length > 0 && (
@@ -315,7 +320,7 @@ export function TrophicNetworkTab({ isJunior = false }) {
                       isDarkMode ? 'text-[#DDEB7A]' : 'text-[#545C1E]'
                     }`}
                   >
-                    Se alimenta de:
+                    {t('library.trophic.feedsOn')}
                   </span>{' '}
                   {foodsForFocusedNode.join(', ')}.
                 </p>
@@ -331,7 +336,7 @@ export function TrophicNetworkTab({ isJunior = false }) {
                       isDarkMode ? 'text-[#DDEB7A]' : 'text-[#545C1E]'
                     }`}
                   >
-                    Es alimento de:
+                    {t('library.trophic.foodOf')}
                   </span>{' '}
                   {consumersForFocusedNode.join(', ')}.
                 </p>
@@ -345,9 +350,9 @@ export function TrophicNetworkTab({ isJunior = false }) {
                   ? 'bg-[#2A3420] text-[#DDEB7A] hover:bg-[#344026]'
                   : 'bg-[#F2F4E6] text-[#4E5618] hover:bg-[#E4E8C8]'
               }`}
-              aria-label="Cerrar información del organismo"
+              aria-label={t('library.trophic.closeAria')}
             >
-              Cerrar
+              {t('library.trophic.close')}
             </button>
           </div>
         </div>

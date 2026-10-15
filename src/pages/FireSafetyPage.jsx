@@ -3,15 +3,16 @@ import { EmergencyContacts } from '../components/fireSafety/EmergencyContacts';
 import { FireSafetyGuidelines } from '../components/fireSafety/FireSafetyGuidelines';
 import { FireSafetyHeader } from '../components/fireSafety/FireSafetyHeader';
 import { FireSafetyProtocol } from '../components/fireSafety/FireSafetyProtocol';
-import { HOME_DATA } from '../data/homeData';
 import { useTheme } from '../hooks/useTheme';
 import { useUserProfile } from '../hooks/useUserProfile';
+import { useLanguage } from '../hooks/useLanguage';
 
 export function FireSafetyPage() {
   const navigate = useNavigate();
   const { isDarkMode } = useTheme();
   const { isJunior } = useUserProfile();
-  const { fireSafety } = HOME_DATA;
+  const { content } = useLanguage();
+  const fireSafety = content.fireSafety;
   const steps = isJunior ? fireSafety.juniorSteps : fireSafety.adultSteps;
 
   return (
@@ -45,7 +46,7 @@ export function FireSafetyPage() {
               : 'border-[#E6E0D3] text-[#7A766B]'
           }`}
         >
-          Cuidar la reserva es responsabilidad de todos.
+          {fireSafety.footer}
         </p>
       </div>
 

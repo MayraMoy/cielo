@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { SCAN_DATA } from '../data/scanData';
+import { useLanguage } from './useLanguage';
 import { getCompletedStations } from '../data/rewardProgress';
 
 export function useQRScanner(onScanSuccess) {
+  const { content } = useLanguage();
+  const { stations, discoveredSpecies } = content.scan;
   const [status, setStatus] = useState('idle'); // 'idle' | 'scanning' | 'success'
   const [cameraMode, setCameraMode] = useState('simulation'); // 'simulation' | 'live'
   const [completedStations] = useState(getCompletedStations);
@@ -10,9 +12,7 @@ export function useQRScanner(onScanSuccess) {
   // Por defecto selecciona la primera estación aún no completada (1, 2 o 3)
   const [selectedStationIndex, setSelectedStationIndex] = useState(() => {
     const completed = getCompletedStations();
-    const nextIdx = SCAN_DATA.stations.findIndex(
-      (st) => !completed.includes(st.step)
-    );
+    const nextIdx = stations.findIndex((st) => !completed.includes(st.step));
     return nextIdx !== -1 ? nextIdx : 0;
   });
 
@@ -47,8 +47,7 @@ export function useQRScanner(onScanSuccess) {
     if (status === 'scanning' || status === 'success') return;
     setStatus('scanning');
 
-    const station =
-      SCAN_DATA.stations[selectedStationIndex] || SCAN_DATA.discoveredSpecies;
+    const station = stations[selectedStationIndex] || discoveredSpecies;
 
     // Simula lectura activa del QR por 900ms con láser y efecto visual
     setTimeout(() => {
@@ -59,7 +58,7 @@ export function useQRScanner(onScanSuccess) {
         onScanSuccess(station);
       }
     }, 900);
-  }, [status, selectedStationIndex, playBeep, onScanSuccess]);
+  }, [status, selectedStationIndex, stations, discoveredSpecies, playBeep, onScanSuccess]);
 
   // Manejo de cámara real (Webcam / Celular)
   useEffect(() => {
@@ -113,7 +112,7 @@ export function useQRScanner(onScanSuccess) {
     scannedData,
     cameraMode,
     videoRef,
-    stations: SCAN_DATA.stations,
+    stations,
     selectedStationIndex,
     completedStations,
     selectStation,

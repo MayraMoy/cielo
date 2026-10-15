@@ -1,11 +1,12 @@
 import { useState, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { HOME_DATA } from '../data/homeData';
+import { useLanguage } from './useLanguage';
 import { getUnlockedCharacters, getOpenedRewards, markRewardAsOpened } from '../data/rewardProgress';
 
 export function useHome() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { content } = useLanguage();
   const [activeTab, setActiveTab] = useState('home');
   const [unlockedCharacters] = useState(getUnlockedCharacters);
   const [openedRewards, setOpenedRewards] = useState(getOpenedRewards);
@@ -30,8 +31,8 @@ export function useHome() {
       // Ignorar errores al parsear localStorage
     }
 
-    return HOME_DATA.defaultUserName;
-  }, [location.state]);
+    return content.home.defaultUserName;
+  }, [location.state, content]);
 
   const handleTabChange = (tabId) => {
     setActiveTab(tabId);

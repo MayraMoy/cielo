@@ -1,14 +1,28 @@
+import { Portal } from '../common/Portal';
+import { useDismissAnimation } from '../../hooks/useDismissAnimation';
+
 export function TrophicInfoModal({ level, isJunior = false, onClose }) {
+  const { isClosing, requestClose } = useDismissAnimation(onClose, 200);
+
   return (
-    <div
-      className="absolute inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm animate-[modal-appear_200ms_ease-out]"
-      onClick={onClose}
-    >
+    <Portal>
+      <div
+        className={`absolute inset-0 z-[70] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm ${
+          isClosing
+            ? 'animate-[overlay-fade-out_200ms_ease-in_forwards]'
+            : 'animate-[overlay-fade-in_160ms_ease-out]'
+        }`}
+        onClick={requestClose}
+      >
       <section
         role="dialog"
         aria-modal="true"
         aria-labelledby="trophic-info-title"
-        className="trophic-modal w-full max-w-[345px] overflow-hidden rounded-3xl border border-[#CCD69E] shadow-2xl"
+        className={`trophic-modal w-full max-w-[345px] overflow-hidden rounded-3xl border border-[#CCD69E] shadow-2xl ${
+          isClosing
+            ? 'animate-[modal-disappear_180ms_ease-in_forwards]'
+            : 'animate-[modal-appear_200ms_ease-out]'
+        }`}
         style={{ backgroundColor: level.background }}
         onClick={(event) => event.stopPropagation()}
       >
@@ -24,7 +38,7 @@ export function TrophicInfoModal({ level, isJunior = false, onClose }) {
           </h2>
           <button
             type="button"
-            onClick={onClose}
+            onClick={requestClose}
             className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 text-2xl leading-none !text-[#11130E] hover:bg-black/10 rounded-full cursor-pointer"
             aria-label="Cerrar información"
           >
@@ -70,6 +84,7 @@ export function TrophicInfoModal({ level, isJunior = false, onClose }) {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+    </Portal>
   );
 }

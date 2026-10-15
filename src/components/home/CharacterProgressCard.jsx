@@ -1,3 +1,4 @@
+import { useLanguage } from '../../hooks/useLanguage';
 import { GiftBox } from './GiftBox';
 
 export function CharacterProgressCard({
@@ -8,6 +9,7 @@ export function CharacterProgressCard({
   onOpenReward,
   onStartGame,
 }) {
+  const { t } = useLanguage();
   const totalSteps = 3;
 
   return (
@@ -19,7 +21,7 @@ export function CharacterProgressCard({
       <div
         className="relative w-full py-3 mt-1 mb-4"
         role="progressbar"
-        aria-label="Personajes desbloqueados"
+        aria-label={t('home.characterCard.unlockedAria')}
         aria-valuemin={0}
         aria-valuemax={totalSteps}
         aria-valuenow={Math.min(unlockedCount, totalSteps)}
@@ -44,9 +46,9 @@ export function CharacterProgressCard({
                 aria-label={
                   isUnlocked
                     ? isOpened
-                      ? `Ver premio ${index + 1} reclamado`
-                      : `Abrir premio ${index + 1}`
-                    : `Premio ${index + 1} bloqueado`
+                      ? t('home.characterCard.rewardOpenedAria', { n: index + 1 })
+                      : t('home.characterCard.rewardOpenAria', { n: index + 1 })
+                    : t('home.characterCard.rewardLockedAria', { n: index + 1 })
                 }
                 className={`rounded-full transition-transform ${isUnlocked ? 'cursor-pointer hover:scale-110 focus-visible:outline-2 focus-visible:outline-[#687320] dark:focus-visible:outline-[#C5D76A]' : 'cursor-not-allowed opacity-50'}`}
               >

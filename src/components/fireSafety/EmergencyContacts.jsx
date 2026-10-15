@@ -1,3 +1,5 @@
+import { useLanguage } from '../../hooks/useLanguage';
+
 function PhoneIcon() {
   return (
     <svg
@@ -16,6 +18,7 @@ function PhoneIcon() {
 }
 
 export function EmergencyContacts({ contacts, isDarkMode }) {
+  const { t } = useLanguage();
   const heading = isDarkMode ? 'text-[#F4F6ED]' : 'text-[#24251E]';
   const muted = isDarkMode ? 'text-[#C4CCB9]' : 'text-[#625E54]';
 
@@ -30,11 +33,11 @@ export function EmergencyContacts({ contacts, isDarkMode }) {
         id="fire-contacts-title"
         className={`text-xl font-bold tracking-tight ${heading}`}
       >
-        Líneas de emergencia
+        {t('fireSafety.contactsTitle')}
       </h2>
 
       <p className={`mt-1 text-sm ${muted}`}>
-        Tocá un contacto para iniciar una llamada directa.
+        {t('fireSafety.contactsIntro')}
       </p>
 
       <div className="mt-5 grid grid-cols-1 gap-3">

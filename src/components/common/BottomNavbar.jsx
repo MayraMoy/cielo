@@ -1,31 +1,34 @@
+import { useLanguage } from '../../hooks/useLanguage';
+
 export function BottomNavbar({
   activeTab = 'home',
   onTabChange,
   onScanQR,
   onOpenLibrary,
 }) {
+  const { t } = useLanguage();
   return (
     <div className="absolute bottom-5 left-0 right-0 px-4 z-40 pointer-events-none">
       <nav
-        className="pointer-events-auto bg-[#F8F5F0] dark:bg-[#1F241A] rounded-[26px] shadow-[0_10px_24px_rgba(44,53,20,0.09)] border border-[#E7E4D8] dark:border-[#353D2B] px-8 py-2.5 flex items-center justify-between relative select-none transition-colors duration-200"
-        aria-label="Navegación principal flotante"
+        className="pointer-events-auto bg-[#F8F5F0] dark:bg-[#1F241A] rounded-[26px] shadow-[0_10px_24px_rgba(44,53,20,0.09)] border border-[#E7E4D8] dark:border-[#353D2B] px-6 py-3 flex items-center justify-center gap-x-14 relative select-none transition-colors duration-200"
+        aria-label={t('nav.ariaNav')}
       >
         <button
           type="button"
           onClick={() => onTabChange?.('home')}
-          className="flex flex-col items-center justify-center p-1 group cursor-pointer transition-colors relative"
-          aria-label="Inicio"
+          className="flex flex-col items-center justify-center px-2 group cursor-pointer transition-colors relative"
+          aria-label={t('nav.home')}
           aria-current={activeTab === 'home' ? 'page' : undefined}
         >
           <span
-            className={`w-7 h-1 rounded-full mb-1.5 transition-all ${
+            className={`w-8 h-1 rounded-full mb-1.5 transition-all ${
               activeTab === 'home' ? 'bg-[#7E8B28]' : 'bg-transparent'
             }`}
           />
 
           <svg
             viewBox="0 0 28 28"
-            className="w-7 h-7 text-[#1A1C16] dark:text-[#F4F6ED] transition-transform group-hover:scale-105"
+            className="w-8 h-8 text-[#1A1C16] dark:text-[#F4F6ED] transition-transform group-hover:scale-105"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
@@ -52,7 +55,7 @@ export function BottomNavbar({
             type="button"
             onClick={onScanQR}
             className="w-14 h-14 bg-[#7E8B28] hover:bg-[#738220] text-white rounded-[20px] flex items-center justify-center shadow-[0_10px_18px_rgba(126,139,40,0.2)] ring-4 ring-[#F8F5F0] dark:ring-[#141710] transition-all duration-150 hover:scale-[1.02] active:scale-95 cursor-pointer"
-            aria-label="Escanear código QR"
+            aria-label={t('nav.scan')}
           >
             <svg
               viewBox="0 0 28 28"
@@ -79,19 +82,19 @@ export function BottomNavbar({
         <button
           type="button"
           onClick={onOpenLibrary}
-          className="flex flex-col items-center justify-center p-1 group cursor-pointer transition-colors relative"
-          aria-label="Colección y Biblioteca"
+          className="flex flex-col items-center justify-center px-2 group cursor-pointer transition-colors relative"
+          aria-label={t('nav.ariaLibrary')}
           aria-current={activeTab === 'library' ? 'page' : undefined}
         >
           <span
-            className={`w-7 h-1 rounded-full mb-1.5 transition-all ${
+            className={`w-8 h-1 rounded-full mb-1.5 transition-all ${
               activeTab === 'library' ? 'bg-[#7E8B28]' : 'bg-transparent'
             }`}
           />
 
           <svg
             viewBox="0 0 28 28"
-            className="w-7 h-7 text-[#1A1C16] dark:text-[#F4F6ED] transition-transform group-hover:scale-105"
+            className="w-8 h-8 text-[#1A1C16] dark:text-[#F4F6ED] transition-transform group-hover:scale-105"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"

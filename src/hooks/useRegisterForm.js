@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useLanguage } from './useLanguage';
 
 export function useRegisterForm(onSubmitSuccess) {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     fullName: '',
     age: '',
@@ -28,17 +30,17 @@ export function useRegisterForm(onSubmitSuccess) {
     const newErrors = {};
 
     if (!formData.fullName.trim()) {
-      newErrors.fullName = 'El nombre completo es requerido';
+      newErrors.fullName = t('register.errors.fullNameRequired');
     } else if (formData.fullName.trim().length < 2) {
-      newErrors.fullName = 'El nombre debe tener al menos 2 caracteres';
+      newErrors.fullName = t('register.errors.fullNameShort');
     }
 
     if (!formData.age) {
-      newErrors.age = 'Ingresa tu edad';
+      newErrors.age = t('register.errors.ageRequired');
     } else {
       const ageNum = parseInt(formData.age, 10);
       if (isNaN(ageNum) || ageNum <= 0 || ageNum > 120) {
-        newErrors.age = 'Ingresa una edad válida';
+        newErrors.age = t('register.errors.ageInvalid');
       }
     }
 
@@ -58,7 +60,7 @@ export function useRegisterForm(onSubmitSuccess) {
 
   const handleGoogleLogin = () => {
     console.log('Iniciar sesión con Google clickeado (sin implementar backend)');
-    alert('Funcionalidad de Iniciar sesión con Google próximamente disponible.');
+    alert(t('register.googleSoon'));
   };
 
   return {

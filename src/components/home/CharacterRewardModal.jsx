@@ -1,26 +1,40 @@
-import { REWARD_CHARACTERS } from '../../data/library/rewardCharacters';
+import { useLanguage } from '../../hooks/useLanguage';
+import { useDismissAnimation } from '../../hooks/useDismissAnimation';
+import { Portal } from '../common/Portal';
 
 export function CharacterRewardModal({ rewardIndex = 0, onClose, onOpenLibrary }) {
+  const { t, content } = useLanguage();
+  const { isClosing, requestClose } = useDismissAnimation(onClose, 220);
+  const REWARD_CHARACTERS = content.library.rewards;
   const reward = REWARD_CHARACTERS[rewardIndex] || REWARD_CHARACTERS[0];
 
   return (
-    <div
-      className="absolute inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
-      onClick={onClose}
-    >
+    <Portal>
+      <div
+        className={`absolute inset-0 z-[70] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm ${
+          isClosing
+            ? 'animate-[overlay-fade-out_220ms_ease-in_forwards]'
+            : 'animate-[overlay-fade-in_180ms_ease-out]'
+        }`}
+        onClick={requestClose}
+      >
       <section
         role="dialog"
         aria-modal="true"
         aria-labelledby="reward-modal-title"
-        className="relative w-full max-w-[320px] rounded-3xl border border-[#E5E7EB] bg-white p-6 text-center shadow-2xl animate-[modal-appear_220ms_ease-out]"
+        className={`relative w-full max-w-[320px] rounded-3xl border border-[#E5E7EB] bg-white p-6 text-center shadow-2xl ${
+          isClosing
+            ? 'animate-[modal-disappear_200ms_ease-in_forwards]'
+            : 'animate-[modal-appear_220ms_ease-out]'
+        }`}
         onClick={(event) => event.stopPropagation()}
       >
         {/* Botón Cerrar */}
         <button
           type="button"
-          onClick={onClose}
+          onClick={requestClose}
           className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full text-xl text-[#4A4E3E] transition-colors hover:bg-black/5 cursor-pointer"
-          aria-label="Cerrar premio"
+          aria-label={t('library.rewardModal.closeAria')}
         >
           ×
         </button>
@@ -54,7 +68,7 @@ export function CharacterRewardModal({ rewardIndex = 0, onClose, onOpenLibrary }
         {/* Fichas Desbloqueadas */}
         <div className="mt-3 rounded-xl bg-[#FAF9F5] px-3 py-2 border border-[#E5E7EB]">
           <p className="text-xs font-medium text-[#3C4033]">
-            <strong className="text-[#1A1C16]">Fichas nuevas:</strong>{' '}
+            <strong className="text-[#1A1C16]">{t('library.rewardModal.newSheets')}</strong>{' '}
             {reward.unlockedSpeciesNames.join(', ')}
           </p>
         </div>
@@ -67,22 +81,23 @@ export function CharacterRewardModal({ rewardIndex = 0, onClose, onOpenLibrary }
               onClick={onOpenLibrary}
               className="w-full rounded-xl bg-[#7E8B28] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#6D7821] cursor-pointer"
             >
-              Ver en Colección
+              {t('library.rewardModal.viewCollection')}
             </button>
           )}
           <button
             type="button"
-            onClick={onClose}
+            onClick={requestClose}
             className={`w-full rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors cursor-pointer ${
               onOpenLibrary
                 ? 'bg-transparent text-[#545C1E] hover:bg-[#F2F4E6]'
                 : 'bg-[#7E8B28] text-white hover:bg-[#6D7821]'
             }`}
           >
-            Continuar
+            {t('library.rewardModal.continue')}
           </button>
         </div>
       </section>
-    </div>
+      </div>
+    </Portal>
   );
 }

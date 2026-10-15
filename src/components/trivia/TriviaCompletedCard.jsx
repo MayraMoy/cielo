@@ -1,5 +1,5 @@
+import { useLanguage } from '../../hooks/useLanguage';
 import { GiftBox } from '../home/GiftBox';
-import { TRIVIA_DATA } from '../../data/triviaData';
 
 export function TriviaCompletedCard({
   score,
@@ -9,6 +9,8 @@ export function TriviaCompletedCard({
   onGoHome,
   onRestart,
 }) {
+  const { t, content } = useLanguage();
+  const TRIVIA_DATA = content.trivia;
   const { reward } = TRIVIA_DATA;
   const hasEarnedReward = score >= TRIVIA_DATA.minimumCorrectAnswers;
 
@@ -25,7 +27,7 @@ export function TriviaCompletedCard({
         {hasEarnedReward && (
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#F2F4E6] text-[#687320] border border-[#CFD79F] mb-2">
             <span>🎉</span>
-            <span>{unlockedTotal}/3 Regalos desbloqueados</span>
+            <span>{t('trivia.completed.unlockedBadge', { n: unlockedTotal })}</span>
           </span>
         )}
         <h2 className="text-[22px] sm:text-[24px] font-bold text-[#1A1C16] tracking-tight">
@@ -33,10 +35,10 @@ export function TriviaCompletedCard({
             ? isJunior
               ? reward.juniorTitle
               : reward.title
-            : '¡Inténtalo de nuevo!'}
+            : t('trivia.completed.retryTitle')}
         </h2>
         <p className="text-[13px] text-[#555A49] mt-1 font-medium">
-          Acertaste {score} de {totalQuestions} preguntas.
+          {t('trivia.completed.score', { score, total: totalQuestions })}
         </p>
       </div>
 
@@ -45,7 +47,10 @@ export function TriviaCompletedCard({
           ? isJunior
             ? reward.juniorMessage
             : reward.message
-          : `Necesitas acertar al menos ${TRIVIA_DATA.minimumCorrectAnswers} de ${totalQuestions} preguntas para ganar el premio. ¡Vuelve a intentarlo!`}
+          : t('trivia.completed.needMore', {
+              min: TRIVIA_DATA.minimumCorrectAnswers,
+              total: totalQuestions,
+            })}
       </p>
 
       {/* Botones de acción unificados */}
@@ -56,7 +61,9 @@ export function TriviaCompletedCard({
             onClick={onGoHome}
             className="w-full py-3 px-4 bg-[#7E8B28] hover:bg-[#6D7821] text-white text-[14.5px] font-semibold rounded-xl shadow-sm transition-all duration-150 active:scale-[0.98] cursor-pointer"
           >
-            {isJunior ? '🎁 ¡Ir a abrir mi regalo!' : 'Ver mi avance en el Inicio'}
+            {isJunior
+              ? t('trivia.completed.goOpenGift')
+              : t('trivia.completed.seeProgress')}
           </button>
         ) : (
           <button
@@ -64,7 +71,7 @@ export function TriviaCompletedCard({
             onClick={onRestart}
             className="w-full py-3 px-4 bg-[#7E8B28] hover:bg-[#6D7821] text-white text-[14.5px] font-semibold rounded-xl shadow-sm transition-all duration-150 active:scale-[0.98] cursor-pointer"
           >
-            Volver a intentar
+            {t('trivia.completed.retry')}
           </button>
         )}
         <button
@@ -72,7 +79,9 @@ export function TriviaCompletedCard({
           onClick={hasEarnedReward ? onRestart : onGoHome}
           className="w-full py-2.5 px-4 bg-transparent hover:bg-black/5 text-[#555A49] text-xs font-medium rounded-xl transition-all cursor-pointer"
         >
-          {hasEarnedReward ? 'Repetir la trivia' : 'Volver al inicio'}
+          {hasEarnedReward
+            ? t('trivia.completed.repeat')
+            : t('trivia.completed.backHome')}
         </button>
       </div>
     </div>

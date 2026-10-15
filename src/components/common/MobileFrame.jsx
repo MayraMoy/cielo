@@ -11,9 +11,14 @@ export function MobileFrame({ children }) {
 
   const isAuthPage = location.pathname === '/' || location.pathname === '/register';
   const effectiveDarkMode = isAuthPage ? false : isDarkMode;
-  const showBottomNavbar = !isAuthPage && !location.pathname.startsWith('/trivia');
+  const showBottomNavbar =
+    !isAuthPage &&
+    !location.pathname.startsWith('/trivia') &&
+    !location.pathname.startsWith('/juegos');
 
-  const activeTab = location.pathname.startsWith('/library')
+  const activeTab = location.pathname.startsWith('/library') ||
+    location.pathname.startsWith('/profile') ||
+    location.pathname.startsWith('/perfil')
     ? 'library'
     : location.pathname.startsWith('/scan') ||
       location.pathname.startsWith('/scanner') ||
@@ -31,6 +36,7 @@ export function MobileFrame({ children }) {
     >
       {/* Marco exterior del Celular */}
       <div
+        id="app-screen"
         className={`relative w-full max-w-[390px] h-[844px] max-h-[96vh] rounded-[50px] border-[10px] sm:border-[12px] border-[#1C1F16] shadow-[0_25px_60px_-10px_rgba(0,0,0,0.35),0_10px_20px_rgba(0,0,0,0.15)] ring-1 ring-black/20 flex flex-col overflow-hidden transition-colors duration-200 ${
           effectiveDarkMode ? 'dark bg-[#141710] text-[#F4F6ED]' : 'bg-[#FAF9F5] text-[#1A1C16]'
         } ${isLargeText ? 'large-text' : ''}`}

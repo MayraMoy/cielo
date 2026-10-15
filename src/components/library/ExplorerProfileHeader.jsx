@@ -1,4 +1,5 @@
 import { useAccessibility } from '../../hooks/useAccessibility';
+import { useLanguage } from '../../hooks/useLanguage';
 
 // SVG de usuario para la ficha de perfil (con soporte para modo oscuro)
 const UserProfileIcon = ({
@@ -14,59 +15,77 @@ const UserProfileIcon = ({
   </svg>
 );
 
+const ChevronIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    className="w-4 h-4 shrink-0 text-[#8A9173] dark:text-[#7C8570] transition-transform group-hover:translate-x-0.5"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.4"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M9 6l6 6-6 6" />
+  </svg>
+);
+
 export function ExplorerProfileHeader({
   user,
-  unlockedCardsCount,
-  totalCardsCount,
   unlockedCharacters,
   onGoRegister,
+  onOpenProfile,
 }) {
   const { isLargeText, toggleLargeText } = useAccessibility();
+  const { t } = useLanguage();
 
   const rankBadge =
     unlockedCharacters >= 3
-      ? 'Guardaparque Maestro'
+      ? t('library.ranks.master')
       : unlockedCharacters >= 2
-      ? 'Explorador del Humedal'
+      ? t('library.ranks.wetland')
       : unlockedCharacters >= 1
-      ? 'Explorador Inicial'
-      : 'Visitante Curioso';
+      ? t('library.ranks.starter')
+      : t('library.ranks.curious');
 
   return (
     <section className="flex items-center justify-between gap-3 rounded-3xl border border-[#E5E7EB] dark:border-[#2C3520] bg-white dark:bg-[#1A1F14] p-4 shadow-xs transition-colors">
       <div className="flex items-center gap-3.5 min-w-0">
-        
-        {/* Contenedor del avatar con el icono de usuario */}
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#F2F4E6] dark:bg-[#252E1B] border border-[#CCD69E] dark:border-[#3D482B] shadow-2xs">
-          <UserProfileIcon />
-        </div>
-
-        <div className="min-w-0">
-          <div className="flex items-center gap-2 flex-wrap">
-            <h1 className="text-base font-bold text-[#1A1C16] dark:text-[#F4F6ED] truncate">
-              {user?.fullName || 'Explorador Invitado'}
-            </h1>
-            <span className="rounded-full bg-[#F2F4E6] dark:bg-[#252E1B] border border-[#CFD79F] dark:border-[#3D482B] px-2.5 py-0.5 text-xs font-semibold text-[#545C1E] dark:text-[#DDEB7A]">
-              {unlockedCardsCount}/{totalCardsCount} fichas
-            </span>
+        <button
+          type="button"
+          onClick={onOpenProfile}
+          className="group flex items-center gap-3.5 min-w-0 text-left rounded-2xl transition-opacity active:opacity-70 cursor-pointer"
+          aria-label={t('profile.title')}
+        >
+          {/* Contenedor del avatar con el icono de usuario */}
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#F2F4E6] dark:bg-[#252E1B] border border-[#CCD69E] dark:border-[#3D482B] shadow-2xs">
+            <UserProfileIcon />
           </div>
 
-          <p className="text-xs font-semibold text-[#687320] dark:text-[#A4B544] mt-0.5">
-            {rankBadge}
-          </p>
+          <div className="min-w-0">
+            <div className="flex items-center gap-2 flex-wrap">
+              <h1 className="text-base font-bold text-[#1A1C16] dark:text-[#F4F6ED] truncate">
+                {user?.fullName || t('library.guest')}
+              </h1>
+            </div>
 
-          <div className="mt-1 flex items-center gap-2">
-            {!user?.fullName && (
-              <button
-                type="button"
-                onClick={onGoRegister}
-                className="text-xs font-semibold text-[#7E8B28] dark:text-[#A4B544] underline underline-offset-2 cursor-pointer hover:text-[#545C1E] dark:hover:text-[#DDEB7A] transition-colors"
-              >
-                • Registrarme
-              </button>
-            )}
+            <p className="text-xs font-semibold text-[#687320] dark:text-[#A4B544] mt-0.5">
+              {rankBadge}
+            </p>
           </div>
-        </div>
+
+          <ChevronIcon />
+        </button>
+
+        {!user?.fullName && (
+          <button
+            type="button"
+            onClick={onGoRegister}
+            className="shrink-0 text-xs font-semibold text-[#7E8B28] dark:text-[#A4B544] underline underline-offset-2 cursor-pointer hover:text-[#545C1E] dark:hover:text-[#DDEB7A] transition-colors"
+          >
+            {t('library.register')}
+          </button>
+        )}
       </div>
 
       {/* Botón Accesibilidad A+ */}
@@ -80,13 +99,13 @@ export function ExplorerProfileHeader({
         }`}
         aria-label={
           isLargeText
-            ? 'Desactivar texto agrandado'
-            : 'Activar texto agrandado y remarcado (A+)'
+            ? t('a11y.disable')
+            : t('a11y.enable')
         }
         title={
           isLargeText
-            ? 'Modo Lectura Activo (A+)'
-            : 'Agrandar y Remarcar Texto (A+)'
+            ? t('a11y.active')
+            : t('a11y.inactive')
         }
       >
         <span className="text-[12px] font-extrabold tracking-tight">A+</span>

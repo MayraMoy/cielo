@@ -1,11 +1,13 @@
 import { useState, useMemo, useEffect, useRef, useCallback } from 'react';
-import { TRIVIA_DATA } from '../data/triviaData';
+import { useLanguage } from './useLanguage';
 import {
   unlockCharacterByStation,
   getUnlockedCharacters,
 } from '../data/rewardProgress';
 
 export function useTrivia({ isJunior = false, stationStep = 1 } = {}) {
+  const { content } = useLanguage();
+  const TRIVIA_DATA = content.trivia;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);
@@ -52,7 +54,7 @@ export function useTrivia({ isJunior = false, stationStep = 1 } = {}) {
       }
       setIsFinished(true);
     }
-  }, [currentIndex, totalQuestions, totalTime, score, stationStep]);
+  }, [currentIndex, totalQuestions, totalTime, score, stationStep, TRIVIA_DATA.minimumCorrectAnswers]);
 
   // Manejador cuando el tiempo se agota (0 segundos)
   const handleTimeout = useCallback(() => {

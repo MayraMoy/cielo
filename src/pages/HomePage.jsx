@@ -1,8 +1,8 @@
-import { HOME_DATA } from '../data/homeData';
 import { useHome } from '../hooks/useHome';
 import { useUserProfile } from '../hooks/useUserProfile';
 import { useTheme } from '../hooks/useTheme';
 import { useAccessibility } from '../hooks/useAccessibility';
+import { useLanguage } from '../hooks/useLanguage';
 import { CharacterProgressCard } from '../components/home/CharacterProgressCard';
 import { DidYouKnowCard } from '../components/home/DidYouKnowCard';
 import { CharacterRewardModal } from '../components/home/CharacterRewardModal';
@@ -24,6 +24,8 @@ export function HomePage() {
   const { isJunior } = useUserProfile();
   const { isDarkMode, toggleDarkMode } = useTheme();
   const { isLargeText, toggleLargeText } = useAccessibility();
+  const { t, content } = useLanguage();
+  const HOME_DATA = content.home;
 
   return (
     <div className="w-full flex-1 relative flex flex-col justify-between select-none">
@@ -39,8 +41,8 @@ export function HomePage() {
                   ? 'border-[#687320] bg-[#687320] text-white dark:border-[#879532] dark:bg-[#879532]'
                   : 'border-[#CCD69E] bg-[#F2F4E6] text-[#4E5618] hover:bg-[#E4E8C8] dark:border-[#55623B] dark:bg-[#242B1E] dark:text-[#E3E9D5] dark:hover:bg-[#303A27]'
               }`}
-              aria-label={isLargeText ? 'Desactivar texto agrandado' : 'Activar texto agrandado y remarcado (A+)'}
-              title={isLargeText ? 'Modo Lectura Activo (A+)' : 'Agrandar y Remarcar Texto (A+)'}
+              aria-label={isLargeText ? t('a11y.disable') : t('a11y.enable')}
+              title={isLargeText ? t('a11y.active') : t('a11y.inactive')}
             >
               <span className="text-[12px] font-extrabold tracking-tight">A+</span>
             </button>
@@ -49,8 +51,8 @@ export function HomePage() {
               type="button"
               onClick={toggleDarkMode}
               className="inline-flex items-center gap-1.5 rounded-xl border border-[#CCD69E] bg-[#F2F4E6] px-2.5 py-1.5 text-xs font-semibold text-[#4E5618] hover:bg-[#E4E8C8] active:scale-95 transition-all cursor-pointer dark:border-[#55623B] dark:bg-[#242B1E] dark:text-[#E3E9D5] dark:hover:bg-[#303A27]"
-              aria-label={isDarkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
-              title={isDarkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
+              aria-label={isDarkMode ? t('theme.toLight') : t('theme.toDark')}
+              title={isDarkMode ? t('theme.toLight') : t('theme.toDark')}
             >
               {isDarkMode ? (
                 <>
@@ -65,14 +67,14 @@ export function HomePage() {
                     <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
                     <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
                   </svg>
-                  <span>Día</span>
+                  <span>{t('theme.day')}</span>
                 </>
               ) : (
                 <>
                   <svg className="w-3.5 h-3.5 text-[#545C1E]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
                   </svg>
-                  <span>Noche</span>
+                  <span>{t('theme.night')}</span>
                 </>
               )}
             </button>
@@ -82,7 +84,7 @@ export function HomePage() {
             type="button"
             onClick={handleOpenFireSafety}
             className="inline-flex items-center gap-1.5 rounded-xl bg-[#A83B12] hover:bg-[#8F320F] text-white px-3 py-1.5 text-xs font-bold shadow-xs active:scale-95 transition-all cursor-pointer dark:bg-[#C85A27] dark:hover:bg-[#B34E1E]"
-            aria-label="Prevención de incendios y protocolo de emergencias"
+            aria-label={t('home.fireSafetyAria')}
           >
             <svg
               className="w-4 h-4 text-white"

@@ -1,6 +1,8 @@
+import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTrivia } from '../hooks/useTrivia';
 import { useUserProfile } from '../hooks/useUserProfile';
+import { useLanguage } from '../hooks/useLanguage';
 import { TriviaCard } from '../components/trivia/TriviaCard';
 import { TriviaCompletedCard } from '../components/trivia/TriviaCompletedCard';
 
@@ -8,8 +10,16 @@ export function TriviaPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const { isJunior } = useUserProfile();
+  const { t } = useLanguage();
 
   const stationStep = location.state?.stationStep || 1;
+
+  // La trivia es solo para adultos: los niños juegan "Zona de juegos".
+  useEffect(() => {
+    if (isJunior) {
+      navigate('/juegos', { replace: true, state: { stationStep } });
+    }
+  }, [isJunior, navigate, stationStep]);
 
   const {
     currentQuestion,
@@ -37,7 +47,7 @@ export function TriviaPage() {
           type="button"
           onClick={() => navigate('/home')}
           className="p-1.5 text-[#1A1C16] hover:text-[#7E8B28] hover:bg-black/5 rounded-full transition-all active:scale-90 cursor-pointer"
-          aria-label="Cerrar y volver al inicio"
+          aria-label={t('trivia.closeAria')}
         >
           <svg
             viewBox="0 0 24 24"

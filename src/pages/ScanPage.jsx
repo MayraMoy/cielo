@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useQRScanner } from '../hooks/useQRScanner';
 import { useUserProfile } from '../hooks/useUserProfile';
+import { useLanguage } from '../hooks/useLanguage';
 import { SimpleQRScanner } from '../components/scan/SimpleQRScanner';
 import { ScanResultModal } from '../components/scan/ScanResultModal';
 import qrCartelImg from '../assets/qr_cartel.png';
@@ -8,6 +9,7 @@ import qrCartelImg from '../assets/qr_cartel.png';
 export function ScanPage() {
   const navigate = useNavigate();
   const { isJunior } = useUserProfile();
+  const { t } = useLanguage();
 
   const {
     status,
@@ -25,7 +27,7 @@ export function ScanPage() {
 
   const handleStartTrivia = () => {
     const step = scannedData?.step || selectedStationIndex + 1;
-    navigate('/trivia', {
+    navigate(isJunior ? '/juegos' : '/trivia', {
       state: {
         stationStep: step,
         speciesName: scannedData?.name,
@@ -67,7 +69,7 @@ export function ScanPage() {
             type="button"
             onClick={() => navigate('/home')}
             className="w-9 h-9 rounded-full bg-black/40 backdrop-blur-md text-white flex items-center justify-center hover:bg-black/60 active:scale-95 transition-all cursor-pointer border border-white/10"
-            aria-label="Volver al inicio"
+            aria-label={t('scan.backAria')}
           >
             <svg
               viewBox="0 0 24 24"
@@ -96,10 +98,13 @@ export function ScanPage() {
             />
             <span className="text-white text-xs font-medium tracking-tight">
               {status === 'scanning'
-                ? 'Escaneando...'
+                ? t('scan.statusScanning')
                 : status === 'success'
-                ? '¡QR Detectado!'
-                : `Estación ${selectedStationIndex + 1} de 3`}
+                ? t('scan.statusDetected')
+                : t('scan.stationOf', {
+                    current: selectedStationIndex + 1,
+                    total: stations.length,
+                  })}
             </span>
           </div>
 
@@ -108,9 +113,11 @@ export function ScanPage() {
             type="button"
             onClick={toggleCameraMode}
             className="px-2.5 py-1 rounded-full bg-black/40 backdrop-blur-md text-white text-[10px] font-medium border border-white/15 hover:bg-black/60 transition-all cursor-pointer"
-            title="Alternar entre foto de simulación y cámara web"
+            title={t('scan.cameraToggleTitle')}
           >
-            {cameraMode === 'simulation' ? 'Cámara' : 'Simulación'}
+            {cameraMode === 'simulation'
+              ? t('scan.cameraModeLive')
+              : t('scan.cameraModeSimulation')}
           </button>
         </div>
 
@@ -118,7 +125,7 @@ export function ScanPage() {
         <div
           className="flex items-center justify-center gap-1.5"
           role="group"
-          aria-label="Seleccionar estación QR del recorrido"
+          aria-label={t('scan.selectStationAria')}
         >
           {stations.map((st, idx) => {
             const isSelected = idx === selectedStationIndex;
@@ -136,10 +143,10 @@ export function ScanPage() {
                 }`}
               >
                 <span>
-                  Estación {st.step}: {st.name}
+                  {t('scan.stationButton', { step: st.step, name: st.name })}
                 </span>
                 {isDone && (
-                  <span className="text-[#DFFF67] font-bold" title="Completada">
+                  <span className="text-[#DFFF67] font-bold" title={t('scan.completed')}>
                     ✓
                   </span>
                 )}
@@ -164,8 +171,8 @@ export function ScanPage() {
           disabled={status === 'scanning' || status === 'success'}
           onClick={triggerScan}
           className="w-16 h-16 rounded-full border-3 border-white bg-white/20 hover:bg-white/35 active:scale-90 backdrop-blur-md flex items-center justify-center text-white shadow-[0_8px_25px_rgba(0,0,0,0.5)] transition-all duration-150 cursor-pointer group disabled:opacity-60"
-          aria-label="Escanear código QR"
-          title="Toca para escanear"
+          aria-label={t('scan.triggerScanAria')}
+          title={t('scan.triggerScanTitle')}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -179,9 +186,7 @@ export function ScanPage() {
           </svg>
         </button>
         <span className="text-white/90 text-xs font-semibold mt-2 drop-shadow-sm select-none text-center px-4">
-          {isJunior
-            ? '¡Tocá la cámara para leer el cartel QR!'
-            : 'Presiona para escanear la estación seleccionada'}
+          {isJunior ? t('scan.scanHintJunior') : t('scan.scanHintAdult')}
         </span>
       </div>
 

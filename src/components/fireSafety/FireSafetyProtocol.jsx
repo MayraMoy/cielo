@@ -1,4 +1,7 @@
+import { useLanguage } from '../../hooks/useLanguage';
+
 export function FireSafetyProtocol({ isDarkMode, steps }) {
+  const { t } = useLanguage();
   const heading = isDarkMode ? 'text-[#F4F6ED]' : 'text-[#24251E]';
 
   return (
@@ -7,7 +10,7 @@ export function FireSafetyProtocol({ isDarkMode, steps }) {
         id="fire-protocol-title"
         className={`text-xl font-bold tracking-tight ${heading}`}
       >
-        Qué hacer paso a paso
+        {t('fireSafety.protocolTitle')}
       </h2>
 
       <ol className="relative mt-6 flex flex-col gap-6 pl-2">

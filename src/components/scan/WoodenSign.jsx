@@ -1,7 +1,8 @@
-import { SCAN_DATA } from '../../data/scanData';
+import { useLanguage } from '../../hooks/useLanguage';
 
 export function WoodenSign({ onQRClick, isScanning, isLocking }) {
-  const { woodenSign } = SCAN_DATA;
+  const { t, content } = useLanguage();
+  const { woodenSign } = content.scan;
 
   return (
     <div className="relative mx-auto w-full max-w-[325px] select-none">
@@ -60,7 +61,7 @@ export function WoodenSign({ onQRClick, isScanning, isLocking }) {
           <div
             onClick={onQRClick}
             className="relative p-2 flex items-center justify-center cursor-pointer group"
-            title="Presiona para simular escaneo"
+            title={t('scan.woodenSign.scanTitle')}
           >
             {/* Esquinas / Brackets de encuadre en el cartel */}
             <div className="absolute inset-0 pointer-events-none">

@@ -1,4 +1,7 @@
+import { useLanguage } from '../../hooks/useLanguage';
+
 export function FireSafetyGuidelines({ isDarkMode, preventionRules }) {
+  const { t } = useLanguage();
   const heading = isDarkMode ? 'text-[#F4F6ED]' : 'text-[#24251E]';
 
   return (
@@ -12,7 +15,7 @@ export function FireSafetyGuidelines({ isDarkMode, preventionRules }) {
         id="fire-prevention-title"
         className={`text-xl font-bold tracking-tight ${heading}`}
       >
-        Cuidado de la Reserva
+        {t('fireSafety.preventionTitle')}
       </h2>
       <ul
         className={`mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base ${

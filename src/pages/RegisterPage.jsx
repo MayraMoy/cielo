@@ -1,13 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 import { Logo } from '../components/common/Logo';
+import { LanguageSelector } from '../components/common/LanguageSelector';
 import { Card } from '../components/ui/Card';
 import { Input } from '../components/ui/Input';
 import { Button } from '../components/ui/Button';
 import { useRegisterForm } from '../hooks/useRegisterForm';
-import { REGISTER_DATA } from '../data/registerData';
+import { useLanguage } from '../hooks/useLanguage';
 
 export function RegisterPage() {
   const navigate = useNavigate();
+  const { content } = useLanguage();
+  const REGISTER_DATA = content.register;
 
   const handleSuccess = (data) => {
     try {
@@ -30,6 +33,9 @@ export function RegisterPage() {
     <div className="w-full flex-1 flex items-center justify-center p-3 py-6">
       <Card className="max-w-[340px] p-6 shadow-sm">
         <div>
+          {/* Selector de idioma */}
+          <LanguageSelector className="mb-5" />
+
           {/* Header: Logo + Title + Subtitle */}
           <div className="flex flex-col items-center text-center mb-7">
             <Logo className="w-16 h-16 mb-4" />
