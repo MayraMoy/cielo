@@ -3,9 +3,9 @@ import { TROPHIC_NETWORK } from '../../data/library/trophicNetwork';
 import { useTheme } from '../../hooks/useTheme';
 
 const GRAPH_WIDTH = 360;
-const GRAPH_HEIGHT = 680;
-const NODE_WIDTH_PERCENT = 31.2;
-const NODE_HEIGHT = 98;
+const GRAPH_HEIGHT = 900;
+const NODE_WIDTH_PERCENT = 29.5;
+const NODE_HEIGHT = 86;
 const NODE_HEIGHT_PERCENT = (NODE_HEIGHT / GRAPH_HEIGHT) * 100;
 
 const trophicLayers = [
@@ -13,7 +13,7 @@ const trophicLayers = [
     id: 'tertiary',
     label: 'Consumidores terciarios',
     top: 0,
-    height: 170,
+    height: 240,
     color: '#FFF4E7',
     darkColor: '#251D14',
     textColor: '#8D4314',
@@ -22,8 +22,8 @@ const trophicLayers = [
   {
     id: 'secondary',
     label: 'Consumidores secundarios',
-    top: 170,
-    height: 170,
+    top: 240,
+    height: 240,
     color: '#F0F5FB',
     darkColor: '#16212E',
     textColor: '#214B77',
@@ -32,8 +32,8 @@ const trophicLayers = [
   {
     id: 'primary',
     label: 'Consumidores primarios',
-    top: 340,
-    height: 170,
+    top: 480,
+    height: 250,
     color: '#FFFBEA',
     darkColor: '#252312',
     textColor: '#705F12',
@@ -42,7 +42,7 @@ const trophicLayers = [
   {
     id: 'producer',
     label: 'Productores',
-    top: 510,
+    top: 730,
     height: 170,
     color: '#F4F7E6',
     darkColor: '#1A2313',
@@ -80,12 +80,21 @@ function OrganismNode({ organism, isSelected, onSelect, isDarkMode = false }) {
         className="h-8 w-9 shrink-0 object-contain drop-shadow-sm mb-0.5 pointer-events-none"
       />
       <span
-        className={`trophic-organism-name text-xs font-bold w-full text-center tracking-tight px-0.5 ${
+        className={`trophic-organism-name text-[11px] leading-[1.15] font-bold w-full text-center tracking-tight px-0.5 line-clamp-2 ${
           isDarkMode ? 'text-[#F4F6ED]' : 'text-[#1A1C16]'
         }`}
       >
         {organism.name}
       </span>
+      {organism.scientificName && (
+        <span
+          className={`text-[9px] italic font-medium w-full text-center truncate px-0.5 opacity-75 ${
+            isDarkMode ? 'text-[#DDE2D3]' : 'text-[#555A49]'
+          }`}
+        >
+          {organism.scientificName}
+        </span>
+      )}
     </>
   );
 
@@ -181,7 +190,7 @@ export function TrophicNetworkTab({ isJunior = false }) {
         role="group"
         aria-label="Red trófica: las flechas conectan alimentos y consumidores"
       >
-        <div className="relative aspect-[360/680] w-full">
+        <div className="relative aspect-[360/900] w-full">
           {trophicLayers.map((layer) => (
             <div
               key={layer.id}
@@ -293,6 +302,15 @@ export function TrophicNetworkTab({ isJunior = false }) {
                 >
                   {focusedNode.name}
                 </span>
+                {focusedNode.scientificName && (
+                  <span
+                    className={`text-xs italic font-medium ${
+                      isDarkMode ? 'text-[#DDEB7A]' : 'text-[#687320]'
+                    }`}
+                  >
+                    ({focusedNode.scientificName})
+                  </span>
+                )}
                 <span
                   className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${
                     isDarkMode
