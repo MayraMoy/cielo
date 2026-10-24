@@ -5,7 +5,7 @@ export function OwlMascot({ className = "w-28 h-auto" }) {
     <img
       src={buhoImg}
       alt="Búho sabio leyendo libro"
-      className={`object-contain select-none ${className}`}
+      className={`owl-mascot object-contain select-none ${className}`}
       draggable={false}
     />
   );

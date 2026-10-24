@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { HomeFactContext } from '../context/HomeFactContext';
 import { useHome } from '../hooks/useHome';
 import { useUserProfile } from '../hooks/useUserProfile';
 import { useTheme } from '../hooks/useTheme';
@@ -14,6 +16,8 @@ export function HomePage() {
     openedRewards,
     isRewardModalOpen,
     selectedRewardIndex,
+    lockedRewardIndex,
+    handleDismissLockedReward,
     handleStartGame,
     handleOpenLibrary,
     handleOpenReward,
@@ -26,11 +30,16 @@ export function HomePage() {
   const { isLargeText, toggleLargeText } = useAccessibility();
   const { t, content } = useLanguage();
   const HOME_DATA = content.home;
+  const factIndex = useContext(HomeFactContext);
+  const facts = [HOME_DATA.didYouKnowCard, ...content.library.cards
+    .filter((card) => ['carpincho', 'carpintero', 'arbusto-serrano'].includes(card.id))
+    .map((card) => ({ subject: card.name, description: card.contribution, juniorDescription: card.juniorContribution }))];
+  const fact = facts[factIndex % facts.length];
 
   return (
     <div className="w-full flex-1 relative flex flex-col justify-between select-none">
       {/* Contenido principal con padding ajustado para pantalla de celular */}
-      <main className="w-full px-5 pt-3 pb-28 flex flex-col gap-4">
+      <main className="w-full px-5 pt-3 pb-24 flex flex-col gap-5">
         <div className="flex items-center justify-between gap-2 flex-wrap">
           <div className="flex items-center gap-1.5">
             <button
@@ -98,13 +107,11 @@ export function HomePage() {
           </button>
         </div>
 
-        <header className="mb-1 pl-0.5 pt-1">
-          <h1 className="text-[26px] font-medium text-[#1E201A] leading-[1.08] tracking-[-0.05em] dark:text-[#F4F6ED]">
-            {isJunior ? HOME_DATA.juniorGreeting : HOME_DATA.greeting}
+        <header className="pl-0.5 pt-1">
+          <h1 className="text-base font-medium text-[#535746] leading-relaxed dark:text-[#BCC5AE]">
+            <span className="block">{isJunior ? HOME_DATA.juniorGreeting : HOME_DATA.greeting}</span>
+            <span className="block text-[28px] font-bold text-[#4E5C19] leading-tight tracking-[-0.035em] mt-0.5 break-words dark:text-[#DDEB7A]">{userName}</span>
           </h1>
-          <p className="text-[34px] font-black text-[#6F7D1F] leading-[0.9] tracking-[-0.07em] mt-1.5 dark:text-[#DDEB7A]">
-            {userName}
-          </p>
         </header>
 
         {/* Tarjeta 1: Progreso de personaje y regalos */}
@@ -115,24 +122,32 @@ export function HomePage() {
               : HOME_DATA.characterCard.title
           }
           buttonText={
-            isJunior
+            unlockedCharacters >= HOME_DATA.characterCard.totalSteps
+              ? t('home.characterCard.collectionButton')
+              : unlockedCharacters > 0
+              ? t('home.characterCard.continueButton')
+              : isJunior
               ? HOME_DATA.characterCard.juniorButtonText
               : HOME_DATA.characterCard.buttonText
           }
           unlockedCount={unlockedCharacters}
           openedRewards={openedRewards}
           onOpenReward={handleOpenReward}
-          onStartGame={handleStartGame}
+          onStartGame={unlockedCharacters >= HOME_DATA.characterCard.totalSteps ? handleOpenLibrary : handleStartGame}
+          isJunior={isJunior}
+          lockedRewardIndex={lockedRewardIndex}
+          onDismissLockedReward={handleDismissLockedReward}
         />
 
         {/* Tarjeta 2: Sabías que con el búho lector */}
         <DidYouKnowCard
           title={HOME_DATA.didYouKnowCard.title}
+          subject={fact.subject}
           icon={HOME_DATA.didYouKnowCard.icon}
           description={
             isJunior
-              ? HOME_DATA.didYouKnowCard.juniorDescription
-              : HOME_DATA.didYouKnowCard.description
+              ? fact.juniorDescription
+              : fact.description
           }
           isJunior={isJunior}
         />

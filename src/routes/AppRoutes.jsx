@@ -8,10 +8,12 @@ import { LibraryPage } from '../pages/LibraryPage';
 import { ProfilePage } from '../pages/ProfilePage';
 import { FireSafetyPage } from '../pages/FireSafetyPage';
 import { MobileFrame } from '../components/common/MobileFrame';
+import { HomeFactProvider } from '../context/HomeFactContext';
 
 export function AppRoutes() {
   return (
     <BrowserRouter>
+      <HomeFactProvider>
       <MobileFrame>
         <Routes>
           <Route path="/" element={<RegisterPage />} />
@@ -30,6 +32,7 @@ export function AppRoutes() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </MobileFrame>
+      </HomeFactProvider>
     </BrowserRouter>
   );
 }

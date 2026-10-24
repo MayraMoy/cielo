@@ -376,3 +376,17 @@ body {
 .dark .fire-modal-container .fire-contact-card span:last-child {
   color: #FFB18A !important;
 }
+
+/* A short greeting on each Home visit; no perpetual motion while reading. */
+@keyframes owl-greeting {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  25% { transform: translateY(-4px) rotate(-4deg); }
+  65% { transform: translateY(-2px) rotate(3deg); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .owl-mascot {
+    transform-origin: 50% 90%;
+    animation: owl-greeting 2.2s ease-in-out 2;
+  }
+}

@@ -12,6 +12,7 @@ export function useHome() {
   const [openedRewards, setOpenedRewards] = useState(getOpenedRewards);
   const [isRewardModalOpen, setIsRewardModalOpen] = useState(false);
   const [selectedRewardIndex, setSelectedRewardIndex] = useState(0);
+  const [lockedRewardIndex, setLockedRewardIndex] = useState(null);
 
   // Obtiene el nombre del usuario desde location.state, localStorage o el valor por defecto
   const userName = useMemo(() => {
@@ -58,6 +59,12 @@ export function useHome() {
   };
 
   const handleOpenReward = (index = 0) => {
+    if (!Number.isInteger(index) || index < 0 || index >= content.home.characterCard.totalSteps) return;
+    if (index >= unlockedCharacters) {
+      setLockedRewardIndex(index);
+      return;
+    }
+    setLockedRewardIndex(null);
     const updated = markRewardAsOpened(index);
     setOpenedRewards([...updated]);
     setSelectedRewardIndex(index);
@@ -83,6 +90,8 @@ export function useHome() {
     openedRewards,
     isRewardModalOpen,
     selectedRewardIndex,
+    lockedRewardIndex,
+    handleDismissLockedReward: () => setLockedRewardIndex(null),
     handleTabChange,
     handleStartGame,
     handleScanQR,
