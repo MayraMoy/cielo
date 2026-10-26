@@ -62,7 +62,7 @@ export function FichasTab({
                   }`}
                 />
                 {!isUnlocked && (
-                    <span className="absolute right-1 top-1 rounded-full border border-[var(--surface-card-border)] bg-[var(--surface-card)] p-1 text-[var(--text-name)] shadow-[var(--control-shadow)] transition-colors">
+                  <span className="absolute right-1 top-1 rounded-full border border-[var(--surface-card-border)] bg-[var(--surface-card)] p-1 text-[var(--text-name)] shadow-[var(--control-shadow)] transition-colors">
                     <LockIcon />
                   </span>
                 )}

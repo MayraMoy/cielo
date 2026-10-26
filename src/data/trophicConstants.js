@@ -1,7 +1,7 @@
 export const GRAPH_WIDTH = 360;
-export const GRAPH_HEIGHT = 760;
-export const NODE_WIDTH_PERCENT = 30;
-export const NODE_HEIGHT = 92;
+export const GRAPH_HEIGHT = 1080;
+export const NODE_WIDTH_PERCENT = 29;
+export const NODE_HEIGHT = 96;
 export const NODE_HEIGHT_PERCENT = (NODE_HEIGHT / GRAPH_HEIGHT) * 100;
 
 export const trophicLayers = [
@@ -9,41 +9,57 @@ export const trophicLayers = [
     id: 'tertiary',
     label: 'Consumidores terciarios',
     top: 0,
-    height: 190,
-    color: '#FFF4E7',
-    darkColor: '#251D14',
+    height: 270,
+    color: '#FFF8F0',
+    darkColor: '#241B12',
     textColor: '#8D4314',
     darkTextColor: '#FFC899',
+    badgeBg: '#FFEAD4',
+    darkBadgeBg: '#3A2716',
+    badgeBorder: '#F2D0B0',
+    darkBadgeBorder: '#55381F',
   },
   {
     id: 'secondary',
     label: 'Consumidores secundarios',
-    top: 190,
-    height: 190,
-    color: '#F0F5FB',
-    darkColor: '#16212E',
+    top: 270,
+    height: 270,
+    color: '#F2F7FC',
+    darkColor: '#141E2B',
     textColor: '#214B77',
     darkTextColor: '#B9DAFB',
+    badgeBg: '#DEECFA',
+    darkBadgeBg: '#1B2C42',
+    badgeBorder: '#BDD7F5',
+    darkBadgeBorder: '#294263',
   },
   {
     id: 'primary',
     label: 'Consumidores primarios',
-    top: 380,
-    height: 190,
-    color: '#FFFBEA',
-    darkColor: '#252312',
+    top: 540,
+    height: 310,
+    color: '#FFFDF0',
+    darkColor: '#242010',
     textColor: '#705F12',
     darkTextColor: '#FDE047',
+    badgeBg: '#FFF3C4',
+    darkBadgeBg: '#383313',
+    badgeBorder: '#F0DF96',
+    darkBadgeBorder: '#59501B',
   },
   {
     id: 'producer',
     label: 'Productores',
-    top: 570,
-    height: 190,
-    color: '#F4F7E6',
-    darkColor: '#1A2313',
+    top: 850,
+    height: 230,
+    color: '#F5F8EC',
+    darkColor: '#172211',
     textColor: '#4E5B18',
     darkTextColor: '#D9EE85',
+    badgeBg: '#E7F0CC',
+    darkBadgeBg: '#27381B',
+    badgeBorder: '#CFE09B',
+    darkBadgeBorder: '#3F5927',
   },
 ];
 

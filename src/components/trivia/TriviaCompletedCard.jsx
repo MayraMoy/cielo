@@ -5,7 +5,6 @@ import { BadgeCheck } from 'lucide-react';
 export function TriviaCompletedCard({
   score,
   totalQuestions,
-  unlockedTotal = 1,
   isJunior = false,
   onGoHome,
   onRestart,

@@ -13,6 +13,15 @@ import insectsImg from '../../assets/insects.png';
 import reptilesImg from '../../assets/reptiles.png';
 import pastosImg from '../../assets/pastos.png';
 
+// Nuevos animales de la Red Trófica Villa Cielo (diseño Canva)
+import zorroImg from '../../assets/zorro.png';
+import joteImg from '../../assets/jote.png';
+import yararaImg from '../../assets/yarara.png';
+import ratonaImg from '../../assets/ratona.png';
+import cuisImg from '../../assets/cuis.png';
+import naranjeroImg from '../../assets/naranjero.png';
+import pepiteroImg from '../../assets/pepitero.png';
+
 export {
   halconImg,
   molleImg,
@@ -28,4 +37,11 @@ export {
   insectsImg,
   reptilesImg,
   pastosImg,
+  zorroImg,
+  joteImg,
+  yararaImg,
+  ratonaImg,
+  cuisImg,
+  naranjeroImg,
+  pepiteroImg,
 };

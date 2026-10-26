@@ -420,6 +420,24 @@ body {
   line-height: 1.3rem !important;
 }
 
+.trophic-organism-name {
+  line-height: 1.15 !important;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+.large-text .trophic-organism-name {
+  font-size: 0.86rem !important;
+  line-height: 1.12 !important;
+  font-weight: 700 !important;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+.large-text .trophic-node-card {
+  min-height: 104px !important;
+}
+
 /* ========================================================
    RED TRÓFICA - CONTRASTE Y LEGIBILIDAD GARANTIZADA
    ======================================================== */
@@ -439,6 +457,15 @@ body {
 .trophic-card button[aria-label^="Información"] * {
   color: #8D6500 !important;
 }
+
+.dark .trophic-network h2 {
+  color: #F4F6ED !important;
+}
+
+.dark .trophic-network .trophic-network-instruction {
+  color: #DDE2D3 !important;
+}
+
 
 /* ========================================================
    MODAL DE EMERGENCIAS SOS - MODO OSCURO DE ALTA LEGIBILIDAD

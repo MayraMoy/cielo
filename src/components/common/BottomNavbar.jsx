@@ -1,6 +1,7 @@
 import { useLanguage } from '../../hooks/useLanguage';
 
 export function BottomNavbar({
+  isHidden = false,
   activeTab = 'home',
   onTabChange,
   onScanQR,
@@ -16,7 +17,15 @@ export function BottomNavbar({
     }`;
 
   return (
-    <div className="pointer-events-none absolute bottom-5 left-0 right-0 z-40 px-4">
+    <div
+      className={`pointer-events-none absolute bottom-5 left-0 right-0 z-40 px-4 transition-[opacity,transform] duration-200 ${
+        isHidden
+          ? 'translate-y-24 opacity-0'
+          : 'translate-y-0 opacity-100'
+      }`}
+      aria-hidden={isHidden}
+      inert={isHidden}
+    >
       <nav
         className="pointer-events-auto relative mx-auto grid h-[64px] w-full max-w-[320px] grid-cols-3 items-end rounded-[26px] border border-[var(--surface-card-border)] bg-[var(--surface-card)] px-2 pb-1.5 pt-1 shadow-[var(--card-shadow)] select-none transition-colors duration-200"
         aria-label={t('nav.ariaNav')}

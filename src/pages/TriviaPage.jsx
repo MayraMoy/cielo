@@ -33,7 +33,6 @@ export function TriviaPage() {
     isCorrect,
     score,
     isFinished,
-    unlockedTotal,
     handleSelectOption,
     handleNextQuestion,
     handleRestart,
@@ -86,7 +85,6 @@ export function TriviaPage() {
           <TriviaCompletedCard
             score={score}
             totalQuestions={totalQuestions}
-            unlockedTotal={unlockedTotal}
             isJunior={isJunior}
             onGoHome={() => navigate('/home')}
             onRestart={handleRestart}

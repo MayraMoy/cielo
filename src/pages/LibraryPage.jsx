@@ -26,20 +26,19 @@ export function LibraryPage() {
   return (
     <div className="relative flex w-full flex-1 flex-col select-none bg-[var(--app-surface)] transition-colors">
       <main
-        className="flex-1 px-5 pt-5 pb-36 transition-all duration-300"
+        className={`flex-1 px-5 pt-5 transition-all duration-300 ${
+          activeSection === 'network' ? 'pb-36' : 'pb-40'
+        }`}
       >
         <ExplorerProfileHeader
           user={user}
-          isJunior={isJunior}
-          unlockedCardsCount={unlockedCardsCount}
-          totalCardsCount={LIBRARY_CARDS.length}
           unlockedCharacters={unlockedCharacters}
           onGoRegister={() => navigate('/register')}
           onOpenProfile={() => navigate('/profile')}
         />
 
         <div
-          className="mt-4 flex p-1 rounded-2xl bg-[#E4E8C8] dark:bg-[#202619] border border-[#CCD69E] dark:border-[#353E2A] transition-colors"
+          className="mt-4 flex p-1.5 rounded-2xl bg-[var(--surface-card)] border border-[var(--surface-card-border)] shadow-[var(--control-shadow)] transition-colors"
           role="tablist"
           aria-label={t('library.tabs.sectionsAria')}
         >
@@ -51,7 +50,7 @@ export function LibraryPage() {
             className={`flex-1 py-2.5 text-xs font-bold rounded-xl transition-all cursor-pointer ${
               activeSection === 'fichas'
                 ? 'bg-[#7E8B28] text-white shadow-xs'
-                : 'text-[#4E5618] dark:text-[#B3BE8E] hover:text-[#1A1C16] dark:hover:text-white'
+                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5'
             }`}
           >
             {t('library.tabs.fichas', {
@@ -67,7 +66,7 @@ export function LibraryPage() {
             className={`flex-1 py-2.5 text-xs font-bold rounded-xl transition-all cursor-pointer ${
               activeSection === 'network'
                 ? 'bg-[#7E8B28] text-white shadow-xs'
-                : 'text-[#4E5618] dark:text-[#B3BE8E] hover:text-[#1A1C16] dark:hover:text-white'
+                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5'
             }`}
           >
             {t('library.tabs.network')}

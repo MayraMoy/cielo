@@ -1,3 +1,4 @@
+import { useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTheme } from '../../hooks/useTheme';
 import { useAccessibility } from '../../hooks/useAccessibility';
@@ -8,6 +9,9 @@ export function MobileFrame({ children }) {
   const { isLargeText } = useAccessibility();
   const location = useLocation();
   const navigate = useNavigate();
+  const [navbarHiddenOnPath, setNavbarHiddenOnPath] = useState(null);
+  const lastScrollTopRef = useRef(0);
+  const lastScrollPathRef = useRef(location.pathname);
 
   const isAuthPage = location.pathname === '/' || location.pathname === '/register';
   const effectiveDarkMode = isAuthPage ? false : isDarkMode;
@@ -15,6 +19,29 @@ export function MobileFrame({ children }) {
     !isAuthPage &&
     !location.pathname.startsWith('/trivia') &&
     !location.pathname.startsWith('/juegos');
+
+  const isNavbarHidden = navbarHiddenOnPath === location.pathname;
+
+  const handleContentScroll = (event) => {
+    const currentScrollTop = event.currentTarget.scrollTop;
+
+    if (lastScrollPathRef.current !== location.pathname) {
+      lastScrollPathRef.current = location.pathname;
+      lastScrollTopRef.current = currentScrollTop;
+      setNavbarHiddenOnPath(null);
+      return;
+    }
+
+    const scrollDelta = currentScrollTop - lastScrollTopRef.current;
+
+    if (currentScrollTop <= 8 || scrollDelta < -4) {
+      setNavbarHiddenOnPath(null);
+    } else if (scrollDelta > 4) {
+      setNavbarHiddenOnPath(location.pathname);
+    }
+
+    lastScrollTopRef.current = currentScrollTop;
+  };
 
   const activeTab = location.pathname.startsWith('/library') ||
     location.pathname.startsWith('/profile') ||
@@ -83,13 +110,17 @@ export function MobileFrame({ children }) {
         </div>
 
         {/* ÁREA DE CONTENIDO DE LA PANTALLA (SCROLLABLE DEBAJO DEL NAVBAR FLOTANTE) */}
-        <div className="flex-1 overflow-y-auto overflow-x-hidden relative flex flex-col [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+        <div
+          className="flex-1 overflow-y-auto overflow-x-hidden relative flex flex-col [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+          onScroll={handleContentScroll}
+        >
           {children}
         </div>
 
         {/* NAVEGADOR FLOTANTE QUE PASA POR ENCIMA DE TODO SIN TENER QUE SCROLLEAR */}
         {showBottomNavbar && (
           <BottomNavbar
+            isHidden={isNavbarHidden}
             activeTab={activeTab}
             onTabChange={(tabId) =>
               navigate(tabId === 'library' ? '/library' : tabId === 'scan' ? '/scan' : '/home')
