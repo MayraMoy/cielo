@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom';
 import { useHome } from '../hooks/useHome';
 import { useUserProfile } from '../hooks/useUserProfile';
 import { useTheme } from '../hooks/useTheme';
@@ -8,6 +9,7 @@ import { DidYouKnowCard } from '../components/home/DidYouKnowCard';
 import { CharacterRewardModal } from '../components/home/CharacterRewardModal';
 
 export function HomePage() {
+  const location = useLocation();
   const {
     userName,
     unlockedCharacters,
@@ -28,7 +30,7 @@ export function HomePage() {
   const HOME_DATA = content.home;
 
   return (
-    <div className="home-surface w-full flex-1 relative flex flex-col justify-between select-none">
+    <div className={`home-surface w-full flex-1 relative flex flex-col justify-between select-none ${location.state?.fromFireSafety ? 'animate-[page-enter-left_260ms_cubic-bezier(0.22,1,0.36,1)_both]' : ''}`}>
       {/* Contenido principal con padding ajustado para pantalla de celular */}
       <main className="w-full px-5 pt-3 pb-28 flex flex-col gap-5">
         <div className="flex flex-nowrap items-center justify-between gap-1">

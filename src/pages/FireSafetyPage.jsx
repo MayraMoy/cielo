@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
 import { EmergencyContacts } from '../components/fireSafety/EmergencyContacts';
 import { FireSafetyGuidelines } from '../components/fireSafety/FireSafetyGuidelines';
 import { FireSafetyHeader } from '../components/fireSafety/FireSafetyHeader';
@@ -9,15 +10,27 @@ import { useLanguage } from '../hooks/useLanguage';
 
 export function FireSafetyPage() {
   const navigate = useNavigate();
+  const [isExiting, setIsExiting] = useState(false);
+  const exitTimer = useRef(null);
   const { isDarkMode } = useTheme();
   const { isJunior } = useUserProfile();
   const { content } = useLanguage();
   const fireSafety = content.fireSafety;
   const steps = isJunior ? fireSafety.juniorSteps : fireSafety.adultSteps;
 
+  useEffect(() => () => window.clearTimeout(exitTimer.current), []);
+
+  const handleBackHome = () => {
+    if (isExiting) return;
+    setIsExiting(true);
+    exitTimer.current = window.setTimeout(() => {
+      navigate('/home', { state: { fromFireSafety: true } });
+    }, 180);
+  };
+
   return (
     <main
-      className={`min-h-full w-full flex-1 shrink-0 px-5 pb-6 pt-4 sm:px-7 animate-[page-enter-right_260ms_cubic-bezier(0.22,1,0.36,1)_both] ${
+      className={`min-h-full w-full flex-1 shrink-0 px-5 pb-6 pt-4 sm:px-7 ${isExiting ? 'pointer-events-none animate-[page-exit-right_180ms_cubic-bezier(0.4,0,1,1)_forwards]' : 'animate-[page-enter-right_260ms_cubic-bezier(0.22,1,0.36,1)_both]'} ${
         isDarkMode
           ? 'bg-[var(--app-surface)] text-[var(--text-primary)]'
           : 'bg-[var(--app-surface)] text-[#1A1C16]'
@@ -28,7 +41,7 @@ export function FireSafetyPage() {
           isDarkMode={isDarkMode}
           isJunior={isJunior}
           fireSafety={fireSafety}
-          onBack={() => navigate('/home')}
+          onBack={handleBackHome}
         />
         <FireSafetyProtocol isDarkMode={isDarkMode} steps={steps} />
         <FireSafetyGuidelines
