@@ -78,7 +78,7 @@ export function FichaDetailModal({ card, isJunior = false, onClose }) {
           role="dialog"
           aria-modal="true"
           aria-labelledby="ficha-title"
-          className={`relative flex h-auto max-h-[94%] w-full max-w-[390px] flex-col overflow-hidden rounded-t-3xl bg-white dark:bg-[#1A1F15] shadow-[0_-12px_40px_rgba(0,0,0,0.35)] ${
+          className={`relative flex h-auto max-h-[94%] w-full max-w-[390px] flex-col overflow-hidden rounded-t-2xl border border-[var(--surface-card-border)] bg-[var(--surface-card)] shadow-[0_-12px_36px_rgba(0,0,0,0.28)] ${
             isClosing
               ? 'animate-[sheet-slide-out_220ms_cubic-bezier(0.4,0,1,1)_forwards]'
               : 'animate-[sheet-slide-in_320ms_cubic-bezier(0.22,1,0.36,1)]'
@@ -86,7 +86,7 @@ export function FichaDetailModal({ card, isJunior = false, onClose }) {
           onClick={(event) => event.stopPropagation()}
         >
           {/* --- PORTADA SUPERIOR FIJA, AL RAS DE LOS BORDES --- */}
-          <div className="relative h-60 w-full shrink-0 overflow-hidden bg-[#1A1C16]">
+          <div className="relative h-60 w-full shrink-0 overflow-hidden bg-[#171B1D]">
             <img
               src={card.detailImage ?? card.image}
               alt={card.name}
@@ -140,13 +140,13 @@ export function FichaDetailModal({ card, isJunior = false, onClose }) {
           {/* --- CUERPO CON SCROLL INTERNO --- */}
           <div className="flex-1 min-h-0 overflow-y-auto p-5 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
             {/* Descripción */}
-            <p className="text-[13px] leading-relaxed text-[#434837] dark:text-[#D1D8C5]">
+            <p className="text-[13px] leading-relaxed text-[var(--text-secondary)]">
               {description}
             </p>
 
             {/* Bloque 1: Aporte a la Red Trófica / Bosque */}
-            <section className="mt-4 flex items-start gap-3 rounded-2xl border border-[#DCE3B5] dark:border-[#3E492D] bg-[#F7F9EE] dark:bg-[#232A1C] p-3.5 shadow-2xs">
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[#E2EA81]/40 dark:bg-[#344023] border border-[#CBD598] dark:border-[#4B5A34] text-[#545C1E] dark:text-[#DDEB7A]">
+            <section className="mt-4 flex items-start gap-3 rounded-2xl border border-[var(--surface-card-border)] bg-[var(--surface-step)] p-3.5 shadow-[var(--control-shadow)]">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-[var(--accent-soft-border)] bg-[var(--accent-soft-bg)] text-[var(--brand-olive)]">
                 <svg
                   viewBox="0 0 24 24"
                   className="h-4.5 w-4.5"
@@ -162,20 +162,20 @@ export function FichaDetailModal({ card, isJunior = false, onClose }) {
                 </svg>
               </span>
               <div className="min-w-0 flex-1">
-                <h3 className="text-[13px] font-bold text-[#1A1C16] dark:text-[#F4F6ED]">
+                <h3 className="text-[13px] font-bold text-[var(--text-primary)]">
                   {isJunior
                     ? t('library.card.helpsForest')
                     : t('library.card.contributesNetwork')}
                 </h3>
-                <p className="mt-1 text-[13px] leading-relaxed text-[#4A503D] dark:text-[#C5CEB8]">
+                <p className="mt-1 text-[13px] leading-relaxed text-[var(--text-secondary)]">
                   {contribution}
                 </p>
               </div>
             </section>
 
             {/* Bloque 2: Alimentación con la Mascota Contenida */}
-            <section className="relative mt-3 flex items-start gap-3 rounded-2xl border border-[#DCE3B5] dark:border-[#3E492D] bg-[#F7F9EE] dark:bg-[#232A1C] p-3.5 shadow-2xs">
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[#E2EA81]/40 dark:bg-[#344023] border border-[#CBD598] dark:border-[#4B5A34] text-[#545C1E] dark:text-[#DDEB7A]">
+            <section className="relative mt-3 flex items-start gap-3 rounded-2xl border border-[var(--surface-card-border)] bg-[var(--surface-step)] p-3.5 shadow-[var(--control-shadow)]">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-[var(--accent-soft-border)] bg-[var(--accent-soft-bg)] text-[var(--brand-olive)]">
                 <svg
                   viewBox="0 0 24 24"
                   className="h-4.5 w-4.5"
@@ -188,10 +188,10 @@ export function FichaDetailModal({ card, isJunior = false, onClose }) {
                 </svg>
               </span>
               <div className="min-w-0 flex-1 pr-12">
-                <h3 className="text-[13px] font-bold text-[#1A1C16] dark:text-[#F4F6ED]">
+                <h3 className="text-[13px] font-bold text-[var(--text-primary)]">
                   {t('library.card.eats')}
                 </h3>
-                <p className="mt-1 text-[13px] leading-relaxed text-[#4A503D] dark:text-[#C5CEB8]">
+                <p className="mt-1 text-[13px] leading-relaxed text-[var(--text-secondary)]">
                   {diet}
                 </p>
               </div>

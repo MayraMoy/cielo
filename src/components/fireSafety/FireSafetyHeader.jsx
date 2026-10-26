@@ -47,7 +47,7 @@ export function FireSafetyHeader({
       <button
         type="button"
         onClick={onBack}
-        className={`mb-6 inline-flex min-h-11 items-center gap-2 rounded-xl border px-3.5 py-2 text-sm font-semibold transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] ${
+        className={`mb-6 inline-flex min-h-11 items-center gap-2 rounded-xl border px-3.5 py-2 text-sm font-semibold transition-[color,background-color,transform] duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#687320] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--app-surface)] active:scale-[0.98] ${
           isDarkMode
             ? 'border-[#46503F] bg-[#20251B] text-[#F4F6ED] hover:bg-[#2B3325]'
             : 'border-[#E5DED2] bg-white text-[#37332D] shadow-xs hover:bg-[#F7F3EB]'
@@ -57,9 +57,9 @@ export function FireSafetyHeader({
         {t('common.backHome')}
       </button>
 
-      <header className="mb-10">
+      <header className="mb-8">
         <h1
-          className={`max-w-md text-[28px] font-extrabold leading-tight tracking-[-0.03em] sm:text-4xl ${
+          className={`max-w-md text-[30px] font-extrabold leading-[1.12] tracking-[-0.03em] sm:text-4xl ${
             isDarkMode ? 'text-white' : 'text-[#211C18]'
           }`}
         >
@@ -67,30 +67,20 @@ export function FireSafetyHeader({
         </h1>
 
         <div
-          className={`mt-6 flex items-start gap-4 rounded-r-2xl border-l-4 p-4 sm:p-5 ${
-            isDarkMode
-              ? 'border-[#FFD76A] bg-[#2A2314] text-[#FFF1C7]'
-              : 'border-[#E5B83B] bg-[#FFF8E7] text-[#493710]'
-          }`}
+          role="note"
+          className="mt-5 rounded-2xl border border-[var(--surface-card-border)] bg-[var(--surface-card)] p-4 text-[var(--text-primary)] shadow-[var(--card-shadow)] sm:p-5"
         >
-          <div
-            className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl shadow-xs ${
-              isDarkMode
-                ? 'bg-[#40331A] text-[#FFD76A]'
-                : 'bg-[#FBE8B0] text-[#533B0B]'
-            }`}
-          >
-            <FlameIcon />
-          </div>
-
-          <div className="min-w-0 flex-1">
-            <h2 className="text-base font-bold leading-snug tracking-tight sm:text-lg">
+          <h2 className="flex items-center gap-2.5 text-lg font-bold leading-snug tracking-tight sm:text-xl">
+            <span className={`shrink-0 ${isDarkMode ? 'text-[#FFB18A]' : 'text-[#B34E1E]'}`}>
+              <FlameIcon />
+            </span>
+            <span>
               {t('fireSafety.anteIncendio')}
-            </h2>
-            <p className="mt-1.5 text-sm font-normal leading-relaxed opacity-95 sm:text-base">
-              {isJunior ? fireSafety.juniorIntro : fireSafety.adultIntro}
-            </p>
-          </div>
+            </span>
+          </h2>
+          <p className="mt-2.5 text-[15px] font-normal leading-relaxed text-[var(--text-secondary)] sm:text-base">
+            {isJunior ? fireSafety.juniorIntro : fireSafety.adultIntro}
+          </p>
         </div>
       </header>
     </>

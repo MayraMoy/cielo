@@ -27,6 +27,7 @@ const en = {
   nav: {
     home: 'Home',
     scan: 'Scan QR',
+    scanShort: 'Scan',
     library: 'Collection',
     ariaNav: 'Floating main navigation',
     ariaLibrary: 'Collection and Library',
@@ -69,24 +70,48 @@ const en = {
   home: {
     greeting: 'Hi, welcome',
     juniorGreeting: 'Hi, explorer!',
-    fireSafetyLabel: 'SOS Fires',
-    fireSafetyAria: 'Fire prevention and emergency protocol',
+    fireSafetyLabel: 'Fire safety',
+    fireSafetyAria: 'Open fire prevention and emergency guidance',
     characterCard: {
       title: 'Collect the reserve characters',
       juniorTitle: 'Unlock the 3 secret gifts!',
-      buttonText: 'Start playing',
-      juniorButtonText: 'Go find QR codes!',
+      buttonText: 'Scan QR to play',
+      juniorButtonText: 'Scan a QR code!',
       unlockedAria: 'Unlocked characters',
+      rewardsGroupAria: 'Rewards to unlock',
       rewardOpenAria: 'Open reward {n}',
       rewardOpenedAria: 'View claimed reward {n}',
-      rewardLockedAria: 'Reward {n} locked',
+      rewardLockedAria: 'Reward {n} locked. Tap to learn how to unlock it.',
+      rewardLockedMessage: 'Answer the trivia to unlock it.',
     },
     didYouKnowCard: {
       title: 'Did you know...?',
-      description:
-        'The molle is a nurse tree: its shade protects orchids, bromeliads and young ferns in the forest.',
-      juniorDescription:
-        'The molle is like an umbrella! Its shade protects orchids and small ferns from the strong sun.',
+      facts: [
+        {
+          description:
+            'The molle is a nurse tree: its shade protects orchids, bromeliads and young ferns in the forest.',
+          juniorDescription:
+            'The molle is like an umbrella! Its shade protects orchids and small ferns from the strong sun.',
+        },
+        {
+          description:
+            'The sweet, spicy fruits of the molle feed many birds in the reserve.',
+          juniorDescription:
+            'Many little birds love eating the molle’s red fruits!',
+        },
+        {
+          description:
+            'A capybara’s eyes, ears and nose sit high on its head, helping it stay alert while swimming.',
+          juniorDescription:
+            'A capybara can swim with just its eyes, ears and nose above the water.',
+        },
+        {
+          description:
+            'Fungi break down leaves and other remains, returning nutrients to the soil.',
+          juniorDescription:
+            'Fungi help turn fallen leaves into nutrients for the soil.',
+        },
+      ],
     },
   },
   scan: {
@@ -107,6 +132,17 @@ const en = {
     scanHintJunior: 'Tap the camera to read the QR sign!',
     scanHintAdult: 'Press to scan the selected station',
     discoveredFallback: 'Species discovered',
+    closeResult: 'Close scan result',
+    curiosityLabel: 'Did you know?',
+    answerTriviaAction: 'Answer trivia to unlock',
+    passTriviaAction: 'Pass the trivia to unlock the reward',
+    playGameAction: 'Play to win the reward',
+    triviaButtonTitle: 'Pass the trivia',
+    triviaButtonHint: 'to unlock the reward',
+    gameButtonTitle: 'Play',
+    gameButtonHint: 'to win the reward',
+    chooseAnotherAction: 'Choose another station',
+    lockedRewardLabel: 'Reward to unlock',
     stationShort: 'St. {step}/{total}',
     giftAvailable: 'Gift #{n} available',
     playToWinGift: 'Play to win your gift!',
@@ -375,7 +411,8 @@ const en = {
       },
     },
     rewardModal: {
-      newSheets: 'New cards:',
+      unlockedStatus: 'Prize unlocked!',
+      newSheets: 'Unlocked cards',
       viewCollection: 'View in Collection',
       continue: 'Continue',
       closeAria: 'Close prize',
@@ -534,7 +571,7 @@ const en = {
     },
   },
   fireSafety: {
-    buttonLabel: 'SOS Fires',
+    buttonLabel: 'Fire safety',
     modalTitle: 'Prevention and Emergencies',
     juniorModalTitle: 'Fire Brigade! 🚒',
     juniorIntro:
@@ -557,15 +594,18 @@ const en = {
       'Take your trash with you.',
     ],
     emergencyContacts: [
-      { label: 'Volunteer Firefighters', number: '100' },
-      { label: 'Civil Defense', number: '103' },
-      { label: 'Police Emergencies', number: '911' },
+      { label: 'Volunteer Firefighters', shortLabel: 'Firefighters', number: '100' },
+      { label: 'Civil Defense', shortLabel: 'Civil Defense', number: '103' },
+      { label: 'Police Emergencies', shortLabel: 'Police', number: '911' },
     ],
     anteIncendio: 'In case of fire',
     protocolTitle: 'What to do step by step',
     preventionTitle: 'Caring for the Reserve',
     contactsTitle: 'Emergency lines',
     contactsIntro: 'Tap a contact to start a direct call.',
+    callAction: 'Call',
+    sosMenuTitle: 'Call emergency services',
+    closeSos: 'Close',
     footer: 'Caring for the reserve is everyone’s responsibility.',
   },
 };

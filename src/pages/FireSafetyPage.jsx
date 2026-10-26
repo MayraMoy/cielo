@@ -17,10 +17,10 @@ export function FireSafetyPage() {
 
   return (
     <main
-      className={`min-h-full w-full flex-1 shrink-0 px-5 pb-6 pt-4 sm:px-7 ${
+      className={`min-h-full w-full flex-1 shrink-0 px-5 pb-6 pt-4 sm:px-7 animate-[page-enter-right_260ms_cubic-bezier(0.22,1,0.36,1)_both] ${
         isDarkMode
-          ? 'bg-[#141710] text-[#F4F6ED]'
-          : 'bg-[#FAF9F5] text-[#1A1C16]'
+          ? 'bg-[var(--app-surface)] text-[var(--text-primary)]'
+          : 'bg-[var(--app-surface)] text-[#1A1C16]'
       }`}
     >
       <div className="mx-auto w-full max-w-2xl">
@@ -35,21 +35,18 @@ export function FireSafetyPage() {
           isDarkMode={isDarkMode}
           preventionRules={fireSafety.preventionRules}
         />
-        <EmergencyContacts
-          contacts={fireSafety.emergencyContacts}
-          isDarkMode={isDarkMode}
-        />
         <p
-          className={`mt-10 border-t pt-6 text-center text-xs font-medium uppercase tracking-wide ${
+          className={`mt-8 border-t pt-5 text-center text-sm leading-relaxed ${
             isDarkMode
-              ? 'border-[#333C2A] text-[#8C9680]'
-              : 'border-[#E6E0D3] text-[#7A766B]'
+              ? 'border-[#3A4246] text-[var(--text-secondary)]'
+              : 'border-[#DDE1E6] text-[var(--text-secondary)]'
           }`}
         >
           {fireSafety.footer}
         </p>
       </div>
 
+      <EmergencyContacts contacts={fireSafety.emergencyContacts} />
       <div aria-hidden="true" className="h-24 shrink-0" />
     </main>
   );

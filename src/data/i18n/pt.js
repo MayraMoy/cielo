@@ -27,6 +27,7 @@ const pt = {
   nav: {
     home: 'Início',
     scan: 'Escanear QR',
+    scanShort: 'Escanear',
     library: 'Coleção',
     ariaNav: 'Navegação principal flutuante',
     ariaLibrary: 'Coleção e Biblioteca',
@@ -69,24 +70,48 @@ const pt = {
   home: {
     greeting: 'Olá, bem-vindo',
     juniorGreeting: 'Olá, explorador!',
-    fireSafetyLabel: 'SOS Incêndios',
-    fireSafetyAria: 'Prevenção de incêndios e protocolo de emergência',
+    fireSafetyLabel: 'Guia contra incêndios',
+    fireSafetyAria: 'Abrir orientações sobre prevenção de incêndios e emergências',
     characterCard: {
       title: 'Colecione os personagens da reserva',
       juniorTitle: 'Desbloqueie os 3 presentes secretos!',
-      buttonText: 'Começar a jogar',
-      juniorButtonText: 'Vá procurar QR!',
+      buttonText: 'Escanear QR para jogar',
+      juniorButtonText: 'Escaneie um QR!',
       unlockedAria: 'Personagens desbloqueados',
+      rewardsGroupAria: 'Prêmios para desbloquear',
       rewardOpenAria: 'Abrir prêmio {n}',
       rewardOpenedAria: 'Ver prêmio {n} resgatado',
-      rewardLockedAria: 'Prêmio {n} bloqueado',
+      rewardLockedAria: 'Prêmio {n} bloqueado. Toque para saber como desbloquear.',
+      rewardLockedMessage: 'Responda à trivia para desbloquear.',
     },
     didYouKnowCard: {
       title: 'Você sabia...?',
-      description:
-        'O molle é uma árvore-berçário: sua sombra protege orquídeas, bromélias e samambaias jovens da mata.',
-      juniorDescription:
-        'O molle é como um guarda-chuva! Sua sombra protege orquídeas e samambaias pequenas do sol forte.',
+      facts: [
+        {
+          description:
+            'O molle é uma árvore-berçário: sua sombra protege orquídeas, bromélias e samambaias jovens da mata.',
+          juniorDescription:
+            'O molle é como um guarda-chuva! Sua sombra protege orquídeas e samambaias pequenas do sol forte.',
+        },
+        {
+          description:
+            'Os frutos doces e picantes do molle alimentam muitas aves da reserva.',
+          juniorDescription:
+            'Muitos passarinhos adoram comer os frutinhos vermelhos do molle!',
+        },
+        {
+          description:
+            'Os olhos, as orelhas e o nariz da capivara ficam no alto da cabeça, ajudando-a a ficar atenta enquanto nada.',
+          juniorDescription:
+            'A capivara pode nadar deixando só os olhos, as orelhas e o nariz para fora da água.',
+        },
+        {
+          description:
+            'Os fungos decompõem folhas e outros restos, devolvendo nutrientes ao solo.',
+          juniorDescription:
+            'Os fungos ajudam a transformar folhas caídas em nutrientes para a terra.',
+        },
+      ],
     },
   },
   scan: {
@@ -107,6 +132,17 @@ const pt = {
     scanHintJunior: 'Toque na câmera para ler a placa QR!',
     scanHintAdult: 'Pressione para escanear a estação selecionada',
     discoveredFallback: 'Espécie descoberta',
+    closeResult: 'Fechar resultado da leitura',
+    curiosityLabel: 'Curiosidade',
+    answerTriviaAction: 'Responda à trivia para desbloquear',
+    passTriviaAction: 'Acerte a trivia para desbloquear o prêmio',
+    playGameAction: 'Jogue para ganhar o prêmio',
+    triviaButtonTitle: 'Acerte a trivia',
+    triviaButtonHint: 'para desbloquear o prêmio',
+    gameButtonTitle: 'Jogar',
+    gameButtonHint: 'para ganhar o prêmio',
+    chooseAnotherAction: 'Escolher outra estação',
+    lockedRewardLabel: 'Prêmio a desbloquear',
     stationShort: 'Est. {step}/{total}',
     giftAvailable: 'Presente #{n} disponível',
     playToWinGift: 'Jogue para ganhar seu presente!',
@@ -381,7 +417,8 @@ const pt = {
       },
     },
     rewardModal: {
-      newSheets: 'Cartas novas:',
+      unlockedStatus: 'Prêmio desbloqueado!',
+      newSheets: 'Cartas desbloqueadas',
       viewCollection: 'Ver na Coleção',
       continue: 'Continuar',
       closeAria: 'Fechar prêmio',
@@ -544,7 +581,7 @@ const pt = {
     },
   },
   fireSafety: {
-    buttonLabel: 'SOS Incêndios',
+    buttonLabel: 'Guia contra incêndios',
     modalTitle: 'Prevenção e Emergências',
     juniorModalTitle: 'Brigada Contra o Fogo! 🚒',
     juniorIntro:
@@ -567,15 +604,18 @@ const pt = {
       'Leve seu lixo com você.',
     ],
     emergencyContacts: [
-      { label: 'Bombeiros Voluntários', number: '100' },
-      { label: 'Defesa Civil', number: '103' },
-      { label: 'Emergências Policiais', number: '911' },
+      { label: 'Bombeiros Voluntários', shortLabel: 'Bombeiros', number: '100' },
+      { label: 'Defesa Civil', shortLabel: 'Defesa Civil', number: '103' },
+      { label: 'Emergências Policiais', shortLabel: 'Polícia', number: '911' },
     ],
     anteIncendio: 'Diante de um incêndio',
     protocolTitle: 'O que fazer passo a passo',
     preventionTitle: 'Cuidado com a Reserva',
     contactsTitle: 'Linhas de emergência',
     contactsIntro: 'Toque em um contato para iniciar uma ligação direta.',
+    callAction: 'Ligar',
+    sosMenuTitle: 'Ligar para emergências',
+    closeSos: 'Fechar',
     footer: 'Cuidar da reserva é responsabilidade de todos.',
   },
 };

@@ -66,7 +66,7 @@ export function JuniorGamesPage() {
   ];
 
   return (
-    <div className="w-full flex-1 flex flex-col select-none bg-[#FAF9F5] dark:bg-[#141710]">
+    <div className="w-full flex-1 flex flex-col select-none bg-[var(--app-surface)]">
       <header className="w-full flex items-center justify-between px-5 pt-3">
         {mode === 'hub' || mode === 'completed' ? (
           <button

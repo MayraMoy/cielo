@@ -1,5 +1,6 @@
 import { useLanguage } from '../../hooks/useLanguage';
 import { GiftBox } from '../home/GiftBox';
+import { BadgeCheck } from 'lucide-react';
 
 export function TriviaCompletedCard({
   score,
@@ -15,7 +16,7 @@ export function TriviaCompletedCard({
   const hasEarnedReward = score >= TRIVIA_DATA.minimumCorrectAnswers;
 
   return (
-    <div className="w-full max-w-[350px] bg-white rounded-3xl p-6 shadow-[0_6px_20px_rgba(0,0,0,0.08)] border border-[#E5E7EB] flex flex-col items-center text-center gap-4 animate-[modal-appear_220ms_ease-out] font-['Poppins']">
+    <div className="flex w-full max-w-[350px] flex-col items-center gap-4 rounded-2xl border border-[var(--surface-card-border)] bg-[var(--surface-card)] p-6 text-center shadow-[var(--card-shadow)] animate-[modal-appear_220ms_ease-out] font-['Poppins']">
       {/* Icono de regalo animado */}
       {hasEarnedReward && (
         <div className="transform hover:scale-110 transition-transform my-1">
@@ -25,24 +26,24 @@ export function TriviaCompletedCard({
 
       <div>
         {hasEarnedReward && (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#F2F4E6] text-[#687320] border border-[#CFD79F] mb-2">
-            <span>🎉</span>
-            <span>{t('trivia.completed.unlockedBadge', { n: unlockedTotal })}</span>
+          <span className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-[var(--accent-soft-border)] bg-[var(--accent-soft-bg)] px-3 py-1 text-xs font-semibold text-[var(--accent-soft-text)]">
+            <BadgeCheck className="h-4 w-4" aria-hidden="true" />
+            <BadgeCheck className="h-4 w-4" aria-hidden="true" />
           </span>
         )}
-        <h2 className="text-[22px] sm:text-[24px] font-bold text-[#1A1C16] tracking-tight">
+        <h2 className="text-[22px] font-bold tracking-tight text-[var(--text-primary)] sm:text-[24px]">
           {hasEarnedReward
             ? isJunior
               ? reward.juniorTitle
               : reward.title
             : t('trivia.completed.retryTitle')}
         </h2>
-        <p className="text-[13px] text-[#555A49] mt-1 font-medium">
+        <p className="mt-1 text-[13px] font-medium text-[var(--text-secondary)]">
           {t('trivia.completed.score', { score, total: totalQuestions })}
         </p>
       </div>
 
-      <p className="text-[14px] leading-relaxed text-[#2B2F25] bg-[#FAF9F5] p-4 rounded-2xl border border-[#E5E7EB]">
+      <p className="rounded-2xl border border-[var(--surface-card-border)] bg-[var(--surface-step)] p-4 text-[14px] leading-relaxed text-[var(--text-secondary)]">
         {hasEarnedReward
           ? isJunior
             ? reward.juniorMessage
@@ -53,13 +54,13 @@ export function TriviaCompletedCard({
             })}
       </p>
 
-      {/* Botones de acción unificados */}
+      {/* Botones de acciÃ³n unificados */}
       <div className="w-full flex flex-col gap-2.5 pt-1">
         {hasEarnedReward ? (
           <button
             type="button"
             onClick={onGoHome}
-            className="w-full py-3 px-4 bg-[#7E8B28] hover:bg-[#6D7821] text-white text-[14.5px] font-semibold rounded-xl shadow-sm transition-all duration-150 active:scale-[0.98] cursor-pointer"
+            className="w-full rounded-xl bg-[var(--brand-olive)] px-4 py-3 text-[14.5px] font-semibold text-white shadow-[var(--control-shadow)] transition-all duration-150 hover:bg-[var(--brand-olive-hover)] active:scale-[0.98] cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#687320] dark:focus-visible:outline-[#B9C76B]"
           >
             {isJunior
               ? t('trivia.completed.goOpenGift')
@@ -69,7 +70,7 @@ export function TriviaCompletedCard({
           <button
             type="button"
             onClick={onRestart}
-            className="w-full py-3 px-4 bg-[#7E8B28] hover:bg-[#6D7821] text-white text-[14.5px] font-semibold rounded-xl shadow-sm transition-all duration-150 active:scale-[0.98] cursor-pointer"
+            className="w-full rounded-xl bg-[var(--brand-olive)] px-4 py-3 text-[14.5px] font-semibold text-white shadow-[var(--control-shadow)] transition-all duration-150 hover:bg-[var(--brand-olive-hover)] active:scale-[0.98] cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#687320] dark:focus-visible:outline-[#B9C76B]"
           >
             {t('trivia.completed.retry')}
           </button>
@@ -77,7 +78,7 @@ export function TriviaCompletedCard({
         <button
           type="button"
           onClick={hasEarnedReward ? onRestart : onGoHome}
-          className="w-full py-2.5 px-4 bg-transparent hover:bg-black/5 text-[#555A49] text-xs font-medium rounded-xl transition-all cursor-pointer"
+          className="w-full rounded-xl bg-transparent px-4 py-2.5 text-xs font-medium text-[var(--text-secondary)] transition-all hover:bg-[var(--surface-step)] cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#687320] dark:focus-visible:outline-[#B9C76B]"
         >
           {hasEarnedReward
             ? t('trivia.completed.repeat')

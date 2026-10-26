@@ -40,13 +40,13 @@ export function TriviaPage() {
   } = useTrivia({ isJunior, stationStep });
 
   return (
-    <div className="w-full flex-1 relative flex flex-col justify-between items-center select-none bg-[#FAF9F5]">
+    <div className="w-full flex-1 relative flex flex-col justify-between items-center select-none bg-[var(--app-surface)]">
       {/* 1. BARRA SUPERIOR CON BOTÓN CERRAR "✕" */}
       <div className="w-full flex items-center justify-end px-6 pt-3 z-20">
         <button
           type="button"
           onClick={() => navigate('/home')}
-          className="p-1.5 text-[#1A1C16] hover:text-[#7E8B28] hover:bg-black/5 rounded-full transition-all active:scale-90 cursor-pointer"
+          className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--surface-card-border)] bg-[var(--surface-card)] text-[var(--text-secondary)] shadow-[var(--control-shadow)] transition-colors hover:bg-[var(--accent-soft-bg)] hover:text-[var(--brand-olive)] active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#687320] dark:focus-visible:outline-[#B9C76B] cursor-pointer"
           aria-label={t('trivia.closeAria')}
         >
           <svg

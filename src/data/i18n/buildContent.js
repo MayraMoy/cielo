@@ -51,9 +51,13 @@ export function buildContent(lang) {
   };
 
   const s = tr.scan || {};
+  const stationImageById = new Map(
+    LIBRARY_CARDS.map(({ id, image }) => [id, image]),
+  );
   const stations = SCAN_DATA.stations.map((station) => ({
     ...station,
     ...((s.stations && s.stations[station.id]) || {}),
+    image: stationImageById.get(station.id),
   }));
   const scan = {
     title: s.title ?? SCAN_DATA.title,

@@ -3,7 +3,7 @@ import { useLanguage } from '../../hooks/useLanguage';
 
 // SVG de usuario para la ficha de perfil (con soporte para modo oscuro)
 const UserProfileIcon = ({
-  className = 'w-7 h-7 text-[#545C1E] dark:text-[#DDEB7A]',
+  className = 'w-7 h-7 text-[#545C1E] dark:text-[var(--text-name)]',
 }) => (
   <svg
     viewBox="0 0 32 32"
@@ -49,7 +49,7 @@ export function ExplorerProfileHeader({
       : t('library.ranks.curious');
 
   return (
-    <section className="flex items-center justify-between gap-3 rounded-3xl border border-[#E5E7EB] dark:border-[#2C3520] bg-white dark:bg-[#1A1F14] p-4 shadow-xs transition-colors">
+    <section className="flex items-center justify-between gap-3 rounded-2xl border border-[var(--surface-card-border)] bg-[var(--surface-card)] p-4 shadow-[var(--card-shadow)] transition-colors">
       <div className="flex items-center gap-3.5 min-w-0">
         <button
           type="button"
@@ -58,18 +58,18 @@ export function ExplorerProfileHeader({
           aria-label={t('profile.title')}
         >
           {/* Contenedor del avatar con el icono de usuario */}
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#F2F4E6] dark:bg-[#252E1B] border border-[#CCD69E] dark:border-[#3D482B] shadow-2xs">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[var(--accent-soft-border)] bg-[var(--accent-soft-bg)] shadow-[var(--control-shadow)]">
             <UserProfileIcon />
           </div>
 
           <div className="min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
-              <h1 className="text-base font-bold text-[#1A1C16] dark:text-[#F4F6ED] truncate">
+              <h1 className="text-base font-bold text-[var(--text-primary)] truncate">
                 {user?.fullName || t('library.guest')}
               </h1>
             </div>
 
-            <p className="text-xs font-semibold text-[#687320] dark:text-[#A4B544] mt-0.5">
+            <p className="text-xs font-semibold text-[#687320] dark:text-[var(--text-name)] mt-0.5">
               {rankBadge}
             </p>
           </div>
@@ -95,7 +95,7 @@ export function ExplorerProfileHeader({
         className={`shrink-0 inline-flex items-center justify-center rounded-xl border px-2.5 py-1.5 text-xs font-bold shadow-xs active:scale-95 transition-all cursor-pointer ${
           isLargeText
             ? 'border-[#7E8B28] bg-[#7E8B28] text-white'
-            : 'border-[#CCD69E] dark:border-[#3D482B] bg-[#F2F4E6] dark:bg-[#252E1B] text-[#4E5618] dark:text-[#DDEB7A] hover:bg-[#E4E8C8] dark:hover:bg-[#2F3A22]'
+            : 'border-[var(--accent-soft-border)] bg-[var(--accent-soft-bg)] text-[var(--accent-soft-text)] hover:bg-[var(--accent-soft-hover)]'
         }`}
         aria-label={
           isLargeText

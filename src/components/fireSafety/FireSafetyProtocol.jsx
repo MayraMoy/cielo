@@ -2,18 +2,18 @@ import { useLanguage } from '../../hooks/useLanguage';
 
 export function FireSafetyProtocol({ isDarkMode, steps }) {
   const { t } = useLanguage();
-  const heading = isDarkMode ? 'text-[#F4F6ED]' : 'text-[#24251E]';
+  const heading = 'text-[var(--text-primary)]';
 
   return (
-    <section aria-labelledby="fire-protocol-title" className="mb-10">
+    <section aria-labelledby="fire-protocol-title" className="mb-9">
       <h2
         id="fire-protocol-title"
-        className={`text-xl font-bold tracking-tight ${heading}`}
+        className={`text-[21px] font-bold tracking-tight ${heading}`}
       >
         {t('fireSafety.protocolTitle')}
       </h2>
 
-      <ol className="relative mt-6 flex flex-col gap-6 pl-2">
+      <ol className="relative mt-5 flex flex-col gap-5 pl-1">
         {steps.map((step, index) => {
           const [lead, ...rest] = step.split(':');
           const hasLead = rest.length > 0;
@@ -24,44 +24,34 @@ export function FireSafetyProtocol({ isDarkMode, steps }) {
               {!isLast && (
                 <span
                   aria-hidden="true"
-                  className={`absolute bottom-[-24px] left-4 top-10 w-0.5 ${
-                    isDarkMode ? 'bg-[#2E3626]' : 'bg-[#E5E0D3]'
+                  className={`absolute bottom-[-20px] left-[15px] top-9 w-0.5 ${
+                    isDarkMode ? 'bg-[#3A4246]' : 'bg-[#DDE1E6]'
                   }`}
                 />
               )}
 
               <span
-                className={`relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold shadow-xs ${
-                  isDarkMode
-                    ? 'bg-[#E9B949] text-[#24190C]'
-                    : 'bg-[#E5B83B] text-white'
-                }`}
+                className="relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--brand-olive)] text-sm font-bold text-white shadow-sm"
                 aria-hidden="true"
               >
                 {index + 1}
               </span>
 
-              <div className="min-w-0 flex-1 pt-1">
-                <p
-                  className={`text-sm leading-relaxed sm:text-base ${
-                    isDarkMode ? 'text-[#E2E8D7]' : 'text-[#2D2A24]'
-                  }`}
-                >
-                  {hasLead ? (
-                    <>
-                      <span
-                        className={`mr-1.5 font-bold ${
-                          isDarkMode ? 'text-[#F4F6ED]' : 'text-[#1A1C16]'
-                        }`}
-                      >
-                        {lead}:
-                      </span>
-                      {rest.join(':')}
-                    </>
-                  ) : (
-                    step
-                  )}
-                </p>
+              <div className="min-w-0 flex-1 pt-0.5">
+                {hasLead ? (
+                  <div>
+                    <h3 className={`text-base font-bold leading-snug ${heading}`}>
+                      {lead}
+                    </h3>
+                    <p className="mt-1 text-sm leading-relaxed text-[var(--text-secondary)] sm:text-base">
+                      {rest.join(':').trim()}
+                    </p>
+                  </div>
+                ) : (
+                  <p className="text-sm leading-relaxed text-[var(--text-secondary)] sm:text-base">
+                    {step}
+                  </p>
+                )}
               </div>
             </li>
           );

@@ -67,7 +67,7 @@ export function ProfilePage() {
   };
 
   return (
-    <div className="w-full flex-1 flex flex-col select-none bg-[#FAF9F5] dark:bg-[#141710]">
+    <div className="w-full flex-1 flex flex-col select-none bg-[var(--app-surface)]">
       <header className="px-5 pt-3 flex items-center gap-3">
         <button
           type="button"
