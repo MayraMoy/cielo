@@ -1,5 +1,5 @@
-import { useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { Lock, MoreVertical, RotateCw } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
 import { useAccessibility } from '../../hooks/useAccessibility';
 import { BottomNavbar } from './BottomNavbar';
@@ -9,39 +9,17 @@ export function MobileFrame({ children }) {
   const { isLargeText } = useAccessibility();
   const location = useLocation();
   const navigate = useNavigate();
-  const [navbarHiddenOnPath, setNavbarHiddenOnPath] = useState(null);
-  const lastScrollTopRef = useRef(0);
-  const lastScrollPathRef = useRef(location.pathname);
 
-  const isAuthPage = location.pathname === '/' || location.pathname === '/register';
-  const effectiveDarkMode = isAuthPage ? false : isDarkMode;
+  const isGoogleAuthPage = location.pathname.startsWith('/auth/google');
+  const isAuthPage =
+    location.pathname === '/' ||
+    location.pathname === '/register' ||
+    isGoogleAuthPage;
+  const effectiveDarkMode = isGoogleAuthPage ? false : isDarkMode;
   const showBottomNavbar =
     !isAuthPage &&
     !location.pathname.startsWith('/trivia') &&
     !location.pathname.startsWith('/juegos');
-
-  const isNavbarHidden = navbarHiddenOnPath === location.pathname;
-
-  const handleContentScroll = (event) => {
-    const currentScrollTop = event.currentTarget.scrollTop;
-
-    if (lastScrollPathRef.current !== location.pathname) {
-      lastScrollPathRef.current = location.pathname;
-      lastScrollTopRef.current = currentScrollTop;
-      setNavbarHiddenOnPath(null);
-      return;
-    }
-
-    const scrollDelta = currentScrollTop - lastScrollTopRef.current;
-
-    if (currentScrollTop <= 8 || scrollDelta < -4) {
-      setNavbarHiddenOnPath(null);
-    } else if (scrollDelta > 4) {
-      setNavbarHiddenOnPath(location.pathname);
-    }
-
-    lastScrollTopRef.current = currentScrollTop;
-  };
 
   const activeTab = location.pathname.startsWith('/library') ||
     location.pathname.startsWith('/profile') ||
@@ -73,7 +51,7 @@ export function MobileFrame({ children }) {
         {/* BARRA SUPERIOR DE ESTADO / DYNAMIC ISLAND */}
         <div
           className={`pt-3 pb-1 px-7 flex items-center justify-between text-xs font-medium select-none z-50 transition-colors duration-200 ${
-            effectiveDarkMode ? 'bg-[var(--app-surface)] text-[var(--text-primary)]' : 'bg-[var(--app-surface)] text-[#1A1C16]'
+            effectiveDarkMode ? 'bg-[#202124] text-[#E8EAED]' : 'bg-[#FFFFFF] text-[#1A1C16]'
           }`}
         >
           {/* Hora */}
@@ -109,18 +87,62 @@ export function MobileFrame({ children }) {
           </div>
         </div>
 
+        {/* BARRA DE NAVEGACIÓN DE CHROME MOBILE (DEBAJO DEL STATUS BAR) */}
+        <div
+          aria-hidden="true"
+          className={`px-3 pt-1.5 pb-2 flex items-center gap-2 border-b select-none z-40 transition-colors duration-200 ${
+            effectiveDarkMode
+              ? 'bg-[#202124] border-[#3C4043] text-[#E8EAED]'
+              : 'bg-[#FFFFFF] border-[#E0E2E6] text-[#3C4043]'
+          }`}
+        >
+          {/* Omnibox de Chrome */}
+          <div
+            className={`flex-1 min-w-0 flex items-center justify-between gap-2 rounded-full px-3 py-1.5 text-[12px] ${
+              effectiveDarkMode
+                ? 'bg-[#303134] text-[#E8EAED]'
+                : 'bg-[#F1F3F4] text-[#202124]'
+            }`}
+          >
+            <div className="flex items-center gap-1.5 min-w-0">
+              <Lock className="w-3 h-3 shrink-0 opacity-70" />
+              <span className="truncate font-normal tracking-tight">
+                {isGoogleAuthPage
+                  ? 'accounts.google.com'
+                  : `reservavillacielo.com${
+                      location.pathname !== '/' ? location.pathname : ''
+                    }`}
+              </span>
+            </div>
+            <RotateCw className="w-3.5 h-3.5 shrink-0 opacity-65" />
+          </div>
+
+          {/* Contador de pestañas estilo Chrome */}
+          <div
+            className={`w-5 h-5 shrink-0 rounded-[5px] border-[1.75px] flex items-center justify-center text-[10px] font-bold leading-none ${
+              effectiveDarkMode
+                ? 'border-[#BDC1C6] text-[#E8EAED]'
+                : 'border-[#5F6368] text-[#3C4043]'
+            }`}
+          >
+            1
+          </div>
+
+          {/* Menú de 3 puntos de Chrome */}
+          <MoreVertical className="w-4 h-4 shrink-0 opacity-75" />
+        </div>
+
         {/* ÁREA DE CONTENIDO DE LA PANTALLA (SCROLLABLE DEBAJO DEL NAVBAR FLOTANTE) */}
         <div
           className="flex-1 overflow-y-auto overflow-x-hidden relative flex flex-col [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
-          onScroll={handleContentScroll}
         >
           {children}
         </div>
 
-        {/* NAVEGADOR FLOTANTE QUE PASA POR ENCIMA DE TODO SIN TENER QUE SCROLLEAR */}
+        {/* NAVEGADOR FLOTANTE FIJO */}
         {showBottomNavbar && (
           <BottomNavbar
-            isHidden={isNavbarHidden}
+            isHidden={false}
             activeTab={activeTab}
             onTabChange={(tabId) =>
               navigate(tabId === 'library' ? '/library' : tabId === 'scan' ? '/scan' : '/home')

@@ -1,22 +1,29 @@
 export const REGISTER_DATA = {
-  title: "Unite a la comunidad",
-  subtitle: "Crea tu cuenta para guardar tu avance y explorar la red trófica de la reserva.",
+  reserveLabel: "Reserva Natural",
+  welcomePrefix: "Bienvenido a",
+  title: "Reserva Villa Cielo",
+  subtitle: "Explorá nuestra fauna, flora y red trófica.",
   fields: {
     fullName: {
       label: "Nombre completo",
       name: "fullName",
-      placeholder: "",
+      placeholder: "Ej: Sofía Martínez",
       type: "text",
     },
     age: {
       label: "¿Cuántos años tenés?",
       name: "age",
-      placeholder: "",
+      placeholder: "Ej: 24",
+      helper: "Adaptamos los juegos y trivias a tu edad.",
+      juniorHint: "Modo Junior: juegos visuales y pistas guiadas.",
+      adultHint: "Modo Explorador: trivias y red trófica completa.",
       type: "number",
       min: 1,
       max: 120,
     }
   },
-  submitButtonText: "Continuar",
-  googleLoginText: "Inicia Sesion con Google",
+  submitButtonText: "Comenzar a explorar",
+  dividerText: "o",
+  googleLoginText: "Continuar con Google",
+  googleHelperText: "Opcional: guardá y recuperá tu progreso.",
 };

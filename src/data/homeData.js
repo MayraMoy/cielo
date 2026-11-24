@@ -3,10 +3,10 @@ export const HOME_DATA = {
   juniorGreeting: "¡Hola, explorador!",
   defaultUserName: "Juan",
   characterCard: {
-    title: "Consigue tus personajes de la reserva",
+    title: "Conseguí tus personajes de la reserva",
     juniorTitle: "¡Destrabá los 3 regalos secretos!",
     buttonText: "Escanear QR para jugar",
-    juniorButtonText: "¡Escaneá un QR!",
+    juniorButtonText: "Escanear QR para jugar",
     totalSteps: 3,
   },
   didYouKnowCard: {

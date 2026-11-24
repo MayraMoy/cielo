@@ -84,18 +84,27 @@ export function buildContent(lang) {
 
   const r = tr.register || {};
   const register = {
+    welcomePrefix: r.welcomePrefix ?? REGISTER_DATA.welcomePrefix,
+    reserveLabel: r.reserveLabel ?? REGISTER_DATA.reserveLabel,
     title: r.title ?? REGISTER_DATA.title,
     subtitle: r.subtitle ?? REGISTER_DATA.subtitle,
     submitButtonText: r.submit ?? REGISTER_DATA.submitButtonText,
+    dividerText: r.divider ?? REGISTER_DATA.dividerText,
     googleLoginText: r.google ?? REGISTER_DATA.googleLoginText,
+    googleHelperText: r.googleHelper ?? REGISTER_DATA.googleHelperText,
     fields: {
       fullName: {
         ...REGISTER_DATA.fields.fullName,
         label: r.fullNameLabel ?? REGISTER_DATA.fields.fullName.label,
+        placeholder: r.fullNamePlaceholder ?? REGISTER_DATA.fields.fullName.placeholder,
       },
       age: {
         ...REGISTER_DATA.fields.age,
         label: r.ageLabel ?? REGISTER_DATA.fields.age.label,
+        placeholder: r.agePlaceholder ?? REGISTER_DATA.fields.age.placeholder,
+        helper: r.ageHelper ?? REGISTER_DATA.fields.age.helper,
+        juniorHint: r.ageJuniorHint ?? REGISTER_DATA.fields.age.juniorHint,
+        adultHint: r.ageAdultHint ?? REGISTER_DATA.fields.age.adultHint,
       },
     },
   };

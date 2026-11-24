@@ -120,6 +120,7 @@ export function HomePage() {
           }
           unlockedCount={unlockedCharacters}
           openedRewards={openedRewards}
+          isJunior={isJunior}
           onOpenReward={handleOpenReward}
           onStartGame={handleStartGame}
         />

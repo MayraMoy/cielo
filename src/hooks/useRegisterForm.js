@@ -10,6 +10,7 @@ export function useRegisterForm(onSubmitSuccess) {
 
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [googleNotice, setGoogleNotice] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,6 +24,9 @@ export function useRegisterForm(onSubmitSuccess) {
         ...prev,
         [name]: '',
       }));
+    }
+    if (googleNotice) {
+      setGoogleNotice('');
     }
   };
 
@@ -45,6 +49,10 @@ export function useRegisterForm(onSubmitSuccess) {
     }
 
     setErrors(newErrors);
+    const firstErrorField = Object.keys(newErrors)[0];
+    if (firstErrorField) {
+      document.getElementById(firstErrorField)?.focus();
+    }
     return Object.keys(newErrors).length === 0;
   };
 
@@ -59,13 +67,13 @@ export function useRegisterForm(onSubmitSuccess) {
   };
 
   const handleGoogleLogin = () => {
-    console.log('Iniciar sesión con Google clickeado (sin implementar backend)');
-    alert(t('register.googleSoon'));
+    setGoogleNotice(t('register.googleSoon'));
   };
 
   return {
     formData,
     errors,
+    googleNotice,
     isSubmitted,
     handleChange,
     handleSubmit,

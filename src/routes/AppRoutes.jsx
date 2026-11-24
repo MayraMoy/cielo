@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { RegisterPage } from '../pages/RegisterPage';
+import { GoogleAuthPage } from '../pages/GoogleAuthPage';
 import { HomePage } from '../pages/HomePage';
 import { ScanPage } from '../pages/ScanPage';
 import { TriviaPage } from '../pages/TriviaPage';
@@ -16,6 +17,7 @@ export function AppRoutes() {
         <Routes>
           <Route path="/" element={<RegisterPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/auth/google" element={<GoogleAuthPage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/inicio" element={<HomePage />} />
           <Route path="/scan" element={<ScanPage />} />

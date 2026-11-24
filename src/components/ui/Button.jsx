@@ -7,7 +7,7 @@ export function Button({
   ...props
 }) {
   const baseStyles =
-    'w-full py-3 px-4 rounded-xl font-semibold text-[14.5px] transition-all duration-200 flex items-center justify-center gap-2.5 cursor-pointer';
+    'w-full py-3 px-4 rounded-xl font-semibold text-[14.5px] transition-all duration-200 flex items-center justify-center gap-2.5 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#687320] dark:focus-visible:outline-[#C5D76A]';
 
   const variants = {
     primary:
@@ -15,7 +15,7 @@ export function Button({
     secondary:
       'bg-transparent text-[#1F2414] dark:text-[#E6EADF] hover:text-[#7E8B28] dark:hover:text-[#DDEB7A] font-medium text-[14.5px]',
     google:
-      'bg-white hover:bg-neutral-50 dark:bg-[#1A1F14] dark:hover:bg-[#252E1B] text-[#1F2414] dark:text-[#E6EADF] font-semibold text-[14px] py-2.5 px-4 border border-[#D1D5DB] dark:border-[#55623B] rounded-xl shadow-xs active:scale-[0.99]',
+      'bg-white hover:bg-neutral-50 dark:bg-[#1A1F14] dark:hover:bg-[#252E1B] text-[#1F2414] dark:text-[#E6EADF] font-semibold text-[14px] py-2.5 px-4 border border-[#8C949E] dark:border-[#6B7855] rounded-xl shadow-xs active:scale-[0.99]',
   };
 
   return (
