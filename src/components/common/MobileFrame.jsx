@@ -50,7 +50,7 @@ export function MobileFrame({ children }) {
       >
         {/* BARRA SUPERIOR DE ESTADO / DYNAMIC ISLAND */}
         <div
-          className={`pt-3 pb-1 px-7 flex items-center justify-between text-xs font-medium select-none z-50 transition-colors duration-200 ${
+          className={`accessibility-exempt pt-3 pb-1 px-7 flex items-center justify-between text-xs font-medium select-none z-50 transition-colors duration-200 ${
             effectiveDarkMode ? 'bg-[#202124] text-[#E8EAED]' : 'bg-[#FFFFFF] text-[#1A1C16]'
           }`}
         >
@@ -90,7 +90,7 @@ export function MobileFrame({ children }) {
         {/* BARRA DE NAVEGACIÓN DE CHROME MOBILE (DEBAJO DEL STATUS BAR) */}
         <div
           aria-hidden="true"
-          className={`px-3 pt-1.5 pb-2 flex items-center gap-2 border-b select-none z-40 transition-colors duration-200 ${
+          className={`accessibility-exempt px-3 pt-1.5 pb-2 flex items-center gap-2 border-b select-none z-40 transition-colors duration-200 ${
             effectiveDarkMode
               ? 'bg-[#202124] border-[#3C4043] text-[#E8EAED]'
               : 'bg-[#FFFFFF] border-[#E0E2E6] text-[#3C4043]'

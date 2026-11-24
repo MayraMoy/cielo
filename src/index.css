@@ -341,18 +341,18 @@ body {
 /* ========================================================
    MODO LECTURA / ACCESIBILIDAD TIPOGRÁFICA (TEXTO REMARCADO)
    ======================================================== */
-.large-text p,
-.large-text span,
-.large-text button,
-.large-text h1,
-.large-text h2,
-.large-text h3,
-.large-text li,
-.large-text a {
+.large-text p:not(.accessibility-exempt):not(.accessibility-exempt *),
+.large-text span:not(.accessibility-exempt):not(.accessibility-exempt *),
+.large-text button:not(.accessibility-exempt):not(.accessibility-exempt *),
+.large-text h1:not(.accessibility-exempt):not(.accessibility-exempt *),
+.large-text h2:not(.accessibility-exempt):not(.accessibility-exempt *),
+.large-text h3:not(.accessibility-exempt):not(.accessibility-exempt *),
+.large-text li:not(.accessibility-exempt):not(.accessibility-exempt *),
+.large-text a:not(.accessibility-exempt):not(.accessibility-exempt *) {
   font-weight: 600 !important;
 }
 
-.large-text .text-xs {
+.large-text .text-xs:not(.accessibility-exempt):not(.accessibility-exempt *) {
   font-size: 0.88rem !important;
   line-height: 1.38rem !important;
 }
@@ -366,59 +366,59 @@ body {
   line-height: 1.05rem !important;
 }
 
-.large-text .text-sm {
+.large-text .text-sm:not(.accessibility-exempt):not(.accessibility-exempt *) {
   font-size: 1.05rem !important;
   line-height: 1.55rem !important;
 }
 
-.large-text .text-\[13px\] {
+.large-text .text-\[13px\]:not(.accessibility-exempt):not(.accessibility-exempt *) {
   font-size: 0.98rem !important;
   line-height: 1.45rem !important;
 }
 
-.large-text .text-\[14px\] {
+.large-text .text-\[14px\]:not(.accessibility-exempt):not(.accessibility-exempt *) {
   font-size: 1.05rem !important;
   line-height: 1.55rem !important;
 }
 
-.large-text .text-base {
+.large-text .text-base:not(.accessibility-exempt):not(.accessibility-exempt *) {
   font-size: 1.18rem !important;
   line-height: 1.65rem !important;
 }
 
-.large-text .text-lg {
+.large-text .text-lg:not(.accessibility-exempt):not(.accessibility-exempt *) {
   font-size: 1.28rem !important;
   line-height: 1.75rem !important;
 }
 
-.large-text .text-xl {
+.large-text .text-xl:not(.accessibility-exempt):not(.accessibility-exempt *) {
   font-size: 1.42rem !important;
   line-height: 1.85rem !important;
 }
 
-.large-text .text-\[22px\] {
+.large-text .text-\[22px\]:not(.accessibility-exempt):not(.accessibility-exempt *) {
   font-size: 1.55rem !important;
 }
 
-.large-text .text-\[26px\] {
+.large-text .text-\[26px\]:not(.accessibility-exempt):not(.accessibility-exempt *) {
   font-size: 1.75rem !important;
 }
 
-.large-text .text-\[28px\] {
+.large-text .text-\[28px\]:not(.accessibility-exempt):not(.accessibility-exempt *) {
   font-size: 1.95rem !important;
 }
 
-.large-text .text-\[30px\] {
+.large-text .text-\[30px\]:not(.accessibility-exempt):not(.accessibility-exempt *) {
   font-size: 2rem !important;
   line-height: 1.15 !important;
 }
 
-.large-text .text-\[36px\] {
+.large-text .text-\[36px\]:not(.accessibility-exempt):not(.accessibility-exempt *) {
   font-size: 2.25rem !important;
   line-height: 1 !important;
 }
 
-.large-text .text-\[16px\] {
+.large-text .text-\[16px\]:not(.accessibility-exempt):not(.accessibility-exempt *) {
   font-size: 1.12rem !important;
   line-height: 1.55rem !important;
 }
