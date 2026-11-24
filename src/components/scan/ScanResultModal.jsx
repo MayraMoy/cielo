@@ -159,13 +159,6 @@ export function ScanResultModal({
                 {isJunior ? t('scan.gameButtonHint') : t('scan.triviaButtonHint')}
               </span>
             </button>
-            <button
-              type="button"
-              onClick={requestClose}
-              className="min-h-11 w-full rounded-xl border border-[var(--surface-card-border)] bg-[var(--surface-card)] px-4 py-2.5 text-sm font-medium text-[var(--text-secondary)] transition-colors hover:bg-[var(--surface-step)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#687320] dark:focus-visible:outline-[#B9C76B]"
-            >
-              {t('scan.chooseAnotherAction')}
-            </button>
           </div>
         </section>
       </div>

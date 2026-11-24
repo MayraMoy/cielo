@@ -1,72 +1,40 @@
 import { useLanguage } from '../../hooks/useLanguage';
 
-export function SimpleQRScanner({ isScanning, isSuccess }) {
+export function SimpleQRScanner({ isScanning }) {
   const { t } = useLanguage();
   return (
     <div className="relative w-full h-full flex flex-col items-center justify-center pointer-events-none select-none">
       
       {/* 1. MÁSCARA SEMITRANSPARENTE ALREDEDOR DEL VISOR */}
       <div className="relative w-[230px] h-[230px] sm:w-[250px] sm:h-[250px] flex items-center justify-center">
-        
+        <div className="absolute inset-0 rounded-2xl shadow-[0_0_0_9999px_rgba(0,0,0,0.45)] pointer-events-none" />
         {/* Recuadro con esquinas de enfoque */}
         <div
           className={`absolute inset-0 rounded-2xl transition-all duration-300 ${
-            isSuccess
-              ? "border-2 border-[#84CC16] shadow-[0_0_20px_rgba(132,204,22,0.6)]"
-              : isScanning
+            isScanning
               ? "border-2 border-[#84CC16]/60 shadow-[0_0_15px_rgba(132,204,22,0.4)]"
               : "border border-white/20"
           }`}
         >
-          {/* Esquina superior izquierda */}
-          <span
-            className={`absolute -top-1 -left-1 w-7 h-7 border-t-4 border-l-4 rounded-tl-xl transition-colors duration-300 ${
-              isScanning || isSuccess ? "border-[#84CC16]" : "border-white"
+          <svg
+            viewBox="0 0 250 250"
+            preserveAspectRatio="none"
+            className={`absolute inset-0 h-full w-full transition-colors duration-300 ${
+              isScanning ? "text-[#84CC16]" : "text-white"
             }`}
-          />
-          {/* Esquina superior derecha */}
-          <span
-            className={`absolute -top-1 -right-1 w-7 h-7 border-t-4 border-r-4 rounded-tr-xl transition-colors duration-300 ${
-              isScanning || isSuccess ? "border-[#84CC16]" : "border-white"
-            }`}
-          />
-          {/* Esquina inferior izquierda */}
-          <span
-            className={`absolute -bottom-1 -left-1 w-7 h-7 border-b-4 border-l-4 rounded-bl-xl transition-colors duration-300 ${
-              isScanning || isSuccess ? "border-[#84CC16]" : "border-white"
-            }`}
-          />
-          {/* Esquina inferior derecha */}
-          <span
-            className={`absolute -bottom-1 -right-1 w-7 h-7 border-b-4 border-r-4 rounded-br-xl transition-colors duration-300 ${
-              isScanning || isSuccess ? "border-[#84CC16]" : "border-white"
-            }`}
-          />
-        </div>
-
-        {/* Silueta tenue de QR en el centro del lector */}
-        <div className="opacity-35 text-white/50 transform scale-90">
-          <svg viewBox="0 0 100 100" width="120" height="120" fill="currentColor">
-            {/* Esquinas QR */}
-            <rect x="10" y="10" width="26" height="26" rx="3" stroke="currentColor" strokeWidth="4" fill="none" />
-            <rect x="18" y="18" width="10" height="10" rx="1" fill="currentColor" />
-            <rect x="64" y="10" width="26" height="26" rx="3" stroke="currentColor" strokeWidth="4" fill="none" />
-            <rect x="72" y="18" width="10" height="10" rx="1" fill="currentColor" />
-            <rect x="10" y="64" width="26" height="26" rx="3" stroke="currentColor" strokeWidth="4" fill="none" />
-            <rect x="18" y="72" width="10" height="10" rx="1" fill="currentColor" />
-            {/* Puntos centrales simulados */}
-            <circle cx="44" cy="22" r="3" />
-            <circle cx="56" cy="34" r="3" />
-            <circle cx="50" cy="50" r="4" />
-            <circle cx="34" cy="50" r="3" />
-            <circle cx="66" cy="50" r="3" />
-            <circle cx="44" cy="78" r="3" />
-            <circle cx="66" cy="70" r="3" />
-            <circle cx="78" cy="82" r="3" />
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M30 2H16A14 14 0 0 0 2 16v14 M220 2h14a14 14 0 0 1 14 14v14 M2 220v14a14 14 0 0 0 14 14h14 M248 220v14a14 14 0 0 1-14 14h-14"
+              stroke="currentColor"
+              strokeWidth="4"
+              strokeLinecap="round"
+            />
           </svg>
         </div>
 
-        {/* LÁSER DE ESCANEO ACTIVO AL PRESIONAR LA CÁMARA */}
+        {/* Guía visual mientras el lector analiza la imagen. */}
         {isScanning && (
           <div
             className="absolute inset-x-2 h-1 bg-gradient-to-r from-transparent via-[#84CC16] to-transparent shadow-[0_0_12px_#84CC16] pointer-events-none"
@@ -76,20 +44,12 @@ export function SimpleQRScanner({ isScanning, isSuccess }) {
           />
         )}
 
-        {/* FLASH DE DETECCIÓN EXITOSA */}
-        {isSuccess && (
-          <div className="absolute inset-0 bg-[#84CC16]/25 rounded-2xl animate-ping pointer-events-none" />
-        )}
       </div>
 
       {/* 2. TEXTO DE INSTRUCCIONES */}
-      <div className="mt-6 px-6 text-center">
-        <p className="text-white/90 text-[13px] font-medium drop-shadow-md">
-          {isScanning
-            ? t('scan.scannerScanning')
-            : isSuccess
-            ? t('scan.scannerSuccess')
-            : t('scan.scannerIdle')}
+      <div className="mt-5 rounded-full border border-white/20 bg-black/75 px-4 py-2 text-center">
+        <p className="text-white text-[13px] font-medium" aria-live="polite" aria-atomic="true">
+          {isScanning ? t('scan.scannerScanning') : t('scan.scannerIdle')}
         </p>
       </div>
     </div>
