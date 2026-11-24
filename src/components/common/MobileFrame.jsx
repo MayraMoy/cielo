@@ -134,9 +134,12 @@ export function MobileFrame({ children }) {
 
         {/* ÁREA DE CONTENIDO DE LA PANTALLA (SCROLLABLE DEBAJO DEL NAVBAR FLOTANTE) */}
         <div
-          className="flex-1 overflow-y-auto overflow-x-hidden relative flex flex-col [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+          id="app-content"
+          className="relative flex min-h-0 flex-1 flex-col overflow-hidden"
         >
-          {children}
+          <div className="flex min-h-0 flex-1 flex-col overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            {children}
+          </div>
         </div>
 
         {/* NAVEGADOR FLOTANTE FIJO */}
@@ -154,7 +157,7 @@ export function MobileFrame({ children }) {
 
         {/* BARRA INFERIOR DE INICIO (HOME INDICATOR) */}
         <div
-          className="w-full bg-[var(--app-surface)] pb-2 pt-1 flex justify-center pointer-events-none select-none z-50 transition-colors duration-200"
+          className="w-full bg-[var(--app-surface)] pb-2 pt-1 flex justify-center pointer-events-none select-none z-[80] transition-colors duration-200"
         >
           <div
             className={`w-32 h-1 rounded-full ${
