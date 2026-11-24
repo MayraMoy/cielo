@@ -13,12 +13,21 @@ export function MemoryGame({ speciesById = {}, onComplete }) {
   const totalPairs = PAIR_IDS.length;
 
   return (
-    <div className="w-full max-w-[360px] mx-auto flex flex-col gap-4">
-      <div className="flex items-center justify-between text-xs font-bold text-[#545C1E] dark:text-[#DDEB7A]">
-        <span className="rounded-full bg-[#F2F4E6] dark:bg-[#242B1E] border border-[#CFD79F] dark:border-[#3D482B] px-3 py-1">
+    <div className="mx-auto flex w-full max-w-[360px] flex-col gap-4">
+      <header className="text-left">
+        <h1 className="text-[25px] font-bold leading-tight tracking-tight text-[var(--text-primary)]">
+          {t('juniorGames.memorama.challengeTitle')}
+        </h1>
+        <p className="mt-1 text-sm leading-snug text-[var(--text-secondary)]">
+          {t('juniorGames.memorama.challengeSubtitle')}
+        </p>
+      </header>
+
+      <div className="flex items-center justify-between gap-3 text-xs text-[var(--text-secondary)]" aria-live="polite">
+        <span>
           {t('juniorGames.memorama.moves', { n: moves })}
         </span>
-        <span className="rounded-full bg-[#F2F4E6] dark:bg-[#242B1E] border border-[#CFD79F] dark:border-[#3D482B] px-3 py-1">
+        <span className="text-right">
           {t('juniorGames.memorama.pairs', {
             found: matched.length,
             total: totalPairs,
@@ -26,7 +35,7 @@ export function MemoryGame({ speciesById = {}, onComplete }) {
         </span>
       </div>
 
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-2 gap-3">
         {deck.map((card, index) => {
           const species = speciesById[card.speciesId];
           const isFaceUp =
@@ -47,12 +56,12 @@ export function MemoryGame({ speciesById = {}, onComplete }) {
                     })
                   : t('juniorGames.memorama.ariaHidden', { n: index + 1 })
               }
-              className={`relative aspect-square rounded-2xl border-2 flex items-center justify-center overflow-hidden transition-all duration-200 active:scale-95 cursor-pointer ${
+              className={`relative aspect-square rounded-2xl border-2 flex items-center justify-center overflow-hidden shadow-[var(--control-shadow)] transition-all duration-200 active:scale-95 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#687320] dark:focus-visible:outline-[#C5D76A] ${
                 isMatched
-                  ? 'border-[#7E8B28] bg-[#F2F7D9] dark:bg-[#2D3624] dark:border-[#879532]'
+                  ? 'border-[var(--brand-olive)] bg-[var(--surface-card)] ring-1 ring-[var(--brand-olive)]'
                   : isFaceUp
-                  ? 'border-[#7E8B28] bg-white dark:bg-[#1F241A] dark:border-[#879532]'
-                  : 'border-[#CCD69E] bg-gradient-to-br from-[#7E8B28] to-[#687320] dark:border-[#3D482B]'
+                  ? 'border-[var(--surface-card-border)] bg-[var(--surface-card)]'
+                  : 'border-[var(--brand-olive-hover)] bg-[var(--brand-olive)]'
               }`}
             >
               {isFaceUp ? (
@@ -60,17 +69,18 @@ export function MemoryGame({ speciesById = {}, onComplete }) {
                   <img
                     src={species?.image}
                     alt={species?.name}
-                    className="w-12 h-12 object-contain"
+                    className="h-16 w-16 object-contain"
                     draggable={false}
                   />
-                  <span className="text-[10px] font-bold text-center leading-tight text-[#1A1C16] dark:text-[#F4F6ED] line-clamp-2">
+                  <span className="line-clamp-2 text-[11px] font-bold text-center leading-tight text-[var(--text-primary)]">
                     {species?.name}
                   </span>
                 </div>
               ) : (
+                <span className="absolute inset-1 flex items-center justify-center rounded-[13px] border border-white/25" aria-hidden="true">
                 <svg
                   viewBox="0 0 24 24"
-                  className="w-8 h-8 text-white/90"
+                  className="h-9 w-9 text-white/90"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2"
@@ -81,6 +91,7 @@ export function MemoryGame({ speciesById = {}, onComplete }) {
                   <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.4 19 2c2 2 2.6 3.5 1.5 9.2A7 7 0 0 1 11 20Z" />
                   <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.5 12 13 13 12" />
                 </svg>
+                </span>
               )}
             </button>
           );

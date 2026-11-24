@@ -41,13 +41,13 @@ export function ComparisonGame({ speciesById = {}, onComplete }) {
     const isCorrectOption = current.correct === key;
 
     let style =
-      'border-[#CFD79F] dark:border-[#3D482B] bg-white dark:bg-[#1F241A] hover:border-[#7E8B28]';
+      'border-[var(--surface-card-border)] bg-[var(--surface-card)] hover:border-[var(--brand-olive)]';
     if (isAnswered && isCorrectOption) {
-      style = 'border-[#7E8B28] ring-2 ring-[#7E8B28] bg-[#F2F7D9] dark:bg-[#2D3624]';
+      style = 'border-[var(--brand-olive)] bg-[var(--surface-card)] ring-1 ring-[var(--brand-olive)]';
     } else if (isAnswered && isThis && !isCorrectOption) {
-      style = 'border-red-400 bg-red-50 dark:bg-[#3A2018] opacity-90';
+      style = 'border-[var(--status-error-border)] bg-[var(--surface-card)]';
     } else if (isAnswered) {
-      style = 'border-gray-200 dark:border-[#2C3322] opacity-60';
+      style = 'border-[var(--surface-card-border)] bg-[var(--surface-card)] opacity-60';
     }
 
     return (
@@ -58,7 +58,7 @@ export function ComparisonGame({ speciesById = {}, onComplete }) {
         aria-label={t('juniorGames.comparison.chooseAria', {
           name: species?.name || '',
         })}
-        className={`flex flex-col items-center gap-2 rounded-2xl border-2 p-3 transition-all active:scale-95 cursor-pointer disabled:cursor-default ${style}`}
+        className={`flex flex-col items-center gap-2 rounded-2xl border-2 bg-[var(--surface-card)] p-3 shadow-[var(--control-shadow)] transition-all active:scale-95 cursor-pointer disabled:cursor-default focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#687320] dark:focus-visible:outline-[#C5D76A] ${style}`}
       >
         <img
           src={species?.image}
@@ -66,7 +66,7 @@ export function ComparisonGame({ speciesById = {}, onComplete }) {
           className="w-24 h-24 object-contain"
           draggable={false}
         />
-        <span className="text-xs font-bold text-center text-[#1A1C16] dark:text-[#F4F6ED]">
+        <span className="text-xs font-bold text-center text-[var(--text-primary)]">
           {species?.name}
         </span>
       </button>
@@ -74,17 +74,41 @@ export function ComparisonGame({ speciesById = {}, onComplete }) {
   };
 
   return (
-    <div className="w-full max-w-[360px] mx-auto flex flex-col gap-4">
-      <div className="flex items-center justify-center">
-        <span className="rounded-full bg-[#F2F4E6] dark:bg-[#242B1E] border border-[#CFD79F] dark:border-[#3D482B] px-3 py-1 text-xs font-bold text-[#545C1E] dark:text-[#DDEB7A]">
+    <div className="mx-auto flex w-full max-w-[360px] flex-col gap-4">
+      <p className="text-sm leading-snug text-[var(--text-secondary)]">
+        {t('juniorGames.comparison.challengeIntro')}
+      </p>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-left text-xs font-semibold text-[var(--text-secondary)]">
           {t('juniorGames.comparison.questionCounter', {
             current: index + 1,
             total,
           })}
-        </span>
+        </p>
+        <div
+          className="grid grid-cols-3 gap-1.5"
+          role="progressbar"
+          aria-label={t('juniorGames.comparison.progressAria')}
+          aria-valuemin={0}
+          aria-valuemax={total}
+          aria-valuenow={index + 1}
+        >
+          {QUESTIONS.map((question, step) => (
+            <span
+              key={question.id}
+              className={`h-1 rounded-full ${
+                step <= index
+                  ? 'bg-[var(--brand-olive)]'
+                  : 'bg-[var(--surface-card-border)]'
+              }`}
+              aria-hidden="true"
+            />
+          ))}
+        </div>
       </div>
 
-      <h2 className="text-[17px] font-bold text-center text-[#1A1C16] dark:text-[#F4F6ED] leading-snug px-1">
+      <h2 className="px-1 text-left text-[17px] font-bold leading-snug text-[var(--text-primary)]">
         {text.prompt}
       </h2>
 
@@ -96,18 +120,20 @@ export function ComparisonGame({ speciesById = {}, onComplete }) {
       {isAnswered && (
         <div className="flex flex-col gap-3 animate-[modal-appear_200ms_ease-out]">
           <div
-            className={`rounded-2xl border p-3.5 text-center ${
+            role="status"
+            aria-live="polite"
+            className={`rounded-2xl border bg-[var(--surface-card)] p-3.5 text-center ${
               isCorrect
-                ? 'border-[#CFD79F] bg-[#F4F8DE] dark:bg-[#2D3624] dark:border-[#3D482B]'
-                : 'border-red-200 bg-red-50 dark:bg-[#3A2018] dark:border-[#5A2E22]'
+                ? 'border-[var(--brand-olive)]'
+                : 'border-[var(--status-error-border)]'
             }`}
           >
-            <p className="text-xs font-bold text-[#545C1E] dark:text-[#DDEB7A] mb-1">
+            <p className={`mb-1 text-xs font-bold ${isCorrect ? 'text-[var(--brand-olive)]' : 'text-[var(--status-error-text)]'}`}>
               {isCorrect
                 ? t('juniorGames.comparison.correctTitle')
                 : t('juniorGames.comparison.wrongTitle')}
             </p>
-            <p className="text-[13px] leading-relaxed text-[#2B2F25] dark:text-[#E6EADF]">
+            <p className="text-[13px] leading-relaxed text-[var(--text-secondary)]">
               {text.explanation}
             </p>
           </div>
@@ -115,7 +141,7 @@ export function ComparisonGame({ speciesById = {}, onComplete }) {
           <button
             type="button"
             onClick={handleNext}
-            className="w-full py-3 px-4 bg-[#7E8B28] hover:bg-[#6D7821] text-white text-[14.5px] font-semibold rounded-xl shadow-sm transition-all active:scale-[0.98] cursor-pointer"
+            className="min-h-12 w-full rounded-2xl bg-[var(--brand-olive)] px-4 py-3 text-[14.5px] font-semibold text-white shadow-[var(--control-shadow)] transition-all hover:bg-[var(--brand-olive-hover)] active:scale-[0.98] cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#687320] dark:focus-visible:outline-[#C5D76A]"
           >
             {isLast
               ? t('juniorGames.comparison.seeResult')

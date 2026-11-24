@@ -36,6 +36,8 @@
   --text-name: #6F7D1F;
   --brand-olive: #687320;
   --brand-olive-hover: #59631B;
+  --status-error-border: #B42318;
+  --status-error-text: #8A1C13;
   --card-shadow: 0 8px 22px rgba(15, 23, 42, 0.1), 0 1px 3px rgba(15, 23, 42, 0.06);
 }
 
@@ -251,6 +253,8 @@ body {
   --text-name: #B9C76B;
   --brand-olive: #707C2B;
   --brand-olive-hover: #7B8833;
+  --status-error-border: #F28B82;
+  --status-error-text: #F0B4B4;
   --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.36);
 }
 

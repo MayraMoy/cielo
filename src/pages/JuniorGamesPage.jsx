@@ -66,8 +66,8 @@ export function JuniorGamesPage() {
   ];
 
   return (
-    <div className="w-full flex-1 flex flex-col select-none bg-[var(--app-surface)]">
-      <header className="w-full flex items-center justify-between px-5 pt-3">
+    <div className="relative w-full flex-1 flex flex-col select-none bg-[var(--app-surface)]">
+      <header className="absolute inset-x-0 top-0 z-10 flex w-full items-center justify-between px-5 pt-3">
         {mode === 'hub' || mode === 'completed' ? (
           <button
             type="button"
@@ -97,9 +97,13 @@ export function JuniorGamesPage() {
         </span>
       </header>
 
-      <main className="w-full flex-1 flex flex-col justify-center px-5 py-6">
+      <main
+        className={`relative flex w-full flex-1 flex-col items-center px-5 ${
+          mode === 'hub' ? 'justify-center py-6' : 'justify-start pt-16 pb-6'
+        }`}
+      >
         {mode === 'hub' && (
-          <div className="flex flex-col gap-5">
+          <div className="flex w-full max-w-[360px] flex-col gap-5">
             <div className="text-center">
               <h1 className="text-[26px] font-black text-[#6F7D1F] dark:text-[#DDEB7A] leading-tight tracking-tight">
                 {t('juniorGames.hubTitle')}
@@ -115,9 +119,9 @@ export function JuniorGamesPage() {
                   key={game.id}
                   type="button"
                   onClick={() => setMode(game.id)}
-                  className="flex items-center gap-4 rounded-3xl border border-[#E7E4D8] dark:border-[#3D4633] bg-[#F7F4EE] dark:bg-[#20251B] p-4 text-left shadow-[0_8px_18px_rgba(28,33,15,0.05)] transition-all active:scale-[0.99] cursor-pointer"
+                  className="flex items-center gap-4 rounded-2xl border border-[var(--surface-card-border)] bg-[var(--surface-card)] p-4 text-left shadow-[var(--card-shadow)] transition-all duration-200 active:scale-[0.99] cursor-pointer"
                 >
-                  <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white dark:bg-[#141710] border border-[#E5E7EB] dark:border-[#353D2B]">
+                  <span className="flex h-14 w-14 shrink-0 items-center justify-center">
                     {game.icon}
                   </span>
                   <span className="min-w-0 flex-1">
