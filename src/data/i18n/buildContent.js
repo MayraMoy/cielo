@@ -23,8 +23,6 @@ function buildFireSafety(tr) {
     anteIncendio: fs.anteIncendio ?? 'Ante un incendio',
     protocolTitle: fs.protocolTitle ?? 'Qué hacer paso a paso',
     preventionTitle: fs.preventionTitle ?? 'Cuidado de la Reserva',
-    contactsTitle: fs.contactsTitle ?? 'Líneas de emergencia',
-    contactsIntro: fs.contactsIntro ?? 'Tocá un contacto para iniciar una llamada directa.',
     footer: fs.footer ?? 'Cuidar la reserva es responsabilidad de todos.',
   };
 }

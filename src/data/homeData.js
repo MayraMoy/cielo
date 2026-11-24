@@ -41,15 +41,15 @@ export const HOME_DATA = {
   fireSafety: {
     buttonLabel: "Guía contra incendios",
     modalTitle: "Prevención y Emergencias",
-    juniorModalTitle: "¡Brigada Contra el Fuego! 🚒",
+    juniorModalTitle: "¿Ves humo o fuego?",
     juniorIntro:
-      "Si ves humo o fuego, alejate. No intentes apagarlo y avisá a un adulto.",
+      "Alejate del humo y del fuego. Avisale a un adulto o guardaparque cercano. No intentes apagarlo.",
     adultIntro:
       "El fuego puede avanzar rápido en el monte. No intentes apagarlo: alejate y avisá.",
     juniorSteps: [
-      "Alejate del humo y del fuego.",
-      "Avisá a un adulto y llamen a Bomberos (100).",
-      "Si es seguro, ayudá a otras personas a alejarse.",
+      "Alejate: del humo y del fuego.",
+      "Avisá: a un adulto o guardaparque cercano.",
+      "Quedate: con esa persona y seguí sus indicaciones.",
     ],
     adultSteps: [
       "Proteger: Alejate del fuego y del humo por un camino seguro.",

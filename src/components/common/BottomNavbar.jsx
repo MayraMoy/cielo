@@ -6,6 +6,7 @@ export function BottomNavbar({
   onTabChange,
   onScanQR,
   onOpenLibrary,
+  isInFlow = false,
 }) {
   const { t } = useLanguage();
 
@@ -18,7 +19,7 @@ export function BottomNavbar({
 
   return (
     <div
-      className={`pointer-events-none absolute bottom-5 left-0 right-0 z-40 px-4 transition-[opacity,transform] duration-200 ${
+      className={`${isInFlow ? 'bottom-nav-flow' : 'pointer-events-none absolute bottom-5 left-0 right-0 z-40 px-4'} transition-[opacity,transform] duration-200 ${
         isHidden
           ? 'translate-y-24 opacity-0'
           : 'translate-y-0 opacity-100'
@@ -27,7 +28,7 @@ export function BottomNavbar({
       inert={isHidden}
     >
       <nav
-        className="bottom-nav pointer-events-auto relative mx-auto grid min-h-[64px] w-full max-w-[320px] grid-cols-3 items-end rounded-[26px] border border-[var(--surface-card-border)] bg-[var(--surface-card)] px-2 pb-2 pt-1 shadow-[var(--card-shadow)] select-none transition-colors duration-200"
+        className="bottom-nav pointer-events-auto relative z-10 mx-auto grid min-h-[64px] w-full max-w-[320px] grid-cols-3 items-end rounded-[26px] border border-[var(--surface-card-border)] bg-[var(--surface-card)] px-2 pb-2 pt-1 shadow-[var(--card-shadow)] select-none transition-colors duration-200"
         aria-label={t('nav.ariaNav')}
       >
         <button

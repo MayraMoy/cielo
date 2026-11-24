@@ -15,6 +15,11 @@ export function useQRScanner() {
     const nextStation = stations.find((station) => !completed.includes(station.step));
     const timer = setTimeout(() => {
       setScannedData(nextStation || discoveredSpecies);
+      try {
+        localStorage.setItem('cielo_last_scanned_station', JSON.stringify(nextStation || discoveredSpecies));
+      } catch {
+        // Scanning still works if browser storage is unavailable.
+      }
       setCompletedStations(completed);
       setStatus('success');
     }, 1800);

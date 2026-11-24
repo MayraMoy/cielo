@@ -36,6 +36,8 @@
   --text-name: #6F7D1F;
   --brand-olive: #687320;
   --brand-olive-hover: #59631B;
+  --fire-sheet-bg: #F7F7F5;
+  --fire-phone-icon-bg: #F8F9FA;
   --status-error-border: #B42318;
   --status-error-text: #8A1C13;
   --card-shadow: 0 8px 22px rgba(15, 23, 42, 0.1), 0 1px 3px rgba(15, 23, 42, 0.06);
@@ -253,9 +255,20 @@ body {
   --text-name: #B9C76B;
   --brand-olive: #707C2B;
   --brand-olive-hover: #7B8833;
+  --fire-sheet-bg: #171B1D;
+  --fire-phone-icon-bg: #272D27;
   --status-error-border: #F28B82;
   --status-error-text: #F0B4B4;
   --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.36);
+}
+
+.bottom-nav-flow {
+  position: relative;
+  z-index: 40;
+  width: 100%;
+  flex: 0 0 auto;
+  padding: 0 1rem 0.25rem;
+  pointer-events: none;
 }
 
 .home-surface {
@@ -477,56 +490,4 @@ body {
 
 .dark .trophic-network .trophic-network-instruction {
   color: #DDE2D3 !important;
-}
-
-
-/* ========================================================
-   MODAL DE EMERGENCIAS SOS - MODO OSCURO DE ALTA LEGIBILIDAD
-   ======================================================== */
-.dark .fire-modal-container {
-  background-color: #1B2018 !important;
-  color: #F4F6ED !important;
-}
-
-.dark .fire-modal-container h2 {
-  color: #FFFFFF !important;
-}
-
-.dark .fire-modal-container p {
-  color: #E1E7D8 !important;
-}
-
-.dark .fire-modal-container .fire-modal-pas {
-  background-color: #302419 !important;
-  border-color: #8C632A !important;
-}
-
-.dark .fire-modal-container .fire-modal-pas h3 {
-  color: #FFE3A1 !important;
-}
-
-.dark .fire-modal-container .fire-modal-pas li {
-  color: #FFF8E9 !important;
-}
-
-.dark .fire-modal-container .fire-prevention-box {
-  background-color: #22291C !important;
-  border-color: #465239 !important;
-}
-
-.dark .fire-modal-container .fire-prevention-box h3 {
-  color: #E2EC9D !important;
-}
-
-.dark .fire-modal-container .fire-prevention-box li {
-  color: #E7EBDD !important;
-}
-
-.dark .fire-modal-container .fire-contact-card {
-  background-color: #30211C !important;
-  border-color: #714737 !important;
-}
-
-.dark .fire-modal-container .fire-contact-card span:last-child {
-  color: #FFB18A !important;
 }

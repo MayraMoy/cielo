@@ -1,8 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
-import { EmergencyContacts } from '../components/fireSafety/EmergencyContacts';
 import { FireSafetyGuidelines } from '../components/fireSafety/FireSafetyGuidelines';
-import { FireSafetyHeader } from '../components/fireSafety/FireSafetyHeader';
+import {
+  FireSafetyAlertCard,
+  FireSafetyHeader,
+  FireSafetyJuniorCallCard,
+} from '../components/fireSafety/FireSafetyHeader';
 import { FireSafetyProtocol } from '../components/fireSafety/FireSafetyProtocol';
 import { useTheme } from '../hooks/useTheme';
 import { useUserProfile } from '../hooks/useUserProfile';
@@ -30,7 +33,7 @@ export function FireSafetyPage() {
 
   return (
     <main
-      className={`min-h-full w-full flex-1 shrink-0 px-5 pb-6 pt-4 sm:px-7 ${isExiting ? 'pointer-events-none animate-[page-exit-right_180ms_cubic-bezier(0.4,0,1,1)_forwards]' : 'animate-[page-enter-right_260ms_cubic-bezier(0.22,1,0.36,1)_both]'} ${
+      className={`min-h-full w-full flex-1 shrink-0 ${isExiting ? 'pointer-events-none animate-[page-exit-right_180ms_cubic-bezier(0.4,0,1,1)_forwards]' : 'animate-[page-enter-right_260ms_cubic-bezier(0.22,1,0.36,1)_both]'} ${
         isDarkMode
           ? 'bg-[var(--app-surface)] text-[var(--text-primary)]'
           : 'bg-[var(--app-surface)] text-[#1A1C16]'
@@ -38,29 +41,38 @@ export function FireSafetyPage() {
     >
       <div className="mx-auto w-full max-w-2xl">
         <FireSafetyHeader
-          isDarkMode={isDarkMode}
           isJunior={isJunior}
           fireSafety={fireSafety}
           onBack={handleBackHome}
         />
-        <FireSafetyProtocol isDarkMode={isDarkMode} steps={steps} />
-        <FireSafetyGuidelines
-          isDarkMode={isDarkMode}
-          preventionRules={fireSafety.preventionRules}
-        />
-        <p
-          className={`mt-8 border-t pt-5 text-center text-sm leading-relaxed ${
-            isDarkMode
-              ? 'border-[#3A4246] text-[var(--text-secondary)]'
-              : 'border-[#DDE1E6] text-[var(--text-secondary)]'
-          }`}
-        >
-          {fireSafety.footer}
-        </p>
+        <div className="relative z-20 -mt-5 rounded-t-[26px] bg-[var(--app-surface)] px-5 pb-10 pt-5 sm:px-7">
+          {isJunior ? (
+            /* Niños: primero los 3 pasos simples con íconos, luego el botón 100 si no hay adulto */
+            <>
+              <FireSafetyProtocol steps={steps} isJunior />
+              <FireSafetyJuniorCallCard />
+              <div className="pt-6">
+                <FireSafetyGuidelines
+                  isDarkMode={isDarkMode}
+                  preventionRules={fireSafety.preventionRules}
+                />
+              </div>
+            </>
+          ) : (
+            /* Adultos: flujo vertical único sin pestañas (contactos -> pasos PAS -> prevención) */
+            <>
+              <FireSafetyAlertCard fireSafety={fireSafety} />
+              <div className="pt-5">
+                <FireSafetyProtocol steps={steps} />
+                <FireSafetyGuidelines
+                  isDarkMode={isDarkMode}
+                  preventionRules={fireSafety.preventionRules}
+                />
+              </div>
+            </>
+          )}
+        </div>
       </div>
-
-      <EmergencyContacts contacts={fireSafety.emergencyContacts} />
-      <div aria-hidden="true" className="h-24 shrink-0" />
     </main>
   );
 }

@@ -19,7 +19,8 @@ export function MobileFrame({ children }) {
   const showBottomNavbar =
     !isAuthPage &&
     !location.pathname.startsWith('/trivia') &&
-    !location.pathname.startsWith('/juegos');
+    !location.pathname.startsWith('/juegos') &&
+    !location.pathname.startsWith('/fire-safety');
 
   const activeTab = location.pathname.startsWith('/library') ||
     location.pathname.startsWith('/profile') ||
@@ -142,7 +143,7 @@ export function MobileFrame({ children }) {
           </div>
         </div>
 
-        {/* NAVEGADOR FLOTANTE FIJO */}
+        {/* Navegación inferior: anclada al flujo durante Emergencias */}
         {showBottomNavbar && (
           <BottomNavbar
             isHidden={false}
@@ -152,6 +153,7 @@ export function MobileFrame({ children }) {
             }
             onScanQR={() => navigate('/scan')}
             onOpenLibrary={() => navigate('/library')}
+            isInFlow={location.pathname.startsWith('/fire-safety')}
           />
         )}
 
