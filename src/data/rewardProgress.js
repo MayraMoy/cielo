@@ -35,6 +35,7 @@ export function unlockCharacterByStation(stationStep = 1) {
 
     const nextCount = Math.min(3, Math.max(currentUnlocked, stepNum, completed.length));
     localStorage.setItem(REWARD_PROGRESS_KEY, String(nextCount));
+    window.dispatchEvent(new Event('cielo:rewards-updated'));
     return nextCount;
   } catch (error) {
     console.error('Error al guardar el personaje desbloqueado:', error);
@@ -66,10 +67,28 @@ export function markRewardAsOpened(rewardIndex = 0) {
     if (!opened.includes(idx)) {
       opened.push(idx);
       localStorage.setItem(OPENED_REWARDS_KEY, JSON.stringify(opened));
+      window.dispatchEvent(new Event('cielo:rewards-updated'));
     }
     return opened;
   } catch (error) {
     console.error('Error al guardar regalo abierto:', error);
     return getOpenedRewards();
   }
+}
+
+export function getPendingRewardsCount() {
+  const unlocked = getUnlockedCharacters();
+  if (unlocked <= 0) return 0;
+  const opened = getOpenedRewards();
+  let pending = 0;
+  for (let i = 0; i < unlocked; i += 1) {
+    if (!opened.includes(i)) pending += 1;
+  }
+  return pending;
+}
+
+export function isCardUnlocked(card, openedRewards = getOpenedRewards()) {
+  if (card?.unlocked) return true;
+  const requiredRewardIndex = Math.max(0, (card?.unlockStep ?? 1) - 1);
+  return openedRewards.includes(requiredRewardIndex);
 }

@@ -1,7 +1,9 @@
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Lock, MoreVertical, RotateCw } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
 import { useAccessibility } from '../../hooks/useAccessibility';
+import { getPendingRewardsCount } from '../../data/rewardProgress';
 import { BottomNavbar } from './BottomNavbar';
 
 export function MobileFrame({ children }) {
@@ -9,6 +11,18 @@ export function MobileFrame({ children }) {
   const { isLargeText } = useAccessibility();
   const location = useLocation();
   const navigate = useNavigate();
+  const [pendingRewardsCount, setPendingRewardsCount] = useState(getPendingRewardsCount);
+
+  useEffect(() => {
+    const syncRewards = () => setPendingRewardsCount(getPendingRewardsCount());
+    syncRewards();
+    window.addEventListener('cielo:rewards-updated', syncRewards);
+    window.addEventListener('storage', syncRewards);
+    return () => {
+      window.removeEventListener('cielo:rewards-updated', syncRewards);
+      window.removeEventListener('storage', syncRewards);
+    };
+  }, [location.pathname]);
 
   const isGoogleAuthPage = location.pathname.startsWith('/auth/google');
   const isAuthPage =
@@ -148,6 +162,7 @@ export function MobileFrame({ children }) {
           <BottomNavbar
             isHidden={false}
             activeTab={activeTab}
+            libraryBadgeCount={pendingRewardsCount}
             onTabChange={(tabId) =>
               navigate(tabId === 'library' ? '/library' : tabId === 'scan' ? '/scan' : '/home')
             }

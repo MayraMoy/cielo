@@ -93,6 +93,7 @@ const es = {
       rewardLockedAria: 'Premio {n} bloqueado. Toca para saber cómo desbloquearlo.',
       rewardLockedMessage: 'Responde la trivia para desbloquearlo.',
       pendingRewardBanner: '¡Tenés un regalo listo para abrir!',
+      openGiftShort: 'Abrir regalo',
       gameCardTitle: 'Mini juegos',
       ageJuniorBadge: 'Hasta 12 años',
       ageAdultBadge: '13+ años',
@@ -231,8 +232,8 @@ const es = {
       score: 'Acertaste {score} de {total} preguntas.',
       needMore:
         'Necesitas acertar al menos {min} de {total} preguntas para ganar el premio. ¡Vuelve a intentarlo!',
-      goOpenGift: '🎁 ¡Ir a abrir mi regalo!',
-      seeProgress: 'Ver mi avance en el Inicio',
+      goOpenGift: '🎁 ¡Abrir mi regalo!',
+      seeProgress: 'Abrir mi regalo',
       retry: 'Volver a intentar',
       repeat: 'Repetir la trivia',
       backHome: 'Volver al inicio',
@@ -243,9 +244,9 @@ const es = {
       subtitle: 'Has completado la trivia de redes tróficas',
       characterUnlocked: 'Nuevo premio desbloqueado',
       message:
-        '¡Conocimiento desbloqueado! Ya puedes abrir tu regalo en el Inicio y revisar tus nuevas fichas en la Colección.',
+        '¡Conocimiento desbloqueado! Abrí tu regalo ahora para sumar tus nuevas fichas a la Colección.',
       juniorMessage:
-        '¡Ganaste un nuevo regalo! Volvé al Inicio para tocar el paquete sorpresa y ver qué personajes destrabaste.',
+        '¡Ganaste un nuevo regalo! Abrí tu paquete sorpresa ahora para ver qué personajes destrabaste.',
     },
     questions: {
       q1: {
@@ -367,8 +368,8 @@ const es = {
     completed: {
       unlockedBadge: '¡Regalo desbloqueado!',
       message:
-        'Volvé al Inicio para abrir tu regalo o mirá tus nuevas fichas en la Colección.',
-      goHome: '🎁 ¡Ir a abrir mi regalo!',
+        '¡Ganaste un premio! Abrí tu regalo ahora o mirá tus nuevas fichas en la Colección.',
+      goHome: '🎁 ¡Abrir mi regalo!',
       seeCollection: 'Ver en Colección',
     },
   },

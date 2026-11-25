@@ -2,10 +2,14 @@ import { useEffect, useMemo, useState, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
 import { useUserProfile } from '../hooks/useUserProfile';
-import { unlockCharacterByStation } from '../data/rewardProgress';
+import {
+  markRewardAsOpened,
+  unlockCharacterByStation,
+} from '../data/rewardProgress';
 import { MemoryGame } from '../components/juniorGames/MemoryGame';
 import { ComparisonGame } from '../components/juniorGames/ComparisonGame';
 import { JuniorGameCompletedCard } from '../components/juniorGames/JuniorGameCompletedCard';
+import { CharacterRewardModal } from '../components/home/CharacterRewardModal';
 
 export function JuniorGamesPage() {
   const navigate = useNavigate();
@@ -14,8 +18,15 @@ export function JuniorGamesPage() {
   const { t, content } = useLanguage();
 
   const stationStep = location.state?.stationStep || 1;
+  const rewardIndex = Math.max(0, Math.min(2, Number(stationStep) - 1));
   const [mode, setMode] = useState('hub');
   const [lastGame, setLastGame] = useState('memorama');
+  const [isRewardModalOpen, setIsRewardModalOpen] = useState(false);
+
+  const handleOpenReward = () => {
+    markRewardAsOpened(rewardIndex);
+    setIsRewardModalOpen(true);
+  };
 
   // Los juegos son solo para niños: los adultos van a la trivia.
   useEffect(() => {
@@ -169,7 +180,7 @@ export function JuniorGamesPage() {
                   ? t('juniorGames.comparison.winTitle')
                   : t('juniorGames.memorama.winTitle')
               }
-              onGoHome={() => navigate('/home')}
+              onGoHome={handleOpenReward}
               onSeeCollection={() => navigate('/library')}
               onChooseAnother={() => navigate('/scan')}
               onReplay={goToHub}
@@ -177,6 +188,17 @@ export function JuniorGamesPage() {
           </div>
         )}
       </main>
+
+      {isRewardModalOpen && (
+        <CharacterRewardModal
+          rewardIndex={rewardIndex}
+          onClose={() => setIsRewardModalOpen(false)}
+          onOpenLibrary={() => {
+            setIsRewardModalOpen(false);
+            navigate('/library');
+          }}
+        />
+      )}
     </div>
   );
 }

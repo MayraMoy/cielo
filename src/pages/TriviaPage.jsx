@@ -1,10 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTrivia } from '../hooks/useTrivia';
 import { useUserProfile } from '../hooks/useUserProfile';
 import { useLanguage } from '../hooks/useLanguage';
+import { markRewardAsOpened } from '../data/rewardProgress';
 import { TriviaCard } from '../components/trivia/TriviaCard';
 import { TriviaCompletedCard } from '../components/trivia/TriviaCompletedCard';
+import { CharacterRewardModal } from '../components/home/CharacterRewardModal';
 
 export function TriviaPage() {
   const navigate = useNavigate();
@@ -13,6 +15,13 @@ export function TriviaPage() {
   const { t } = useLanguage();
 
   const stationStep = location.state?.stationStep || 1;
+  const rewardIndex = Math.max(0, Math.min(2, Number(stationStep) - 1));
+  const [isRewardModalOpen, setIsRewardModalOpen] = useState(false);
+
+  const handleOpenReward = () => {
+    markRewardAsOpened(rewardIndex);
+    setIsRewardModalOpen(true);
+  };
 
   // La trivia es solo para adultos: los niños juegan "Zona de juegos".
   useEffect(() => {
@@ -87,10 +96,22 @@ export function TriviaPage() {
             totalQuestions={totalQuestions}
             isJunior={isJunior}
             onGoHome={() => navigate('/home')}
+            onGoCollection={handleOpenReward}
             onRestart={handleRestart}
           />
         )}
       </main>
+
+      {isRewardModalOpen && (
+        <CharacterRewardModal
+          rewardIndex={rewardIndex}
+          onClose={() => setIsRewardModalOpen(false)}
+          onOpenLibrary={() => {
+            setIsRewardModalOpen(false);
+            navigate('/library');
+          }}
+        />
+      )}
     </div>
   );
 }

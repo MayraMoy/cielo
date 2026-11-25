@@ -10,6 +10,7 @@ import { CharacterRewardModal } from '../components/home/CharacterRewardModal';
 import {
   getOpenedRewards,
   getUnlockedCharacters,
+  isCardUnlocked,
   markRewardAsOpened,
 } from '../data/rewardProgress';
 import { useUserProfile } from '../hooks/useUserProfile';
@@ -52,10 +53,8 @@ export function LibraryPage() {
   };
 
   const unlockedCardsCount = useMemo(() => {
-    return LIBRARY_CARDS.filter(
-      (c) => c.unlocked || (c.unlockStep ?? 1) <= unlockedCharacters
-    ).length;
-  }, [LIBRARY_CARDS, unlockedCharacters]);
+    return LIBRARY_CARDS.filter((c) => isCardUnlocked(c, openedRewards)).length;
+  }, [LIBRARY_CARDS, openedRewards]);
 
   return (
     <div className="relative flex w-full flex-1 flex-col select-none bg-[var(--app-surface)] transition-colors">
@@ -194,7 +193,7 @@ export function LibraryPage() {
           {activeSection === 'fichas' ? (
             <FichasTab
               cards={LIBRARY_CARDS}
-              unlockedCharacters={unlockedCharacters}
+              openedRewards={openedRewards}
               onOpenCard={setSelectedCard}
               onGoScan={() => navigate('/scan')}
             />

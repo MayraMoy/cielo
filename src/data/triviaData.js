@@ -69,7 +69,7 @@ export const TRIVIA_DATA = {
     juniorTitle: "¡Sos un Guardaparque Genial! 🌟",
     subtitle: "Has completado la trivia de redes tróficas",
     characterUnlocked: "Nuevo premio desbloqueado",
-    message: "¡Conocimiento desbloqueado! Ya puedes abrir tu regalo en el Inicio y revisar tus nuevas fichas en la Colección.",
-    juniorMessage: "¡Ganaste un nuevo regalo! Volvé al Inicio para tocar el paquete sorpresa y ver qué personajes destrabaste.",
+    message: "¡Conocimiento desbloqueado! Abrí tu regalo ahora para sumar tus nuevas fichas a la Colección.",
+    juniorMessage: "¡Ganaste un nuevo regalo! Abrí tu paquete sorpresa ahora para ver qué personajes destrabaste.",
   },
 };

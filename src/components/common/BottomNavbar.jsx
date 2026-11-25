@@ -3,6 +3,7 @@ import { useLanguage } from '../../hooks/useLanguage';
 export function BottomNavbar({
   isHidden = false,
   activeTab = 'home',
+  libraryBadgeCount = 0,
   onTabChange,
   onScanQR,
   onOpenLibrary,
@@ -80,14 +81,28 @@ export function BottomNavbar({
           type="button"
           onClick={onOpenLibrary}
           className={itemClass(activeTab === 'library')}
-          aria-label={t('nav.library')}
+          aria-label={
+            libraryBadgeCount > 0
+              ? `${t('nav.library')} (${libraryBadgeCount})`
+              : t('nav.library')
+          }
           aria-current={activeTab === 'library' ? 'page' : undefined}
         >
-          <svg viewBox="0 0 28 28" className="h-7 w-7 shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M6 9.5V20.5C6 22 7 23 8.5 23H20" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
-            <rect x="9.5" y="5" width="13" height="15.5" rx="2" stroke="currentColor" strokeWidth="2.2" />
-            <path d="M13.5 5V12L16 10L18.5 12V5" fill="currentColor" />
-          </svg>
+          <span className="relative inline-flex items-center justify-center">
+            <svg viewBox="0 0 28 28" className="h-7 w-7 shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M6 9.5V20.5C6 22 7 23 8.5 23H20" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+              <rect x="9.5" y="5" width="13" height="15.5" rx="2" stroke="currentColor" strokeWidth="2.2" />
+              <path d="M13.5 5V12L16 10L18.5 12V5" fill="currentColor" />
+            </svg>
+            {libraryBadgeCount > 0 && (
+              <span
+                aria-hidden="true"
+                className="absolute -right-2 -top-1 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-[#B91C1C] px-1 text-[10.5px] font-extrabold leading-none text-white ring-2 ring-[var(--surface-card)] tabular-nums"
+              >
+                {libraryBadgeCount}
+              </span>
+            )}
+          </span>
           <span className="whitespace-nowrap text-xs leading-none">{t('nav.library')}</span>
         </button>
       </nav>

@@ -92,6 +92,7 @@ const en = {
       rewardLockedAria: 'Reward {n} locked. Tap to learn how to unlock it.',
       rewardLockedMessage: 'Answer the trivia to unlock it.',
       pendingRewardBanner: 'You have a gift ready to open!',
+      openGiftShort: 'Open gift',
       gameCardTitle: 'Mini games',
       ageJuniorBadge: 'Ages 12 & under',
       ageAdultBadge: 'Ages 13+',
@@ -228,8 +229,8 @@ const en = {
       score: 'You got {score} of {total} questions right.',
       needMore:
         'You need to get at least {min} of {total} questions right to win the prize. Try again!',
-      goOpenGift: '🎁 Go open my gift!',
-      seeProgress: 'See my progress on Home',
+      goOpenGift: '🎁 Open my gift!',
+      seeProgress: 'Open my gift',
       retry: 'Try again',
       repeat: 'Play the trivia again',
       backHome: 'Back to home',
@@ -240,9 +241,9 @@ const en = {
       subtitle: 'You completed the food web trivia',
       characterUnlocked: 'New prize unlocked',
       message:
-        'Knowledge unlocked! You can now open your gift on Home and check your new cards in the Collection.',
+        'Knowledge unlocked! Open your gift now to add your new cards to the Collection.',
       juniorMessage:
-        'You won a new gift! Go back to Home and tap the surprise box to see which characters you unlocked.',
+        'You won a new gift! Open your surprise box now to see which characters you unlocked.',
     },
     questions: {
       q1: {
@@ -359,8 +360,8 @@ const en = {
     completed: {
       unlockedBadge: 'Gift unlocked!',
       message:
-        'Go back to Home to open your gift or check your new cards in the Collection.',
-      goHome: '🎁 Go open my gift!',
+        'You won a prize! Open your gift now or check your new cards in the Collection.',
+      goHome: '🎁 Open my gift!',
       seeCollection: 'View in Collection',
     },
   },

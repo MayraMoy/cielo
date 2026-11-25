@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useLanguage } from '../../hooks/useLanguage';
+import { isCardUnlocked } from '../../data/rewardProgress';
 import { LockIcon } from './LockIcon';
 import { LockedCardToast } from './LockedCardToast';
 
 export function FichasTab({
   cards = [],
-  unlockedCharacters,
+  openedRewards = [],
   onOpenCard,
   onGoScan,
 }) {
@@ -27,8 +28,7 @@ export function FichasTab({
       {/* Cuadrícula de fichas en 2 columnas legibles */}
       <div className="grid grid-cols-2 gap-3.5 px-1 py-1">
         {cards.map((card) => {
-          const isUnlocked =
-            card.unlocked || (card.unlockStep ?? 1) <= unlockedCharacters;
+          const isUnlocked = isCardUnlocked(card, openedRewards);
 
           return (
             <button

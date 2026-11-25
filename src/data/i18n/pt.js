@@ -92,6 +92,7 @@ const pt = {
       rewardLockedAria: 'Prêmio {n} bloqueado. Toque para saber como desbloquear.',
       rewardLockedMessage: 'Responda à trivia para desbloquear.',
       pendingRewardBanner: 'Você tem um presente pronto para abrir!',
+      openGiftShort: 'Abrir presente',
       gameCardTitle: 'Minijogos',
       ageJuniorBadge: 'Até 12 anos',
       ageAdultBadge: '13+ anos',
@@ -229,8 +230,8 @@ const pt = {
       score: 'Você acertou {score} de {total} perguntas.',
       needMore:
         'Você precisa acertar pelo menos {min} de {total} perguntas para ganhar o prêmio. Tente novamente!',
-      goOpenGift: '🎁 Ir abrir meu presente!',
-      seeProgress: 'Ver meu progresso no Início',
+      goOpenGift: '🎁 Abrir meu presente!',
+      seeProgress: 'Abrir meu presente',
       retry: 'Tentar novamente',
       repeat: 'Jogar a trivia novamente',
       backHome: 'Voltar ao início',
@@ -241,9 +242,9 @@ const pt = {
       subtitle: 'Você completou a trivia das teias alimentares',
       characterUnlocked: 'Novo prêmio desbloqueado',
       message:
-        'Conhecimento desbloqueado! Agora você pode abrir seu presente no Início e conferir suas novas cartas na Coleção.',
+        'Conhecimento desbloqueado! Abra seu presente agora para adicionar suas novas cartas à Coleção.',
       juniorMessage:
-        'Você ganhou um novo presente! Volte ao Início e toque no pacote surpresa para ver quais personagens desbloqueou.',
+        'Você ganhou um novo presente! Abra seu pacote surpresa agora para ver quais personagens desbloqueou.',
     },
     questions: {
       q1: {
@@ -365,8 +366,8 @@ const pt = {
     completed: {
       unlockedBadge: 'Presente desbloqueado!',
       message:
-        'Volte ao Início para abrir seu presente ou veja suas novas cartas na Coleção.',
-      goHome: '🎁 Ir abrir meu presente!',
+        'Você ganhou um prêmio! Abra seu presente agora ou veja suas novas cartas na Coleção.',
+      goHome: '🎁 Abrir meu presente!',
       seeCollection: 'Ver na Coleção',
     },
   },

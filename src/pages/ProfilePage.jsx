@@ -2,7 +2,11 @@ import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
 import { useUserProfile } from '../hooks/useUserProfile';
-import { getUnlockedCharacters } from '../data/rewardProgress';
+import {
+  getOpenedRewards,
+  getUnlockedCharacters,
+  isCardUnlocked,
+} from '../data/rewardProgress';
 import { clearStoredUser } from '../data/userProfile';
 import { LogoutConfirmModal } from '../components/common/LogoutConfirmModal';
 
@@ -46,11 +50,12 @@ export function ProfilePage() {
   const [isLogoutOpen, setIsLogoutOpen] = useState(false);
 
   const unlockedCharacters = useMemo(() => getUnlockedCharacters(), []);
+  const openedRewards = useMemo(() => getOpenedRewards(), []);
   const unlockedCardsCount = useMemo(() => {
-    return content.library.cards.filter(
-      (c) => c.unlocked || (c.unlockStep ?? 1) <= unlockedCharacters
+    return content.library.cards.filter((c) =>
+      isCardUnlocked(c, openedRewards)
     ).length;
-  }, [content, unlockedCharacters]);
+  }, [content, openedRewards]);
 
   const rankLabel =
     unlockedCharacters >= 3

@@ -7,6 +7,7 @@ export function TriviaCompletedCard({
   totalQuestions,
   isJunior = false,
   onGoHome,
+  onGoCollection,
   onRestart,
 }) {
   const { t, content } = useLanguage();
@@ -58,7 +59,7 @@ export function TriviaCompletedCard({
         {hasEarnedReward ? (
           <button
             type="button"
-            onClick={onGoHome}
+            onClick={onGoCollection || onGoHome}
             className="w-full rounded-xl bg-[var(--brand-olive)] px-4 py-3 text-[14.5px] font-semibold text-white shadow-[var(--control-shadow)] transition-all duration-150 hover:bg-[var(--brand-olive-hover)] active:scale-[0.98] cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#687320] dark:focus-visible:outline-[#B9C76B]"
           >
             {isJunior
